@@ -1,0 +1,118 @@
+{
+  "run_id": "20261030T192242Z_followup_validate",
+  "stage": "validate",
+  "protocol_version": "followup-v1",
+  "start_utc": "2026-10-30T19:22:42.327940+00:00",
+  "argv": [
+    "run_followup.py",
+    "validate",
+    "--fit-run",
+    "20261030T192229Z_followup_fit"
+  ],
+  "seed": 20261101,
+  "config_path": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/followup/config/followup_v1.json",
+  "bound": {
+    "protocol_sha256": "1b5ad9023840dd1744d056201c88d56f871e44de93470b9d3bd112486efb92ae",
+    "scp_dependency_source": {
+      "tree_sha256": "f04e0ece5f30f5a56804232d530992bf2cd959335d34bd032357a4a2d2d6a449",
+      "files": {
+        "run.py": "69f6e9b31fcdf8ca63f0552be28c41c505809480e5129671f9264f405fc287da",
+        "run_day2.py": "2b89083a068c5390be39a2398cd1011208a458271cddb015e90a4526983402a8",
+        "run_day3.py": "fbb348ab2f14f4f4d0200eeffa2db3050141c7b6c70446872afc745e16c07a1f",
+        "scp/__init__.py": "8dfd15eb6df2cf72cd659c373d2615741137fad7032a31131903e2c870ce606d",
+        "scp/bases.py": "c44815de5d316f777fb339d61d80b53617f29e25a5c9e14062f6269825677ce6",
+        "scp/common.py": "4af175a75a6927b69496d3f7b4f78b1221a1173b1dd57ded204bdccf7fb6862d",
+        "scp/data.py": "06a8d9b43aa980f2f8d4a09887e0c93c7dbba53e4b160c9a7f02cc4543276cb6",
+        "scp/day2.py": "374310dd60b95bad82d2de62bd0fc77277a8e2c042caf0888b464dcf5ee223b6",
+        "scp/day3.py": "f552a2641f63747c49ec9adc74f10be98382ef7f71a05dcf4a43bf6d9fc5a465",
+        "scp/experiment.py": "2dcbd1e39ff9887b3c4ce1eae14376c84e72da6cb6c4a87e1e88c45a706cb049",
+        "scp/matching.py": "994dde6e9d429648efbb982f9c77c71861adee28f1c98c8dd2b65b312ee5ca97",
+        "scp/metrics.py": "736430a2792f7d970b7abf85ddf5df60e368732fd7235dac255ccbe1ad044f08",
+        "scp/model.py": "82d3db4fd7ae70ec6d00b29c82fbbb228b49fcbe93dcd55e2cb411959c58b8e4",
+        "scp/report.py": "7e024eaab248f39da0277bfb0d8e97645a2d2faee587a61fd2ddd1822af49e34",
+        "scp/report_day2.py": "8e2c5f6ef4607c5eface3b6c204ea1a0fda729abbd8ce9cde7463662225a4abc",
+        "scp/spectral.py": "50eb34663c89a2540d165e300fa9355d4d86d3501a1518a84b0e8cdd27b1ddb4",
+        "tests/conftest.py": "bb4408f6678181cfb65f3adcfdd41d6d32a3e0e87d05511b022fef1b6cc2e4f3",
+        "tests/test_cli_guards.py": "92215361ce9a5433acc0523516aa9b5d147c26451c9d00005edcf8b63eb79f36",
+        "tests/test_data.py": "0f0ee4333982113e577b57b71f03ddb9e245d9a4ce1dcd789e0b228ed474c77e",
+        "tests/test_day2.py": "2edb1805d264a38d7d6291fc6c07da9bd3f1d8d2231b0e085670bf18490739a1",
+        "tests/test_day3.py": "6d3f359a44d7fe765f21216226987c9f506e890c2259f9fa6ff1ca8a64518207",
+        "tests/test_model.py": "da0208cd6a41ccb08928d2912e80b920c9ca31aa5daba5ce455f4cb08032da1d",
+        "tests/test_spectral.py": "f9436e08e81e3dee258e658088a634e7ecf3d0625ad3e03a4a5021b99e964488"
+      }
+    },
+    "design_sha256": "24558511e714ac25b10217631d5aa340d8981f57e0606d463c241a5e40d05238",
+    "config_sha256": "1c09d141f465a57f87beda966af262a1601354640e0f4619c5b606a453e54e3d",
+    "source": {
+      "tree_sha256": "c39af8e403bdfdbe49cb4db391e234362b691a3fb508bfd69bc1bd7731afb908",
+      "files": {
+        "followup/__init__.py": "a3a6f8dd452a435fb1d8a49c3eeec087ddbe31e5c8441b582299dcd33cd86dfd",
+        "followup/common.py": "bf213cc15e083a5d057811dcc399db949949268bf6dcd9a42283e6b3b3751061",
+        "followup/data.py": "bf1dab3e1872de68d485276f7743c89ce6cd1b6766cd2a5953306d97e6b0bf0d",
+        "followup/downstream.py": "581e54c7663e2e9db131641503f4327ff8c73fe685d3898f719c8789e0816668",
+        "followup/features.py": "b04206aa75b9e8aeb77a308171fd7030f20a5b41e8e20ae83962b30a00b2fd00",
+        "followup/local.py": "0e1ce0fc4012291007eed18076f760bdbcdb0edf6858107cccb1c70ac89bf7aa",
+        "followup/pipeline.py": "c1043efd4b1dc7ee524b243b61825097378c7eab68a9aca1d5660149301d85e9",
+        "followup/ridge.py": "e4c8147304d4424c71e6ccbf2acaac377d26bf3112079e2d61bb51f4a01244ad",
+        "followup/stats.py": "aaadf4881b56e49b042a34e0e3f570afb583ca315e23a3af01a36ee70f6e63fe",
+        "run_followup.py": "8d20927fe23691daa73943cf0a1f41e8839e55380f1cecac0c914235bec8ffae",
+        "tests_followup/test_followup.py": "7460a16e57de2fe429facb9b11d63f2354e46822da5f82262bbb757edd7d1fc7"
+      }
+    },
+    "manifests": {
+      "followup/manifests/fit_recipients.csv": "830482dadaa15319d5de709b4ba839b133d2d41b0d318057c0204d3f47e5a089",
+      "followup/manifests/index.json": "0351dbd48d43ae7d998f06e2d3e1f18a4b4710c7370c81d42e804eacb3c1bb2e",
+      "followup/manifests/test_recipients.csv": "08c8221d248818593338b0492f220d0cbadd612812cc14debb60cc02ffc28e32",
+      "followup/manifests/validation_recipients.csv": "5a24b6a1c5c9e3ca1c373cf98ac1e234ad274ae1c36c5525cc5f46f72cefe25d"
+    },
+    "day3_config_sha256": "39147730d3ead4439aadcd12e9a572a5e667aa988c31a967da76cd711b10b0aa",
+    "artifact_file_sha256": "cd56bb2f9cb958cb3381b93e799567cb569788faec17c44d775057e2d92a3fcf"
+  },
+  "env": {
+    "python": "3.13.0 (v3.13.0:60403a5409f, Oct  7 2024, 00:37:40) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "torch": "2.15.0",
+    "transformers": "5.22.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "mps_available": true,
+    "mps_built": true
+  },
+  "model": {
+    "name": "openai-community/gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "dtype": "float32",
+    "device": "mps",
+    "attn_implementation": "eager",
+    "safetensors_path": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/.cache/hf/hub/models--openai-community--gpt2/snapshots/607a30d783dfa663caf39e06633721c8d4cfcd7e/model.safetensors",
+    "safetensors_sha256": "248dfc3911869ec493c76e65bf2fcf7f615828b0254c12b473182f0f81d3a707"
+  },
+  "registration_sha256": "f4b24ef9a3cf62a76e54c9f121394c6026fbbb9d3713a628bc125f07a91d5ab1",
+  "fit_run": "20261030T192229Z_followup_fit",
+  "fixed": {
+    "probes_sha256": "533af3c3297fd162d6e6f316f310e57c0df0c49a438458db4ce6395ce31b620b",
+    "perm_sha256": "e034c82011912377e676af5e6e815262aaae780a60e4986f785fcdb6bc142330",
+    "artifact_P_sha256": "ccdca3cedcaf68fcc9bc847e2ed40597cf8e544807ff20b7fa394bc6b036c954",
+    "artifact_mu_sha256": "0576860c50171215761bbf5065c742439bcecaf25033ab81658b1dc889691417",
+    "m_B_rel_residual": 1.1975888131796137e-15
+  },
+  "label_checks": {
+    "validation": {
+      "x_prime_max_abs_err": 6.98719526681657e-08
+    }
+  },
+  "status": "ok",
+  "end_utc": "2026-10-30T19:22:46.166391+00:00",
+  "walltime_s": 3.838463,
+  "stage_walltimes_s": {
+    "load_model": 1.443912124959752,
+    "validation_unperturbed_vjp": 0.9367891249712557,
+    "validation_labels": 0.22063095797784626
+  },
+  "outputs": {
+    "validation.json": "5b7667201c7f04c7d2c1d4ebe80d75399520dac00e2d3d3b779955e59649ead7",
+    "validation_probe_vjps.pt": "6440c27a23d6bf62130444a0590aca9c43da660f643a04a59a59c81e0d87800a",
+    "validation_rows.csv": "5c49b9decbab7295d112de914b75dc9d240fc1ae1190fda1ec6103811986c522"
+  }
+}

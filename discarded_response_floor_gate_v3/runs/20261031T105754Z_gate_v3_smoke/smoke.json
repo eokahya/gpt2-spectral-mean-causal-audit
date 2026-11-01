@@ -1,0 +1,182 @@
+{
+  "data": "OLD Day-1 calibration only: manifests/pilot_pairs_calibration.csv (rec, don) and manifests/moment_pool_calibration.csv (same-year discarded donors); recipients alternate between lengths 12 and 14 and same-year donors of both lengths occur (the length mismatches that were padded in v2 mixed extraction)",
+  "groups": [
+    "cal-0016",
+    "cal-0171",
+    "cal-0191"
+  ],
+  "projector_checks": {
+    "sym_max_abs": 0.0,
+    "idem_max_abs": 7.216449660063518e-16,
+    "trace": 192.0,
+    "n_eig_above_split": 192,
+    "eig_retained_min": 0.9999999999999947,
+    "eig_discarded_max_abs": 1.5543122344803576e-15,
+    "complement_idem_max_abs": 2.1094237467877974e-15
+  },
+  "prompt_lengths": [
+    12,
+    14
+  ],
+  "u_two_way_rel": 1.9207148492975254e-16,
+  "identity_max_abs": 0.0,
+  "s2_oldcal_technical": 1.3193457889473765,
+  "U_oldcal_technical": [
+    8.819976037193557e-06,
+    1.383246495279309e-05,
+    1.4475044228674962e-05
+  ],
+  "own_q_algebra_max_abs": 2.220446049250313e-15,
+  "same_q_U": 0.0,
+  "d0_R_max_abs": 0.0,
+  "other_positions_max_abs": 0.0,
+  "resid_mid_max_abs": 0.0,
+  "patched_logits_differ": 12.717620849609375,
+  "zero_noise_L2_units": 0.0,
+  "zero_noise_over_theta0": 0.0,
+  "f64_activation_rel": [
+    1.6105205221057592e-06
+  ],
+  "f32_vs_f64_R_rel": 0.00012320196805662653,
+  "f32_vs_f64_U_rel": 0.0014798726117779466,
+  "legacy_mixed_padded_contrast_descriptive": {
+    "extra_pad0": [
+      {
+        "recipient_len": 12,
+        "pad": 2,
+        "identity_max_abs": 0.0
+      },
+      {
+        "recipient_len": 14,
+        "pad": 0,
+        "identity_max_abs": 0.0
+      },
+      {
+        "recipient_len": 12,
+        "pad": 2,
+        "identity_max_abs": 0.0
+      }
+    ],
+    "extra_pad1": [
+      {
+        "recipient_len": 12,
+        "pad": 3,
+        "identity_max_abs": 0.0
+      },
+      {
+        "recipient_len": 14,
+        "pad": 1,
+        "identity_max_abs": 0.0
+      },
+      {
+        "recipient_len": 12,
+        "pad": 3,
+        "identity_max_abs": 0.0
+      }
+    ],
+    "extra_pad2": [
+      {
+        "recipient_len": 12,
+        "pad": 4,
+        "identity_max_abs": 6.103515625e-05
+      },
+      {
+        "recipient_len": 14,
+        "pad": 2,
+        "identity_max_abs": 0.0001068115234375
+      },
+      {
+        "recipient_len": 12,
+        "pad": 4,
+        "identity_max_abs": 9.1552734375e-05
+      }
+    ],
+    "extra_pad3": [
+      {
+        "recipient_len": 12,
+        "pad": 5,
+        "identity_max_abs": 6.103515625e-05
+      },
+      {
+        "recipient_len": 14,
+        "pad": 3,
+        "identity_max_abs": 0.0001068115234375
+      },
+      {
+        "recipient_len": 12,
+        "pad": 5,
+        "identity_max_abs": 9.1552734375e-05
+      }
+    ],
+    "extra_pad4": [
+      {
+        "recipient_len": 12,
+        "pad": 6,
+        "identity_max_abs": 6.103515625e-05
+      },
+      {
+        "recipient_len": 14,
+        "pad": 4,
+        "identity_max_abs": 0.0001068115234375
+      },
+      {
+        "recipient_len": 12,
+        "pad": 6,
+        "identity_max_abs": 9.1552734375e-05
+      }
+    ]
+  },
+  "timing": {
+    "warmup": "untimed: one extraction forward + one 19-row group forward on an old calibration prompt",
+    "timed_groups": 3,
+    "extract_s": 0.5334288750309497,
+    "extract_per_prompt_s": 0.017780962501031658,
+    "group_forward_s": [
+      0.017260750057175756,
+      0.017282416112720966,
+      0.014531458960846066
+    ],
+    "group_forward_max_s": 0.017282416112720966,
+    "projected_dev_model_stage_s": 11.705522467382252,
+    "rows_per_group": 19,
+    "scientific_forwards_dev": 768,
+    "scale_forwards_dev": 96,
+    "control_forwards_dev": 48,
+    "extraction_forwards_dev": 480,
+    "extraction_rows_dev": 9120,
+    "note": "extraction is one canonical 19-row forward per logical prompt"
+  },
+  "canonical_layout_counts": {
+    "extraction_forwards": 30,
+    "extraction_rows": 570
+  },
+  "warmup_counts": {
+    "extraction_forwards": 1,
+    "extraction_rows": 19,
+    "group_forwards": 1,
+    "group_rows": 19,
+    "prompt": "old calibration pair 0 (not a development prompt)"
+  },
+  "memory": {
+    "max_rss_bytes": 2243837952,
+    "mps_current_allocated_bytes": 504296960,
+    "mps_driver_allocated_bytes": 1143603200,
+    "peak_gib": 2.0897369384765625
+  },
+  "gates": {
+    "canonical_layout": true,
+    "identity": true,
+    "own_q_algebra": true,
+    "same_q": true,
+    "d0": true,
+    "other_positions": true,
+    "resid_mid": true,
+    "f32_vs_f64_R": true,
+    "f32_vs_f64_U": true,
+    "u_two_way": true,
+    "zero_noise": true,
+    "patch_has_effect": true,
+    "budget_projection": true
+  },
+  "all_gates_pass": true
+}

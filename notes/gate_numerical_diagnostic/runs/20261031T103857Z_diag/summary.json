@@ -1,0 +1,52 @@
+{
+  "created_utc": "2026-10-31T10:38:57.823407+00:00",
+  "device": "mps",
+  "torch": "2.15.0",
+  "data": "old Day-1 calibration prompts only (pilot recipients + moment pool)",
+  "script_sha256": "d15f2bc58ad2475f311f4181fefab25ee30773b12670796586c6d3fc754d7080",
+  "args": {
+    "device": "mps",
+    "n_targets": 16,
+    "cpu64_spots": 3,
+    "seed": 20261033,
+    "out": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/notes/gate_numerical_diagnostic/runs"
+  },
+  "n_targets": 16,
+  "H_hook_identity_same_layout_max_abs_J": {
+    "single": 0.0,
+    "group19": 0.0,
+    "mix48": 0.0
+  },
+  "G_logit_drift_vs_single_max_abs_J": {
+    "group19": 0.0003204345703125,
+    "same48": 0.0003204345703125,
+    "mix48": 0.0003204345703125
+  },
+  "X_input_drift_vs_single_max_abs": {
+    "group19": 1.8477439880371094e-06,
+    "same48": 1.8477439880371094e-06,
+    "mix48": 1.8477439880371094e-06
+  },
+  "padding_only_logits_max_abs_J": {
+    "pad1": 0.0001220703125,
+    "pad2": 0.000152587890625,
+    "pad3": 0.000152587890625,
+    "pad4": 0.000152587890625
+  },
+  "D_total_max_abs_J": 0.0,
+  "D_injected_input_part_max_abs_J": 0.0,
+  "D_layout_part_max_abs_J": 0.0,
+  "M_gemm_shape_max_abs_J": {
+    "rows19": 0.000274658203125,
+    "rows48": 0.000274658203125
+  },
+  "C_f32_vs_cpu64_max_abs_J": {
+    "single": 5.6186285007697734e-05,
+    "group19": 0.0003419126014421181,
+    "same48": 0.0003419126014421181,
+    "mix48": 0.0003419126014421181
+  },
+  "max_abs_logit_J": 201.96182250976562,
+  "f32_ulp_at_max_logit": 1.52587890625e-05,
+  "reading_guide": "H != 0 in any layout -> hook not an identity (bug). H == 0 with G/X > 0 for padded or mixed layouts and 0 for unpadded ones -> float32 layout numerics. M isolates the lm_head GEMM shape. C shows how far every f32 layout is from a float64 reference."
+}

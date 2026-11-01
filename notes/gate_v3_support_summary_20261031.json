@@ -1,0 +1,63 @@
+{
+  "retained_distance": {
+    "min": 0.6596355060123703,
+    "median": 1.5088228310195224,
+    "max": 2.2942301693571796
+  },
+  "discarded_displacement": {
+    "min": 0.4530335923012914,
+    "median": 0.9827461423865053,
+    "max": 1.4911453075823975
+  },
+  "donor_discarded_norm_uncentred": {
+    "min": 2.877659849549613,
+    "median": 2.9773793945539255,
+    "max": 3.1672629485239483
+  },
+  "recipient_discarded_norm_uncentred": {
+    "min": 2.8866739852873144,
+    "median": 2.964349191014098,
+    "max": 3.0728557015087565
+  },
+  "x_minus_norm": {
+    "min": 6.192039838020562,
+    "median": 6.377708666143846,
+    "max": 6.579314280627608
+  },
+  "x_plus_norm": {
+    "min": 6.140481688554652,
+    "median": 6.367827095485248,
+    "max": 6.6390314212547
+  },
+  "x_rec_norm": {
+    "min": 6.213820466096054,
+    "median": 6.360612969000971,
+    "max": 6.538297915071858
+  },
+  "x_a_norm": {
+    "min": 6.1549373753344,
+    "median": 6.368987339806625,
+    "max": 6.586124288714087
+  },
+  "preact_minus_norm": {
+    "min": 68.36967038040218,
+    "median": 72.38891376200382,
+    "max": 76.32297911971598
+  },
+  "preact_plus_norm": {
+    "min": 69.0560263199059,
+    "median": 72.60603107769441,
+    "max": 76.74457484328919
+  },
+  "preact_rec_norm": {
+    "min": 69.16339590521835,
+    "median": 72.52613597233068,
+    "max": 75.68489938810876
+  },
+  "retained_displacement_norm": {
+    "min": 2.3943494089250468,
+    "median": 3.1470216410175134,
+    "max": 4.065885045284238
+  },
+  "scope": "Descriptive support distances/norms only; not on-manifold evidence; no outcome-based subset/exclusion."
+}

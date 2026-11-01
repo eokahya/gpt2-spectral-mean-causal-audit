@@ -1,0 +1,82 @@
+{
+  "created_utc": "2026-10-30T19:25:01.564228+00:00",
+  "audit": "Independent NumPy reconstruction from raw CSVs and frozen coefficients; equal template means within each fixed frame bootstrap (balanced18 rows/template), without calling followup.stats.gain",
+  "recomputed": {
+    "A": {
+      "mse_B": 0.0003435506679933008,
+      "mse_A": 0.0002877899751033291,
+      "G": 0.16230704255553663,
+      "G_lower_one_sided": 0.0008232427001156484,
+      "G_upper_one_sided": 0.32804070124490126
+    },
+    "A_in": {
+      "mse_B": 0.0003435506679933008,
+      "mse_A": 0.0002982236150511791,
+      "G": 0.13193702462253853,
+      "G_lower_one_sided": -0.045748781937579246,
+      "G_upper_one_sided": 0.3121828721682774
+    }
+  },
+  "saved_predictions_max_abs_difference": {
+    "B": 0.0,
+    "A": 0.0,
+    "A_in": 0.0
+  },
+  "primary_decision": "INCONCLUSIVE",
+  "registration_before_first_new_outcomes": true,
+  "test_prediction_lock_before_eval_start": true,
+  "source_and_output_hashes_verified": true,
+  "old33_files_and_day3_freeze_unchanged": true,
+  "fit_probe_half_reliability": {
+    "pearson": 0.7361932104867845,
+    "mean_ratio_half1_over_half2": 0.9746917876670558
+  },
+  "runs": {
+    "20261030T192229Z_followup_fit": {
+      "start": "2026-10-30T19:22:29.547051+00:00",
+      "end": "2026-10-30T19:22:34.228792+00:00",
+      "walltime_s": 4.681757,
+      "status": "ok"
+    },
+    "20261030T192242Z_followup_validate": {
+      "start": "2026-10-30T19:22:42.327940+00:00",
+      "end": "2026-10-30T19:22:46.166391+00:00",
+      "walltime_s": 3.838463,
+      "status": "ok"
+    },
+    "20261030T192301Z_followup_predict_test": {
+      "start": "2026-10-30T19:23:01.378585+00:00",
+      "end": "2026-10-30T19:23:06.110615+00:00",
+      "walltime_s": 4.732041,
+      "status": "ok"
+    },
+    "20261030T192318Z_followup_evaluate_test": {
+      "start": "2026-10-30T19:23:18.741355+00:00",
+      "end": "2026-10-30T19:23:23.102916+00:00",
+      "walltime_s": 4.361573,
+      "status": "ok"
+    }
+  },
+  "failed_attempts": [
+    {
+      "run": "20261030T192217Z_followup_fit",
+      "stage": "fit",
+      "error": "Traceback (most recent call last):\n  File \"/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/followup/pipeline.py\", line 197, in _staged\n    res = fn(run)\n  File \"/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/followup/pipeline.py\", line 432, in go\n    ctx = Ctx(cfg, run, labels_allowed=True)\n  File \"/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/followup/pipeline.py\", line 49, in __init__\n    self.device = get_device(cfg[\"model\"][\"device\"])\n                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/scp/common.py\", line 77, in get_device\n    raise RuntimeError(\"MPS requested but not available; refusing to fall back to CPU silently.\")\nRuntimeError: MPS requested but not available; refusing to fall back to CPU silently.\n",
+      "outputs": []
+    }
+  ],
+  "independent_fit_scale_and_ridge_selection_verified": true,
+  "final_readonly_check_utc": "2026-10-30T19:35:45.586605+00:00",
+  "final_verified_ok_runs": [
+    "20261030T192134Z_followup_smoke",
+    "20261030T192318Z_followup_evaluate_test",
+    "20261030T192512Z_followup_report",
+    "20261030T192229Z_followup_fit",
+    "20261030T192301Z_followup_predict_test",
+    "20261030T191925Z_followup_smoke",
+    "20261030T191411Z_followup_prepare",
+    "20261030T192242Z_followup_validate"
+  ],
+  "final_summary_sha256": "aa21fb8e5e8f45944e04cccb0dd3ad61efaaff3b6a2559bb9709ded5d3e62d4b",
+  "three_external_reviewer_closure_complete": true
+}

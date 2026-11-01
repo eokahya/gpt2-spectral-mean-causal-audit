@@ -1,0 +1,115 @@
+{
+  "created_utc": "2026-10-31T10:44:32.505701+00:00",
+  "device": "mps",
+  "torch": "2.15.0",
+  "data": "old Day-1 calibration prompts only (all pilot roles + moment pool)",
+  "pool_lengths": {
+    "12": 512,
+    "14": 496
+  },
+  "script_sha256": "c91c2a4f43237370688515f613d1496661bbd923acc0a80238c996525e3613a2",
+  "args": {
+    "device": "mps",
+    "n_targets": 8,
+    "cpu64_spots": 2,
+    "pads": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "rows": [
+      0,
+      24,
+      47
+    ],
+    "seed": 20261034,
+    "out": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/notes/gate_numerical_diagnostic/runs"
+  },
+  "n_targets": 8,
+  "float32": {
+    "n_mixed_cases": 132,
+    "n_padded": 108,
+    "n_unpadded": 24,
+    "H_hook_identity_single_group19_max_abs": 0.0,
+    "H_mix_all_rows_max_abs": 0.0,
+    "D_total_by_pad_max_abs_J": {
+      "0": 0.0,
+      "1": 0.0,
+      "2": 0.0001220703125,
+      "3": 0.0001220703125,
+      "4": 0.0001373291015625
+    },
+    "D_total_by_pad_n_nonzero": {
+      "0": 0,
+      "1": 0,
+      "2": 12,
+      "3": 12,
+      "4": 24
+    },
+    "D_injected_input_max_abs_J": 0.0001068115234375,
+    "D_layout_part_max_abs_J": 0.0001220703125,
+    "X_input_drift_mix_vs_group19_max_abs": 1.5068799257278442e-06,
+    "G_drift_vs_single_max_abs_J": {
+      "group19": 0.000274658203125,
+      "same48": 0.000274658203125
+    },
+    "padding_only_logits_max_abs_J": {
+      "pad1": 7.62939453125e-05,
+      "pad2": 7.62939453125e-05,
+      "pad3": 7.62939453125e-05,
+      "pad4": 0.00018310546875
+    },
+    "M_gemm_shape_max_abs_J": {
+      "rows19": 0.000244140625,
+      "rows48": 0.000244140625
+    },
+    "max_abs_logit_J": 199.69659423828125
+  },
+  "float64_cpu": {
+    "n_mixed_cases": 33,
+    "n_padded": 27,
+    "n_unpadded": 6,
+    "H_hook_identity_single_group19_max_abs": 0.0,
+    "H_mix_all_rows_max_abs": 0.0,
+    "D_total_by_pad_max_abs_J": {
+      "0": 0.0,
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0,
+      "4": 0.0
+    },
+    "D_total_by_pad_n_nonzero": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    "D_injected_input_max_abs_J": 0.0,
+    "D_layout_part_max_abs_J": 0.0,
+    "X_input_drift_mix_vs_group19_max_abs": 0.0,
+    "G_drift_vs_single_max_abs_J": {
+      "group19": 3.694822225952521e-13,
+      "same48": 3.694822225952521e-13
+    },
+    "padding_only_logits_max_abs_J": {
+      "pad1": 0.0,
+      "pad2": 0.0,
+      "pad3": 0.0,
+      "pad4": 0.0
+    },
+    "M_gemm_shape_max_abs_J": {
+      "rows19": 3.694822225952521e-13,
+      "rows48": 3.694822225952521e-13
+    },
+    "max_abs_logit_J": 174.76860701500541
+  },
+  "f32_layouts_vs_cpu64_single_max_abs_J": {
+    "single": 5.380817924560688e-05,
+    "group19": 0.0002538378760732485,
+    "same48": 0.0002538378760732485
+  },
+  "reading_guide": "H (single/group19/mix, float32 and float64) != 0 -> the hook is not an identity in that layout. D by pad/row localises when the development control is non-zero; its two parts separate the injected extraction input from the forward layout. float64 cross-layout values show whether the effect is precision-related. Finite layouts only rule out the mechanisms they exercise."
+}

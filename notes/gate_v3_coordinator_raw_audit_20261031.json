@@ -1,0 +1,47 @@
+{
+  "created_utc": "2026-10-31T10:59:05.951938+00:00",
+  "method": "Coordinator standalone numpy recomputation from raw logits, without importing gate estimators",
+  "shape": [
+    48,
+    19,
+    100
+  ],
+  "s2": 1.093422839563713,
+  "L2": 0.0015673203095944827,
+  "L": 0.039589396428772225,
+  "U_pair_max_abs_diff": 8.673617379884035e-19,
+  "s2_output_diff": 2.220446049250313e-16,
+  "L2_output_diff": 0.0,
+  "U_csv_max_abs_diff": 4.336808689942018e-19,
+  "all48_identity_max": 0.0,
+  "all48_duplicate_max": 0.0,
+  "activation_provenance": {
+    "layout": "canonical_no_padding_replicated",
+    "rows": 19,
+    "reference_row": 17,
+    "rule": "each prompt alone, replicated, unpadded; x and the unpatched reference from the reference row"
+  },
+  "run_binding_equals_registration": true,
+  "registration_precedes_v3_outcomes": true,
+  "v2_all149_hashes_unchanged": true,
+  "v2_changed": [],
+  "compute_counts": {
+    "logical_prompts_extracted": 480,
+    "extraction_forwards": 480,
+    "extraction_rows": 9120,
+    "group_forwards": 48,
+    "group_rows": 912,
+    "scientific_rows": 768,
+    "scale_rows": 96,
+    "control_rows": 48
+  },
+  "warmup_counts": {
+    "extraction_forwards": 1,
+    "extraction_rows": 19,
+    "group_forwards": 1,
+    "group_rows": 19,
+    "prompt": "old calibration pair 0 (not a development prompt)"
+  },
+  "peak_gib": 1.0650634765625,
+  "model_stage_s": 9.38728762511164
+}

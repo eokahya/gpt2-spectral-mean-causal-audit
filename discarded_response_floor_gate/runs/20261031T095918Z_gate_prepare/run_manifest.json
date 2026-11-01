@@ -1,0 +1,56 @@
+{
+  "run_id": "20261031T095918Z_gate_prepare",
+  "stage": "prepare",
+  "protocol_version": "drfg-dev-v1-DRAFT",
+  "start_utc": "2026-10-31T09:59:18.740113+00:00",
+  "argv": [
+    "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate/__main__.py",
+    "prepare"
+  ],
+  "bound": {
+    "protocol_sha256": "9b5f33e1de09ff8f7f7eda952cbe98f34fb0e08ac1d4119b2f30efec2b7e1ce5",
+    "config_sha256": "e23be37ea057bf8e38481905b8bb696e3a0b1e5ca91995559c87f55eb2ea1b45",
+    "source": {
+      "tree_sha256": "fd49cb74a0b2620b219d8a75f1bf22a4f0cb9d1c4f9cf6d4ff3124a42098ddba",
+      "files": {
+        "discarded_response_floor_gate/__init__.py": "f0c23ec3736ed7658b62127b9f16a575e94a3323057b95c3de13b6c2f851187f",
+        "discarded_response_floor_gate/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+        "discarded_response_floor_gate/aggregate.py": "9a5555a1d3e6bb9d0034cff78ceab7519dade64571cdeef36b7a88b7f13c8fa8",
+        "discarded_response_floor_gate/bootstrap.py": "2194c9329acd1c68d61ba0ae7aa3fa8733531cb3281309dff5cee244e4d28837",
+        "discarded_response_floor_gate/cli.py": "f3e6cec52c70f3bea766951990463b5bf13bf736f0af0906188dadaaf0adac71",
+        "discarded_response_floor_gate/common.py": "6403d5ecfa258983e0b774ff6a8deb834625b240c18854d109192dd3bea9a7b9",
+        "discarded_response_floor_gate/data.py": "f0155643368494b6bd2c203bb76a48f9efe3c0b58e3d51cfc25816174957624f",
+        "discarded_response_floor_gate/estimators.py": "668305c39f98f378c2ad2a44f113f132018d7b7b1d513f7f54902c16cf3c8437",
+        "discarded_response_floor_gate/geometry.py": "41fad609fb33634d9c8a594a68afffec416067aa10e3b3cb5797a01ccb25fb1b",
+        "discarded_response_floor_gate/hook.py": "9a29cc63b25ef25baf96ffb0b7a2e73b0d20e00768a329fa38d725912db773d4",
+        "discarded_response_floor_gate/pipeline.py": "a2509cfdcecfc7b5e983f4f5be1b3074565ca8ef2d8509bbaea03be4d39ca7af",
+        "discarded_response_floor_gate/power.py": "885a8681519658b032b6d63b8b19506e712e4d35907360980a06233f883ae99c",
+        "discarded_response_floor_gate/tests/test_gate.py": "1bc5f4baf7bf469b09be4d519c45abf87d66a3a38bd054547aa5ac1bb3a8ddc9"
+      }
+    },
+    "scp_dependency_tree_sha256": "f04e0ece5f30f5a56804232d530992bf2cd959335d34bd032357a4a2d2d6a449",
+    "manifests": {},
+    "protected_manifest_sha256": null,
+    "artifact_file_sha256": "cd56bb2f9cb958cb3381b93e799567cb569788faec17c44d775057e2d92a3fcf",
+    "J_ids_sha256": "5c0ba5751c5b4a59af9f08a4d3116a68380c0ca7f17bcc4a9ec8ca54237b028f"
+  },
+  "env": {
+    "python": "3.13.0 (v3.13.0:60403a5409f, Oct  7 2024, 00:37:40) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "torch": "2.15.0",
+    "transformers": "5.22.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "mps_available": true,
+    "mps_built": true
+  },
+  "torch_threads": 6,
+  "status": "ok",
+  "end_utc": "2026-10-31T09:59:20.412470+00:00",
+  "walltime_s": 1.67237,
+  "stage_walltimes_s": {},
+  "outputs": {
+    "prepare.json": "5d924d200eca2d37fd2109bd67b0c4ce1bb39a1097411f31d60f4ceb6629cd97"
+  }
+}

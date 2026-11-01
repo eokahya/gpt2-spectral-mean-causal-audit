@@ -1,0 +1,6 @@
+2026-10-30 19:03:33,716 INFO [stage] load_model ...
+2026-10-30 19:03:35,126 INFO [stage] load_model done in 1.41s
+2026-10-30 19:03:35,379 INFO [stage] svd_cpu_float64 ...
+2026-10-30 19:03:35,577 INFO [stage] svd_cpu_float64 done in 0.20s
+2026-10-30 19:05:17,213 INFO sigma_max=1.774 bound=2.5 grid={64: 2.7162020233006956e-07, 128: 3.063824749460764e-10, 256: 3.907985046680551e-14, 512: 4.618527782440651e-14} real={64: 8.704125753489222e-10, 128: 3.5083047578154947e-14, 256: 8.881784197001252e-15, 512: 8.881784197001252e-15} chosen=128
+2026-10-30 19:05:17,214 INFO run dir: /Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/runs/20261030T160333Z_day2_quadcheck

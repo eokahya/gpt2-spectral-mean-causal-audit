@@ -1,0 +1,488 @@
+{
+  "guard": {
+    "per_frame": {
+      "G04": "ok",
+      "G09": "ok",
+      "G11": "ok",
+      "G13": "ok"
+    },
+    "floor": 1e-10,
+    "ok": true,
+    "invalid": false
+  },
+  "outer_sims": 2000,
+  "bootstrap_B": 10000,
+  "seed": 20261031,
+  "rows": [
+    {
+      "N": 48,
+      "templates_per_frame": 6,
+      "scenario": "kappa1_v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 153,
+        "n": 2000,
+        "rate": 0.0765,
+        "cp_lo": 0.05862971320742808,
+        "cp_hi": 0.0975015401413256
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 48,
+      "templates_per_frame": 6,
+      "scenario": "kappa4_v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 129,
+        "n": 2000,
+        "rate": 0.0645,
+        "cp_lo": 0.0481237545559061,
+        "cp_hi": 0.08410053124612477
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 48,
+      "templates_per_frame": 6,
+      "scenario": "kappa1_r2v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 122,
+        "n": 2000,
+        "rate": 0.061,
+        "cp_lo": 0.04509059667162004,
+        "cp_hi": 0.08016110128798119
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 48,
+      "templates_per_frame": 6,
+      "scenario": "kappa4_r2v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 124,
+        "n": 2000,
+        "rate": 0.062,
+        "cp_lo": 0.045955630502576804,
+        "cp_hi": 0.08128822026889175
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 96,
+      "templates_per_frame": 12,
+      "scenario": "kappa1_v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 116,
+        "n": 2000,
+        "rate": 0.058,
+        "cp_lo": 0.0425034771891178,
+        "cp_hi": 0.07677184140029591
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 96,
+      "templates_per_frame": 12,
+      "scenario": "kappa4_v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 123,
+        "n": 2000,
+        "rate": 0.0615,
+        "cp_lo": 0.045522951744484765,
+        "cp_hi": 0.08072482104833657
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 96,
+      "templates_per_frame": 12,
+      "scenario": "kappa1_r2v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 110,
+        "n": 2000,
+        "rate": 0.055,
+        "cp_lo": 0.03992901677159005,
+        "cp_hi": 0.07337005282024883
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 96,
+      "templates_per_frame": 12,
+      "scenario": "kappa4_r2v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 109,
+        "n": 2000,
+        "rate": 0.0545,
+        "cp_lo": 0.03950123784922886,
+        "cp_hi": 0.07280180410240908
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 144,
+      "templates_per_frame": 18,
+      "scenario": "kappa1_v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 103,
+        "n": 2000,
+        "rate": 0.0515,
+        "cp_lo": 0.036942798021409394,
+        "cp_hi": 0.06938416943341513
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 144,
+      "templates_per_frame": 18,
+      "scenario": "kappa4_v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 118,
+        "n": 2000,
+        "rate": 0.059,
+        "cp_lo": 0.04336448871398213,
+        "cp_hi": 0.07790294262576895
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 144,
+      "templates_per_frame": 18,
+      "scenario": "kappa1_r2v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 106,
+        "n": 2000,
+        "rate": 0.053,
+        "cp_lo": 0.03822022240894837,
+        "cp_hi": 0.07109476213818179
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 144,
+      "templates_per_frame": 18,
+      "scenario": "kappa4_r2v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 84,
+        "n": 2000,
+        "rate": 0.042,
+        "cp_lo": 0.028946480371427892,
+        "cp_hi": 0.058457526228789976
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 192,
+      "templates_per_frame": 24,
+      "scenario": "kappa1_v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 100,
+        "n": 2000,
+        "rate": 0.05,
+        "cp_lo": 0.03566911339098567,
+        "cp_hi": 0.06766988012119136
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 192,
+      "templates_per_frame": 24,
+      "scenario": "kappa4_v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 108,
+        "n": 2000,
+        "rate": 0.054,
+        "cp_lo": 0.03907384245165262,
+        "cp_hi": 0.07223317605027484
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 192,
+      "templates_per_frame": 24,
+      "scenario": "kappa1_r2v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 105,
+        "n": 2000,
+        "rate": 0.0525,
+        "cp_lo": 0.03779400814680917,
+        "cp_hi": 0.07052496608921162
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 192,
+      "templates_per_frame": 24,
+      "scenario": "kappa4_r2v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 92,
+        "n": 2000,
+        "rate": 0.046,
+        "cp_lo": 0.032292159202966,
+        "cp_hi": 0.06307913960103079
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 240,
+      "templates_per_frame": 30,
+      "scenario": "kappa1_v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 107,
+        "n": 2000,
+        "rate": 0.0535,
+        "cp_lo": 0.038646835594371494,
+        "cp_hi": 0.07166416374089583
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 240,
+      "templates_per_frame": 30,
+      "scenario": "kappa4_v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 99,
+        "n": 2000,
+        "rate": 0.0495,
+        "cp_lo": 0.03524541018376484,
+        "cp_hi": 0.0670976021345295
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 240,
+      "templates_per_frame": 30,
+      "scenario": "kappa1_r2v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 117,
+        "n": 2000,
+        "rate": 0.0585,
+        "cp_lo": 0.04293380936701587,
+        "cp_hi": 0.0773375638264277
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    },
+    {
+      "N": 240,
+      "templates_per_frame": 30,
+      "scenario": "kappa4_r2v",
+      "null": {
+        "theta": 0.0025,
+        "r": 1.5950791836844327,
+        "successes": 93,
+        "n": 2000,
+        "rate": 0.0465,
+        "cp_lo": 0.03271264698623819,
+        "cp_hi": 0.06365459332390838
+      },
+      "alt": {
+        "theta": 0.0064,
+        "r": 4.083402710232147,
+        "successes": 2000,
+        "n": 2000,
+        "rate": 1.0,
+        "cp_lo": 0.9963179161031344,
+        "cp_hi": 1.0
+      }
+    }
+  ],
+  "prescribed": true,
+  "cp_alpha_per_comparison": 0.00125,
+  "n_comparisons": 40,
+  "complete": true,
+  "stats_runtime_s": 207.14728625002317,
+  "decision": "POWER_PLAN_CANDIDATE",
+  "candidate_N": 192,
+  "reason": "smallest N meeting both bounds in all scenarios",
+  "dev_run": "20261031T105820Z_gate_v3_develop",
+  "assumptions": "Gamma shape, the fourfold variance sensitivity and transfer to new frames are assumptions, not guarantees; s is fixed after development and the plan is conditional on it"
+}

@@ -1,0 +1,41 @@
+{
+  "scope": "PCA-bias k192 RB; descriptive RMS vector-error norm / RMS original response norm; original physical RB target. Local 768d, centered logits 50257d. No confidence interval or equivalence criterion.",
+  "results": {
+    "validation": {
+      "last_token": {
+        "local_ratio_raw": 0.13875170039277732,
+        "local_ratio_reported": 0.13875169328974535,
+        "local_difference": 7.103031968158646e-09,
+        "logit_ratio_raw": 0.15906130428614193,
+        "logit_ratio_reported": 0.1590613126734737,
+        "logit_difference": -8.387331773551665e-09
+      },
+      "full_layer": {
+        "local_ratio_raw": 0.4002727542485382,
+        "local_ratio_reported": 0.4002727592915843,
+        "local_difference": -5.043046091834924e-09,
+        "logit_ratio_raw": 0.4214729580373719,
+        "logit_ratio_reported": 0.42147296205357915,
+        "logit_difference": -4.0162072556526596e-09
+      }
+    },
+    "test": {
+      "last_token": {
+        "local_ratio_raw": 0.13842415720631643,
+        "local_ratio_reported": 0.13842415713378237,
+        "local_difference": 7.253406208995727e-11,
+        "logit_ratio_raw": 0.15338594507139477,
+        "logit_ratio_reported": 0.1533859592636109,
+        "logit_difference": -1.4192216124531143e-08
+      },
+      "full_layer": {
+        "local_ratio_raw": 0.409339023562118,
+        "local_ratio_reported": 0.40933901379927656,
+        "local_difference": 9.762841424176827e-09,
+        "logit_ratio_raw": 0.46459686020489166,
+        "logit_ratio_reported": 0.4645969231499338,
+        "logit_difference": -6.294504212300822e-08
+      }
+    }
+  }
+}

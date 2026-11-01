@@ -1,0 +1,10 @@
+{
+  "created_utc": "2026-10-30T19:23:06.100108+00:00",
+  "run_id": "20261030T192301Z_followup_predict_test",
+  "test_features_sha256": "01b8b149f45cdefda70a6cd840013f9a930478ddc0a867d78b82ab6b9214a68e",
+  "test_predictions_sha256": "4c5df66b57033bc39d8833d8147cf682ea173a7c1709e1e767b0d78204f0a2f7",
+  "test_probe_vjps_sha256": "d34d53bc783b5c02f9c6af8b328986548c0dd03adc6a2c2b6cd6de7ae824667d",
+  "frozen_sha256": "73d4c2628dde6c22cce251133970d47d9a4cf916fb029f31416b520c566054d5",
+  "registration_sha256": "f4b24ef9a3cf62a76e54c9f121394c6026fbbb9d3713a628bc125f07a91d5ab1",
+  "rule": "written before any perturbed test forward; evaluate-test verifies it first"
+}

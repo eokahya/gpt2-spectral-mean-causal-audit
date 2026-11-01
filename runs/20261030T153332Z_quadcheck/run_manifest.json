@@ -1,0 +1,74 @@
+{
+  "run_id": "20261030T153332Z_quadcheck",
+  "stage": "quadcheck",
+  "label": "exploratory_pilot",
+  "protocol_version": "pilot-v1",
+  "start_utc": "2026-10-30T15:33:32.586309+00:00",
+  "argv": [
+    "run.py",
+    "quadcheck"
+  ],
+  "seed": 20261030,
+  "config_path": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/config/pilot_v1.json",
+  "config_sha256": "ee0fc09e715c4f449acf3d40b1e41529f10fb574fa70f539efae43e1089d7c15",
+  "protocol_sha256": "d3ee6a76da6f4bbbe93891a37e8185a1f38a22789074d44f047776839c627dbf",
+  "source": {
+    "tree_sha256": "90dc2efd2834e7cf389853ac44ff12f2aa585f0abdbd817d73909ba9e7b8506e",
+    "files": {
+      "run.py": "669fcc38903e52d91124e0e934e90a4b12ab8cfd2dc0d62853c9447c515914e4",
+      "scp/__init__.py": "8dfd15eb6df2cf72cd659c373d2615741137fad7032a31131903e2c870ce606d",
+      "scp/common.py": "be20dc3b392a219fe09942446c18440bc1ca067db1e80194b7715355d1058fee",
+      "scp/data.py": "7571ddaf03577f458c6adca961d9ed3c11d90dc0241d46efb7047eaea4b95ddf",
+      "scp/experiment.py": "58c95c5f7a6e8ed1c4ed0209541ab2edb45b1626adecb17a49d2d7b06784133c",
+      "scp/metrics.py": "8e68703458d5c157ae64b3a62a823d0f73a12a65ba9c41f93d0490f614c6fd46",
+      "scp/model.py": "6804b9cbfb39ccf8ddeac61daeca0cf06d254b0a666168496eacfe3bb195306f",
+      "scp/spectral.py": "0b4c399ce1e8b4da3e5cc76eccd0f9f9d03e3d7c28d481b69191da590db992e6",
+      "tests/conftest.py": "bb4408f6678181cfb65f3adcfdd41d6d32a3e0e87d05511b022fef1b6cc2e4f3",
+      "tests/test_cli_guards.py": "92215361ce9a5433acc0523516aa9b5d147c26451c9d00005edcf8b63eb79f36",
+      "tests/test_data.py": "4e4e96b78f526d58e58fa3248c0bc605b163d0f8247e494a5f71290a4399545d",
+      "tests/test_model.py": "3d35777e0da43d115dd50ff58103a94f4e1a59e6dc4fb26b23a837879aac4856",
+      "tests/test_spectral.py": "87e37940fb371ee01d3c4a8daaa6eb8b1af4a7d9ca0ea3f1f9dd0a7e3528890c"
+    }
+  },
+  "manifests": {
+    "manifests/moment_pool_calibration.csv": "7fec3dab3247ed37f3d9ef28f09398e7b30857937b91f7cc6617b79dcdf7e3e3",
+    "manifests/pilot_pairs_calibration.csv": "797500e0c8c9531c76cad93a5648b85474894112890b10ee19f51c73bc4cff5f",
+    "manifests/sealed_prompts_test.csv": "a311a76a4ce019ef17874a0c6f24e4812d67b21d7f4b502d9b798f0a8593dc6c",
+    "manifests/sealed_prompts_validation.csv": "617e4915c2101083255e7c423b14ca48e9b8e3baea69b941f9dbcb4ba223b3f1",
+    "manifests/split_manifest.json": "40a25f0234a4dd45e6e869afff48af80f35e8126b9e4203febb815b8a9ac0f98"
+  },
+  "env": {
+    "python": "3.13.0 (v3.13.0:60403a5409f, Oct  7 2024, 00:37:40) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "torch": "2.15.0",
+    "transformers": "5.22.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "mps_available": true,
+    "mps_built": true
+  },
+  "model": {
+    "name": "openai-community/gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "dtype": "float32",
+    "device": "mps",
+    "attn_implementation": "eager",
+    "safetensors_path": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/.cache/hf/hub/models--openai-community--gpt2/snapshots/607a30d783dfa663caf39e06633721c8d4cfcd7e/model.safetensors",
+    "safetensors_sha256": "248dfc3911869ec493c76e65bf2fcf7f615828b0254c12b473182f0f81d3a707"
+  },
+  "svd": {
+    "device": "cpu",
+    "dtype": "float64"
+  },
+  "layer": 9,
+  "device_used": "mps",
+  "status": "failed",
+  "end_utc": "2026-10-30T15:33:34.660615+00:00",
+  "walltime_s": 2.074315,
+  "stage_walltimes_s": {
+    "load_model": 1.3437005409505218,
+    "svd_cpu_float64": 0.004566499963402748
+  },
+  "error": "Traceback (most recent call last):\n  File \"/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/run.py\", line 85, in main\n    res = experiment.quadcheck(ctx)\n  File \"/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/scp/experiment.py\", line 439, in quadcheck\n    spec = ctx.spectrum()\n  File \"/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/scp/experiment.py\", line 48, in spectrum\n    return svd_w_in(self.mlp.c_fc.weight)\n  File \"/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/scp/spectral.py\", line 65, in svd_w_in\n    Wc = c_fc_weight.detach().to(\"cpu\", torch.float64)\nRuntimeError: Undefined type Double\n"
+}

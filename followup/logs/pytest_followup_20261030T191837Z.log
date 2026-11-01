@@ -1,0 +1,5 @@
+SKIPPED [1] tests/test_day3.py:373: registration exists: the guard test would launch a real validation run
+SKIPPED [1] tests/test_day3.py:380: freeze exists: the guard test could launch a real test run
+64 passed, 2 skipped in 36.42s
+...........................                                              [100%]
+27 passed in 3.11s

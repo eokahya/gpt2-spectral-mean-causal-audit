@@ -1,0 +1,25 @@
+FUTURE CONFIRMATORY PROTOCOL — INCOMPLETE DRAFT, NOT FOR EXECUTION
+
+The current development branch is not being advanced. This preserves the requested draft decision framework; it is not a registration or authorization for a new run.
+
+Fixed historical choices, if a separately justified SAME-estimand confirmation were proposed:
+GPT-2 small L9, PCA192, centered100year-token logits;8-donor finiteQ enumeration; same normalized response-variance estimand and frozen development scale s=1.0456686088640668. L0=.05 remains unchanged. Numerical identity/duplicate gates1e-4, two-U-formula relative tolerance1e-10, scale floor1e-8 and noise ratio1e6 remain unchanged. MPS execution uses registered canonical19row layout. Preserve all48development prompts/contexts/nouns outside a future fresh pool.
+
+DRAFT decision framework from the frozen development protocol:
+Numerical/sampling/protocol invalidity => EVALUATION_INVALID.
+Valid lower one-sided95% bound on L greater than.05 => SUPPORTED_FLOOR.
+Valid upper one-sided95% bound on L at most.05 => TARGET_FLOOR_RULED_OUT.
+Otherwise => INCONCLUSIVE.
+These labels require a justified fresh sampling/uncertainty design. The current descriptive bootstrap does not supply that justification.
+
+Unresolved prerequisites, before any registration or fresh outcomes:
+1. An independently useful scientific purpose. A post-result switch from positive evidence to negative replication is not sufficient by itself.
+2. Explicit target population, source distribution and intervention support, with nondegenerate conditioning. A natural-distribution bridge is required for natural-use claims, not for every motivated interventional experiment. If full context fixesq, a natural conditionalq distribution cannot simply be assumed variable.
+3. Fresh donor/recipient sampling unit and dependencies. Either scientifically justified disjoint clusters or an uncertainty model accounting for shared lexical effects; low overlap alone proves neither independence nor coverage.
+4. Freeze scale conditioning versus propagated scale uncertainty and label the resulting inference accordingly.
+5. Validate intended coverage/calibration for that sampling law. Reassess sample size under it. N192 belongs only to the previous independent-Gamma model at hypotheticalL=.08, not automatically to this new design or a negative replication.
+6. Freeze genuine target contrast, effect margin justified by scientific utility, comparators, information/compute budgets and stopping rules before any new outputs. No threshold reduction, post-hocP/Qsearch or significance rescue.
+7. A new write-once registration and fresh model-run scope. No such run has been executed.
+
+For a DISTINCT RG research proposal:
+Define the source measure, retained/eliminated shells, observable, effective response-generating object, induced operators and a derived tractable flow. Predict held-out-cutoff response statistics without fitting their outcomes. Compare with equally informed non-RG Taylor/moment/multiscale approaches at matched calibration/search/compute budgets. Theoretical equivalence of exact successive and direct marginalization is allowed; it is not evidence against RG. A useful approximate accuracy/cost prediction, meaningful acceptance margin and identifiable target are required BEFORE further model runs. No numerical success margin is invented from the present outcomes.

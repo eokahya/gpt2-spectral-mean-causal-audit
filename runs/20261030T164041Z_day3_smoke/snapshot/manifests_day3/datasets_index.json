@@ -1,0 +1,52 @@
+{
+  "created_utc": "2026-10-30T16:34:56.822201+00:00",
+  "rule": "Day-1 pair algorithm on sealed prompt pools; output-independent",
+  "splits": {
+    "validation": {
+      "n_pairs": 192,
+      "strata": {
+        "up|10-19": 32,
+        "up|20-29": 32,
+        "up|30-40": 32,
+        "down|10-19": 32,
+        "down|20-29": 32,
+        "down|30-40": 32
+      },
+      "file": "manifests_day3/validation_pairs.csv",
+      "sha256": "f9331172c00c23f8bca125ff75ff9e6815a383fc83a52898433b2e59b103532d",
+      "source": "manifests/sealed_prompts_validation.csv",
+      "source_sha256": "617e4915c2101083255e7c423b14ca48e9b8e3baea69b941f9dbcb4ba223b3f1",
+      "seed": 20261041,
+      "pool_size": 576,
+      "tokenization_failures": 0,
+      "n_templates": 18,
+      "frames": [
+        "F2",
+        "F3"
+      ]
+    },
+    "test": {
+      "n_pairs": 192,
+      "strata": {
+        "up|10-19": 32,
+        "up|20-29": 32,
+        "up|30-40": 32,
+        "down|10-19": 32,
+        "down|20-29": 32,
+        "down|30-40": 32
+      },
+      "file": "manifests_day3/test_pairs.csv",
+      "sha256": "50a1e4bdf44dd67de0fe8002d0000bb88ca81a6d07afd3ecc2990dc98eaba367",
+      "source": "manifests/sealed_prompts_test.csv",
+      "source_sha256": "a311a76a4ce019ef17874a0c6f24e4812d67b21d7f4b502d9b798f0a8593dc6c",
+      "seed": 20261042,
+      "pool_size": 594,
+      "tokenization_failures": 0,
+      "n_templates": 18,
+      "frames": [
+        "F4",
+        "F5"
+      ]
+    }
+  }
+}

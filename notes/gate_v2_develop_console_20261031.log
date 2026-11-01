@@ -1,0 +1,25 @@
+2026-10-31 13:33:29,835 INFO [stage] load_model_mps_float32 ...
+W1031 13:33:30.745000 68407 .venv/lib/python3.13/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 13500.88it/s]
+2026-10-31 13:33:31,138 INFO [stage] load_model_mps_float32 done in 1.30s
+2026-10-31 13:33:31,899 INFO [stage] extract ...
+2026-10-31 13:33:32,350 INFO [stage] extract done in 0.45s
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate/__main__.py", line 3, in <module>
+    main()
+    ~~~~^^
+  File "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate/cli.py", line 40, in main
+    run, _ = fn()
+             ~~^^
+  File "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate/cli.py", line 38, in <lambda>
+    "develop": lambda: pipeline.develop(cfg), "power": lambda: pipeline.power(cfg, a.dev_run),
+                       ~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate/pipeline.py", line 445, in develop
+    return _staged("develop", cfg, go, {"registration_sha256": sha256_file(reg_path(cfg)), "reg_created": reg["created_utc"]})
+  File "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate/pipeline.py", line 35, in _staged
+    res = fn(run)
+  File "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate/pipeline.py", line 443, in go
+    raise RuntimeError(f"development measurement invalid: {out['invalid_reasons']}")
+RuntimeError: development measurement invalid: ['identity replacement differs']

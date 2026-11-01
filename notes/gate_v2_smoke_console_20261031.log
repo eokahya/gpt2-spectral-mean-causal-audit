@@ -1,0 +1,8 @@
+2026-10-31 13:32:59,835 INFO [stage] load_model_mps_float32 ...
+W1031 13:33:00.746000 68323 .venv/lib/python3.13/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 8485.74it/s]
+2026-10-31 13:33:01,550 INFO [stage] load_model_mps_float32 done in 1.71s
+2026-10-31 13:33:02,948 INFO [stage] load_model_cpu_float64 ...
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 1979.06it/s]
+2026-10-31 13:33:03,271 INFO [stage] load_model_cpu_float64 done in 0.32s
+20261031T103259Z_gate_smoke

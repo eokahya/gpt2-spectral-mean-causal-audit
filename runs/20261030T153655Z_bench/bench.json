@@ -1,0 +1,54 @@
+{
+  "k": 192,
+  "reps": 5,
+  "sizes": {
+    "16": {
+      "orig_baseline": {
+        "mean_ms": 11.776358215138316,
+        "min_ms": 11.108333012089133
+      },
+      "orig_patched": {
+        "mean_ms": 11.360450182110071,
+        "min_ms": 10.861542075872421
+      },
+      "gauss_full_layer_patched": {
+        "mean_ms": 21.542891580611467,
+        "min_ms": 21.269875112921
+      },
+      "gauss_last_token_patched": {
+        "mean_ms": 13.726916862651706,
+        "min_ms": 13.340292032808065
+      },
+      "memory": {
+        "max_rss_bytes": 1056964608,
+        "mps_current_allocated_bytes": 508584960,
+        "mps_driver_allocated_bytes": 2213150720
+      },
+      "seq_len_max": 14
+    },
+    "32": {
+      "orig_baseline": {
+        "mean_ms": 17.561150202527642,
+        "min_ms": 17.153749940916896
+      },
+      "orig_patched": {
+        "mean_ms": 17.55195832811296,
+        "min_ms": 17.26070884615183
+      },
+      "gauss_full_layer_patched": {
+        "mean_ms": 39.463116601109505,
+        "min_ms": 38.66604110226035
+      },
+      "gauss_last_token_patched": {
+        "mean_ms": 20.48399168998003,
+        "min_ms": 20.124667091295123
+      },
+      "memory": {
+        "max_rss_bytes": 1063763968,
+        "mps_current_allocated_bytes": 513055744,
+        "mps_driver_allocated_bytes": 2213150720
+      },
+      "seq_len_max": 14
+    }
+  }
+}

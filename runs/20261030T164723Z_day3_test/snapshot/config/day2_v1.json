@@ -1,0 +1,46 @@
+{
+  "protocol_version": "day2-v1",
+  "label": "exploratory_day2_controls",
+  "seed": 20261030,
+  "model": {
+    "name": "openai-community/gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "dtype": "float32",
+    "device": "mps",
+    "attn_implementation": "eager"
+  },
+  "layer": 9,
+  "ranks": [96, 192, 384],
+  "methods": ["zero", "bias", "gauss", "gauss_wo"],
+  "scopes": ["last_token", "full_layer"],
+  "quadrature_nodes": 128,
+  "quadrature_sigma_max_checked": 2.5,
+  "quadrature_fixed_by": "runs/20261030T160333Z_day2_quadcheck (observed sigma_max 1.774, rule bound 2.5, smallest converged nodes 128)",
+  "quadrature_rule": {"candidates": [64, 128, 256, 512], "ref_nodes": 1024, "tol_max_abs": 1e-7,
+                      "sigma_bound_factor": 1.25, "sigma_bound_round": 0.5},
+  "svd": {"device": "cpu", "dtype": "float64"},
+  "bases": {
+    "families": ["svd", "pca", "coord", "random", "wsvd"],
+    "random_seeds": [101, 202, 303, 404, 505],
+    "ridge_rel": 0.01,
+    "fit_pool": "final_token"
+  },
+  "matching": {
+    "regimes": ["native", "l2", "preact"],
+    "abs_floor": 1e-8,
+    "rel_floor": 1e-6,
+    "oos_range": [0.25, 4.0],
+    "assert_rel_tol_f64": 1e-9,
+    "assert_rel_tol_f32": 1e-5
+  },
+  "day1": {
+    "config": "config/pilot_v1.json",
+    "registration": "registration/REGISTRATION.json",
+    "pilot_run": "runs/20261030T153707Z_pilot"
+  },
+  "smoke_gates": {"replay_orig_max_abs_T": 1e-4, "replay_reduced_max_abs_T": 1e-3,
+                  "reduced_B_null_max_abs_logit": 2e-3, "RB_vs_donor_max_abs": 1e-4},
+  "budget": {"batch_size": 192, "walltime_budget_s": 900, "aggregate_reserve_s": 150},
+  "positive_control": {"min_mean_pd": 0.0, "ci_lower_T_gt": 0.0},
+  "bootstrap": {"B": 2000, "ci": 0.95}
+}

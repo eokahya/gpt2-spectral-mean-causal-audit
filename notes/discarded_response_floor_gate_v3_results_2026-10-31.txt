@@ -1,0 +1,77 @@
+DISCARDED-STATE RESPONSE FLOOR — TEKNİK SONUÇ RAPORU
+31 Ekim 2026
+
+SONUÇ
+Opus 5.5 High tarafından hazırlanan ayrı v3 sürümü M2 Max üzerinde çalıştırıldı. Aynı 48 geliştirme grubunun tamamı sayısal kontrolleri geçti. Tanımlanan sonlu tasarımın hata tabanı L = 0.03958939643; önceden belirlenen hedef L0 = 0.05. Bu tasarımda hedef büyüklüğünde taban gözlenmedi. Yeni örnekler veya doğal dil popülasyonu için doğrulayıcı bir dışlama yapılmadı. Bu deney Wilson RG veya WeightWatcher etkinliğini sınamadı.
+
+NE ÖLÇÜLDÜ?
+GPT-2 small, sıfır tabanlı katman9, son gerçek token'ın MLP dal girişi, sabit PCA192 projektörü. Alıcı bağlamı, tutulan koordinatlar ve tutulan müdahale sabitken, atılan koordinatlar aynı yıldaki sekiz farklı donörden alındı. Çıktı, yüz adet yıl token'ının ortalaması çıkarılmış logit vektörüdür; kare norm boyut sayısına bölünür.
+Her grubun sekiz donörünün tamamı değerlendirildi. U, müdahale-cevaplarının bu sonlu donör dağılımı üzerindeki varyansıdır. L² = gruplar üzerinden ortalama U / s². s², aynı geliştirme gruplarındaki tam dal müdahalesinin cevap ölçeğidir. Koşullu varyans özdeşliği standarttır; yeni teorem değildir.
+L≈%3.96, tanımlı cevap ölçeğine göre RMS hata tabanıdır; model doğruluğunda yüzde kayıp değildir. Bu, q bilgisine erişmeyen tekil-cevap tahmincisinin en iyi teorik hata tabanını ifade eder; belirli öğrenilebilir bir yöntemin bu tabana eriştiğini veya küçük pratik hata verdiğini göstermez.
+
+GEÇERSİZ V2 VE TEKNİK DÜZELTME
+V2'de 15/48 kimlik kontrolü sabit1e-4 eşiğini aştı; maksimum2.13623046875e-4. V2 kalıcı olarak EVALUATION_INVALID bırakıldı; eşik değişmedi, grup atılmadı, sonuç yeniden sınıflandırılmadı.
+Eski kalibrasyon verisindeki tanı: MPSfloat32,132 farklı düzen/padding vakası; aynı düzende kimlik0, çapraz düzende en çok1.373291e-4. CPUfloat64,33vakada kimlik ve çapraz düzen kontrolleri0. Bu, test edilen vakalarda hassasiyet/hesaplama düzeni etkisini destekler; tüm olası hataların yokluğunu kanıtlamaz.
+V3'te her kaynak prompt ayrı olarak19özdeş satırda, padding olmadan işlendi. Kaydedilen aktivasyon ve yamasız referans aynı17.satırdan alındı; grup müdahalesi aynı19satırlı düzende işlendi. Model, P, Q,48grup/480prompt, bilimsel ve sayısal eşikler, güç yöntemi değişmedi.
+V3 kayıt zamanı:2026-10-31T10:58:08.465632+00:00; v3 ölçümünden önce. V2 ham çıktıları/s²/U aralığı önceden görüldüğünden v3, kör veya taze doğrulama değildir: geliştirme aşamasının teknik yeniden ölçümüdür.
+
+DOĞRULAMA VE MALİYET
+- Opus kod/test yazarı; koordinatör ayrı inceleme, test ve M2Max çalıştırması yaptı.
+- 48 test geçti (4.90s).
+- Eski kalibrasyon ön kontrolünün bütün kapıları geçti. Kimlik, aynı-q, d=0, diğer pozisyon ve residual bypass farkı0.
+- MPSfloat32 / CPUfloat64: R bağıl fark1.23201968e-4 (<.001), U bağıl fark.0014798726 (<.01).
+- Tam48koşuda bütün kimlik/tekrar kontrolleri0; bütün çıktılar sonlu.
+- U'nun varyans ve çiftler arası uzaklık formülleri en çok2.67313e-16 bağıl farkla uyuştu.
+- Koordinatör, deney estimator modüllerini içe aktarmadan NumPy ile ham logitlerden yeniden hesapladı: L² farkı0, s² farkı2.22e-16, U farkı<9e-19.
+- Model aşaması9.3873s; tepe ölçülen bellek1.0651GiB. Model yükleme ve eski kalibrasyon ısınması bu süreye dahil değil.
+- 480 kaynak prompt için480ileri geçiş/9120hesaplama satırı;48grup için48ileri geçiş/912satır. Isınma ayrı kaydedildi.
+- Önceki149v2dosyası ve toplam892korunan dosya değişmedi. Kaynak/protokol/veri hashleri kayıtla eşleşti.
+
+SAYISAL SONUÇLAR
+s²=1.0934228395637127; s=1.0456686088640668
+L²=0.0015673203095944827; L=0.039589396428772225
+Umin=0.0004055926289398484; Umax=0.0038653637250146856
+Betimsel bootstrap alt/üst L sınırları=.03824514969 / .04088465132.
+Bu iki sınır ayrı tek yönlü%95sınırlardır; doğrulayıcı popülasyon kapsamı kanıtlanmış bir güven aralığı değildir. Kodun varsayımsal 'bu doğrulama olsaydı' etiketi gerçek doğrulayıcı sonuç olarak kullanılmadı.
+Sekiz donör tam sayıldığı için bu48grubun tanımlı sonluQ dağılımlarında ek donör çekilişi MonteCarlo belirsizliği yoktur. Yeni grup/frame/donör popülasyonuna genelleme ise ayrı bir problemdir.
+
+GÜÇ PLANLAMASI — GÖZLENEN ETKİDEN AYRI
+Önceden belirlenen40oranın tamamı hesaplandı: her biri2000simülasyon; her veri kümesinin kendi bağımsız10000bootstrap örneklemesi. Süre207.147s,1800s sınırı içinde. RNG ve bootstrap yöntemi değişmedi.
+Varsayımsal alternatif L1=.08, sıfır eşiği L0=.05. N={48,96,144,192,240}; dört Gamma/varyans senaryosu. Tüm alternatif senaryolarda2000/2000başarı; eşzamanlı Bonferroni düzeltilmiş CP alt sınır.996318. Bu, gerçekte L=.08 ölçüldüğü anlamına gelmez.
+Dondurulmuş kuralın sonucu: POWER_PLAN_CANDIDATE N=192. Sınırlayıcı ölçüt güç değil, sıfır altında yanlış pozitif CP üst sınırının bütün senaryolarda<=.075 olmasıdır. N192'de sıfır oranları .050,.054,.0525,.046; üst sınırlar .067670,.072233,.070525,.063079. N240'ın bir senaryosu .077338 ile sınır üstünde; sonlu MonteCarlo dalgalanması değiştirilmeden raporlandı, yeni seed denenmedi.
+Koordinatör40oranın sayısını ve CP sınırlarını yeniden hesapladı; fark0. N192, sabit algoritmanın doğru çıktısıdır. Ne gözlenenL>.05 lehine kanıt ne de yeni192grupluk koşu başlatma gerekçesidir. .075 alarm eşiği, nominal%5hata kontrolünün kanıtı değildir.
+
+YORUM SINIRLARI
+- Yalnızca buP/rank/katman/gözlenebilir ve sentetik hibritQ için sonuç.
+- 48donör sözcüğü384benzersiz bağlamda kullanılıyor; ikili en çok2sözcük örtüşmesi bağımsızlık kanıtı değil. Bağımsız-Gamma planlama ve template bootstrap sözcüksel bağımlılığı modellemiyor.
+- Yalnız4alıcı frame var. s geliştirmeden sabitleniyor; belirsizliği sonraki koşullu aralığa dahil edilmiyor.
+- Benzer aktivasyon normları, hibritlerin doğal manifold üzerinde olduğunu kanıtlamaz; doğal q|(z,c) dağılımı tanımlanmış/özdeşlenmiş sayılmaz.
+- Küçük taban, atılan değişkenlerin görev bakımından etkisiz olduğunu veya PCA+ortalama telafisinin genel olarak yeterli olduğunu göstermez.
+- Eski PCA+bias NRMSE ve yeni cevap-varyansı tabanı farklı niceliklerdir; sayısal yakınlık matematiksel içerme değildir.
+- RG modeli, akan kuplajlar, yeni kesime tahmin ve eşit bilgili non-RG karşılaştırma uygulanmadı. RG katkısı veya RG başarısızlığı sonucu çıkarılamaz.
+
+DOSYALAR
+/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate_v3/DEV_PROTOCOL_v3.md
+/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate_v3/registration/DEV_REGISTRATION_v3.json
+/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate_v3/runs/20261031T105820Z_gate_v3_develop/development.json
+/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate_v3/runs/20261031T105820Z_gate_v3_develop/raw_J_logits.pt
+/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate_v3/runs/20261031T105841Z_gate_v3_power/power.json
+/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate_v3/runs/20261031T110353Z_gate_v3_report/report_numbers.json
+/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/notes/gate_v3_coordinator_raw_audit_20261031.json
+/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/notes/gate_v3_power_coordinator_audit_20261031.json
+/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/notes/gate_v3_actual_review_record_20261031.json
+
+GERÇEK ÜÇ-MODEL TARTIŞMASI VE NİHAİ KARAR
+Claude Chat Fable5.1Extra, Safari GPT Pro ve Antigravity Gemini4ArgonHigh aynı tam sonuç paketini aldı. Bunlar simüle edilmiş roller değildir. Modeller özet üzerinden değerlendirdi; bağımsız ham-dosya denetimi yaptıklarını iddia etmedik. GPT Pro ilk sonuç incelemesinde3m13s, son çapraz değerlendirmede2m44s çalıştı; yanıt kontrolleri arasında en az5dakika bırakıldı.
+
+İlk ayrışma: Fable, mevcut pozitif kolu kapatırken aynı-yıl/farklı-yıl donör karşılaştırması önerdi. Antigravity bütün hattı durdurmayı savundu. GPT Pro mevcut kolu kapatmayı önerdi; gelecekteki bütün GPT2/L9 araştırmalarının değersiz sayılmasına karşı çıktı.
+Koordinatör, düşük tabanın bir closure hata üst sınırı olmadığı, aynı-yıl donörlerin görev bilgisini tamamen yok etmediği, eskiNRMSE ile yeniL'nin eşdeğer olmadığı ve192planlama çıktısının gerçek etki kanıtı olmadığı itirazlarını iletti. Fable hemen yeniQkoşusu önerisini geri çekti. Antigravity, gelecekteki bütün sonuçların küçük/özgünlüksüz olacağı iddiasını geri çekip durmayı kaynak/araştırma önceliği olarak savundu. RG için exact ardışık entegrasyonun doğrudan entegrasyona eşit olabileceği ayrıca düzeltildi.
+
+Son karar: Mevcut pozitif hata-tabanı kolu kapatılıyor;192grupluk doğrulama veya hemen farklıQkoşusu yapılmıyor. Bu, yeni bir istatistiksel ret kuralı veya bütün olası araştırmalara ilişkin imkânsızlık iddiası değildir. Sonlu48grubun ölçümü hedef altında; daha geniş popülasyon sonucu açık kalır. Eski kapalı INCONCLUSIVE çalışma da değiştirilmedi.
+
+YeniQaraştırması özünde yasak değildir. GPT Pro'nun son itirazı şudur: farklı yılları karıştırmak hem yıl-içi varyansı hem yıl-koşullu ortalama farklarını artırabilir; daha büyükLtek başına yıl-özgül mekanizmayı ayırt etmez. Yeniden açma için, genel kazanç/deplasman değişiminden ayrılan yıl-özgül cevap öngörüsü, yalnız yılda farklılaşan eşlenmiş donör bağlamları, yıl-içi ve yıllar-arası bileşenlerin ayrıştırılması, doğru yıl-ilişkisi kontrolü, bağımlılığı dikkate alan örnekleme ve bağımsız bilimsel/pratik değer gerekir. Bunlar şu an tamamlanmış değildir.
+
+RGyolu için sonraki adım model koşusu değil, önce türetimdir: kaynak dağılımı, elenen modlar, gözlenebilir, üretilen etkileşimler ve gerekçeli yaklaşık akış açıkça tanımlanmalı; sonuçlarına fit yapılmamış kesimde sayısal cevap tahmini üretmelidir. Eşit bilgi ve kaynakla doğrudanTaylor/moment ve non-RGçokölçekli yaklaşımlara karşı önceden gerekçelendirilmiş faydalı doğruluk/maliyet üstünlüğü sınanmalıdır. Böyle bir türetim henüz sağlanmadı; başarılabileceği belirsizdir. Mevcut deney RGkatkısı göstermedi ve RGyi çürütmedi.
+
+Gelecek doğrulama taslağı: notes/gate_v3_future_confirmatory_draft_NOT_FOR_EXECUTION_20261031.txt
+Bu taslak çalıştırılacak bir kayıt değildir; bağımlılık/kapsama/tasarım ve bilimsel gerekçe eksikleri açıkça işaretlenmiştir.

@@ -1,0 +1,41 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.0, pytest-9.2.0, pluggy-1.7.0 -- /Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.15.1
+collecting ... collected 30 items
+
+tests/test_cli_guards.py::test_test_split_is_sealed PASSED               [  3%]
+tests/test_cli_guards.py::test_only_primary_or_backup_layer PASSED       [  6%]
+tests/test_data.py::test_year_tokens_single_and_distinct PASSED          [ 10%]
+tests/test_data.py::test_all_prompts_tokenize_as_specified PASSED        [ 13%]
+tests/test_data.py::test_split_disjointness_and_leakage PASSED           [ 16%]
+tests/test_data.py::test_pair_design PASSED                              [ 20%]
+tests/test_data.py::test_splits_are_seed_deterministic PASSED            [ 23%]
+tests/test_data.py::test_score_definition PASSED                         [ 26%]
+tests/test_data.py::test_check_prompt_positive_and_negative PASSED       [ 30%]
+tests/test_data.py::test_continuation_mask PASSED                        [ 33%]
+tests/test_data.py::test_prob_diff_counts_equal_year_as_wrong PASSED     [ 36%]
+tests/test_data.py::test_float64_metrics_refuse_mps_tensors PASSED       [ 40%]
+tests/test_model.py::test_last_position_logits_match_full_model PASSED   [ 43%]
+tests/test_model.py::test_hook_removal_restores_model PASSED             [ 46%]
+tests/test_model.py::test_same_example_identity PASSED                   [ 50%]
+tests/test_model.py::test_residual_bypass_invariant_and_locality PASSED  [ 53%]
+tests/test_model.py::test_RB_patch_equals_full_donor_branch PASSED       [ 56%]
+tests/test_model.py::test_full_rank_reduction_is_original PASSED         [ 60%]
+tests/test_model.py::test_reduced_B_invariance PASSED                    [ 63%]
+tests/test_model.py::test_scope_locality PASSED                          [ 66%]
+tests/test_model.py::test_mps_cpu_parity PASSED                          [ 70%]
+tests/test_spectral.py::test_gelu_new_matches_hf PASSED                  [ 73%]
+tests/test_spectral.py::test_svd_orientation_and_reconstruction PASSED   [ 76%]
+tests/test_spectral.py::test_projectors_complementary PASSED             [ 80%]
+tests/test_spectral.py::test_gauss_sigma_zero_is_exact_gelu_new PASSED   [ 83%]
+tests/test_spectral.py::test_quadrature_node_convergence PASSED          [ 86%]
+tests/test_spectral.py::test_reduction_refuses_unchecked_sigma PASSED    [ 90%]
+tests/test_spectral.py::test_quadrature_vs_independent_monte_carlo PASSED [ 93%]
+tests/test_spectral.py::test_independent_gaussian_q_local_mean_synthetic PASSED [ 96%]
+tests/test_spectral.py::test_moments_definitions PASSED                  [100%]
+
+============================= 30 passed in 12.41s ==============================

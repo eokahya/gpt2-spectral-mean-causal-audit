@@ -1,0 +1,39 @@
+2026-10-30 18:37:07,523 INFO [stage] load_model ...
+2026-10-30 18:37:08,863 INFO [stage] load_model done in 1.34s
+2026-10-30 18:37:09,137 INFO [stage] svd_cpu_float64 ...
+2026-10-30 18:37:09,351 INFO [stage] svd_cpu_float64 done in 0.21s
+2026-10-30 18:37:09,351 INFO [stage] orig_forward ...
+2026-10-30 18:37:09,514 INFO [stage] orig_forward done in 0.16s
+2026-10-30 18:37:09,514 INFO [stage] positive_control_gate ...
+2026-10-30 18:37:10,200 INFO [stage] positive_control_gate done in 0.69s
+2026-10-30 18:37:10,200 INFO [stage] moment_pool_forward ...
+2026-10-30 18:37:10,470 INFO [stage] moment_pool_forward done in 0.27s
+2026-10-30 18:37:10,944 INFO [stage] orig_patched ...
+2026-10-30 18:37:13,223 INFO [stage] orig_patched done in 2.28s
+2026-10-30 18:37:14,381 INFO k=96 zero     last_token done in 1.07s (elapsed 7s)
+2026-10-30 18:37:15,466 INFO k=96 zero     full_layer done in 1.08s (elapsed 8s)
+2026-10-30 18:37:16,548 INFO k=96 bias     last_token done in 1.08s (elapsed 10s)
+2026-10-30 18:37:17,652 INFO k=96 bias     full_layer done in 1.10s (elapsed 11s)
+2026-10-30 18:37:18,813 INFO k=96 gauss    last_token done in 1.16s (elapsed 12s)
+2026-10-30 18:37:21,768 INFO k=96 gauss    full_layer done in 2.95s (elapsed 15s)
+2026-10-30 18:37:22,911 INFO k=96 gauss_wo last_token done in 1.14s (elapsed 16s)
+2026-10-30 18:37:25,854 INFO k=96 gauss_wo full_layer done in 2.94s (elapsed 19s)
+2026-10-30 18:37:26,902 INFO k=192 zero     last_token done in 1.05s (elapsed 20s)
+2026-10-30 18:37:28,007 INFO k=192 zero     full_layer done in 1.10s (elapsed 21s)
+2026-10-30 18:37:29,073 INFO k=192 bias     last_token done in 1.06s (elapsed 22s)
+2026-10-30 18:37:30,181 INFO k=192 bias     full_layer done in 1.11s (elapsed 23s)
+2026-10-30 18:37:31,337 INFO k=192 gauss    last_token done in 1.15s (elapsed 24s)
+2026-10-30 18:37:34,318 INFO k=192 gauss    full_layer done in 2.98s (elapsed 27s)
+2026-10-30 18:37:35,485 INFO k=192 gauss_wo last_token done in 1.16s (elapsed 28s)
+2026-10-30 18:37:38,464 INFO k=192 gauss_wo full_layer done in 2.98s (elapsed 31s)
+2026-10-30 18:37:39,527 INFO k=384 zero     last_token done in 1.06s (elapsed 32s)
+2026-10-30 18:37:40,659 INFO k=384 zero     full_layer done in 1.13s (elapsed 34s)
+2026-10-30 18:37:41,729 INFO k=384 bias     last_token done in 1.07s (elapsed 35s)
+2026-10-30 18:37:42,842 INFO k=384 bias     full_layer done in 1.11s (elapsed 36s)
+2026-10-30 18:37:44,007 INFO k=384 gauss    last_token done in 1.16s (elapsed 37s)
+2026-10-30 18:37:47,024 INFO k=384 gauss    full_layer done in 3.01s (elapsed 40s)
+2026-10-30 18:37:48,182 INFO k=384 gauss_wo last_token done in 1.15s (elapsed 41s)
+2026-10-30 18:37:51,189 INFO k=384 gauss_wo full_layer done in 3.00s (elapsed 44s)
+2026-10-30 18:37:51,192 INFO [stage] aggregate ...
+2026-10-30 18:38:01,785 INFO [stage] aggregate done in 10.59s
+2026-10-30 18:38:01,821 INFO run dir: /Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/runs/20261030T153707Z_pilot

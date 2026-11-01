@@ -1,0 +1,119 @@
+{
+  "run_id": "20261030T153707Z_pilot",
+  "stage": "pilot",
+  "label": "exploratory_pilot",
+  "protocol_version": "pilot-v1",
+  "start_utc": "2026-10-30T15:37:07.046311+00:00",
+  "argv": [
+    "run.py",
+    "pilot"
+  ],
+  "seed": 20261030,
+  "config_path": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/config/pilot_v1.json",
+  "config_sha256": "e8f7165df53ce4b112444d1d4e4ecc9c86e231d5421974739df63f1475f8ff33",
+  "protocol_sha256": "88cb9abf3744a15aaa4eea092d2c64e3eaf8e22b8d3fcfa236aba91032f1e979",
+  "source": {
+    "tree_sha256": "9ea69ff9fd5162c591f8eea4f66008b349673cee96deb214da8ea0c34ae65ec3",
+    "files": {
+      "run.py": "69f6e9b31fcdf8ca63f0552be28c41c505809480e5129671f9264f405fc287da",
+      "scp/__init__.py": "8dfd15eb6df2cf72cd659c373d2615741137fad7032a31131903e2c870ce606d",
+      "scp/common.py": "b3c34473a5bb30d0993783cc155e54c781b68081e9227c950010c9f10a7378d4",
+      "scp/data.py": "7571ddaf03577f458c6adca961d9ed3c11d90dc0241d46efb7047eaea4b95ddf",
+      "scp/experiment.py": "0a7610b94d3a94c12746efeb6316d92301802333055f098351690fe952070275",
+      "scp/metrics.py": "8e68703458d5c157ae64b3a62a823d0f73a12a65ba9c41f93d0490f614c6fd46",
+      "scp/model.py": "090d6b01c20a77437274f8553dd8bfac4e1af8814c276114027dc9d75d534794",
+      "scp/spectral.py": "50eb34663c89a2540d165e300fa9355d4d86d3501a1518a84b0e8cdd27b1ddb4",
+      "tests/conftest.py": "bb4408f6678181cfb65f3adcfdd41d6d32a3e0e87d05511b022fef1b6cc2e4f3",
+      "tests/test_cli_guards.py": "92215361ce9a5433acc0523516aa9b5d147c26451c9d00005edcf8b63eb79f36",
+      "tests/test_data.py": "4e4e96b78f526d58e58fa3248c0bc605b163d0f8247e494a5f71290a4399545d",
+      "tests/test_model.py": "da0208cd6a41ccb08928d2912e80b920c9ca31aa5daba5ce455f4cb08032da1d",
+      "tests/test_spectral.py": "f9436e08e81e3dee258e658088a634e7ecf3d0625ad3e03a4a5021b99e964488"
+    }
+  },
+  "manifests": {
+    "manifests/moment_pool_calibration.csv": "7fec3dab3247ed37f3d9ef28f09398e7b30857937b91f7cc6617b79dcdf7e3e3",
+    "manifests/pilot_pairs_calibration.csv": "797500e0c8c9531c76cad93a5648b85474894112890b10ee19f51c73bc4cff5f",
+    "manifests/sealed_prompts_test.csv": "a311a76a4ce019ef17874a0c6f24e4812d67b21d7f4b502d9b798f0a8593dc6c",
+    "manifests/sealed_prompts_validation.csv": "617e4915c2101083255e7c423b14ca48e9b8e3baea69b941f9dbcb4ba223b3f1",
+    "manifests/split_manifest.json": "40a25f0234a4dd45e6e869afff48af80f35e8126b9e4203febb815b8a9ac0f98"
+  },
+  "env": {
+    "python": "3.13.0 (v3.13.0:60403a5409f, Oct  7 2024, 00:37:40) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "torch": "2.15.0",
+    "transformers": "5.22.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "mps_available": true,
+    "mps_built": true
+  },
+  "model": {
+    "name": "openai-community/gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "dtype": "float32",
+    "device": "mps",
+    "attn_implementation": "eager",
+    "safetensors_path": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/.cache/hf/hub/models--openai-community--gpt2/snapshots/607a30d783dfa663caf39e06633721c8d4cfcd7e/model.safetensors",
+    "safetensors_sha256": "248dfc3911869ec493c76e65bf2fcf7f615828b0254c12b473182f0f81d3a707"
+  },
+  "svd": {
+    "device": "cpu",
+    "dtype": "float64"
+  },
+  "snapshot_dir": "runs/20261030T153707Z_pilot/snapshot",
+  "registration": {
+    "registered_utc": "2026-10-30T15:36:37.233005+00:00",
+    "registration_sha256": "67accfcbb506876b2d2c3e06182f9abf20089a340bb44a5f2f07017a43b0be0d"
+  },
+  "layer": 9,
+  "device_used": "mps",
+  "svd_singular_values_top5": [
+    31.65195909126816,
+    16.711757660882498,
+    16.432095171750948,
+    16.153565533039462,
+    15.411688183526175
+  ],
+  "retained_energy": {
+    "96": 0.3610525317895929,
+    "192": 0.553388020950384,
+    "384": 0.8005768217094208
+  },
+  "status": "ok",
+  "end_utc": "2026-10-30T15:38:01.821022+00:00",
+  "walltime_s": 54.77473,
+  "stage_walltimes_s": {
+    "load_model": 1.3406919999979436,
+    "svd_cpu_float64": 0.21449337503872812,
+    "orig_forward": 0.1626024169381708,
+    "positive_control_gate": 0.685614249901846,
+    "moment_pool_forward": 0.2701365421526134,
+    "orig_patched": 2.2786063340026885,
+    "variant_k96_zero_last_token": 1.0710412911139429,
+    "variant_k96_zero_full_layer": 1.0839360000099987,
+    "variant_k96_bias_last_token": 1.080496917013079,
+    "variant_k96_bias_full_layer": 1.1025458748918027,
+    "variant_k96_gauss_last_token": 1.1594447081442922,
+    "variant_k96_gauss_full_layer": 2.9525573330465704,
+    "variant_k96_gauss_wo_last_token": 1.1407340001314878,
+    "variant_k96_gauss_wo_full_layer": 2.941865124972537,
+    "variant_k192_zero_last_token": 1.0460504160728306,
+    "variant_k192_zero_full_layer": 1.1017889590002596,
+    "variant_k192_bias_last_token": 1.0634804170113057,
+    "variant_k192_bias_full_layer": 1.105322124902159,
+    "variant_k192_gauss_last_token": 1.1534269999247044,
+    "variant_k192_gauss_full_layer": 2.97791412496008,
+    "variant_k192_gauss_wo_last_token": 1.1645544169005007,
+    "variant_k192_gauss_wo_full_layer": 2.9767082498874515,
+    "variant_k384_zero_last_token": 1.0602766659576446,
+    "variant_k384_zero_full_layer": 1.1286486249882728,
+    "variant_k384_bias_last_token": 1.0673567499034107,
+    "variant_k384_bias_full_layer": 1.11061895894818,
+    "variant_k384_gauss_last_token": 1.1619637499097735,
+    "variant_k384_gauss_full_layer": 3.0133517920039594,
+    "variant_k384_gauss_wo_last_token": 1.1548824170604348,
+    "variant_k384_gauss_wo_full_layer": 3.004190874984488,
+    "aggregate": 10.593244291841984
+  }
+}

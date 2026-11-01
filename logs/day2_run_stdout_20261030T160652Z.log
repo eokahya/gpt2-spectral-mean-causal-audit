@@ -1,0 +1,26 @@
+2026-10-30 19:06:53,823 INFO [stage] load_model ...
+W1030 19:06:54.664000 35544 .venv/lib/python3.13/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 13106.92it/s]
+2026-10-30 19:06:55,166 INFO [stage] load_model done in 1.34s
+2026-10-30 19:06:55,446 INFO [stage] svd_cpu_float64 ...
+2026-10-30 19:06:55,665 INFO [stage] svd_cpu_float64 done in 0.22s
+2026-10-30 19:06:55,666 INFO [stage] orig_forward ...
+2026-10-30 19:06:56,162 INFO [stage] orig_forward done in 0.50s
+2026-10-30 19:06:56,162 INFO [stage] positive_control_gate ...
+2026-10-30 19:06:56,505 INFO [stage] positive_control_gate done in 0.34s
+2026-10-30 19:06:56,505 INFO [stage] bases ...
+2026-10-30 19:06:57,369 INFO [stage] bases done in 0.86s
+2026-10-30 19:06:57,369 INFO [stage] original_controls ...
+2026-10-30 19:07:46,454 INFO [stage] original_controls done in 49.08s
+2026-10-30 19:08:06,824 INFO basis svd done in 20.3s (elapsed 73s)
+2026-10-30 19:08:27,458 INFO basis pca done in 20.6s (elapsed 94s)
+2026-10-30 19:08:48,197 INFO basis coord done in 20.7s (elapsed 115s)
+2026-10-30 19:09:09,244 INFO basis random_s101 done in 21.0s (elapsed 136s)
+2026-10-30 19:09:30,749 INFO basis random_s202 done in 21.5s (elapsed 157s)
+2026-10-30 19:09:52,462 INFO basis random_s303 done in 21.7s (elapsed 179s)
+2026-10-30 19:10:15,504 INFO basis random_s404 done in 23.0s (elapsed 202s)
+2026-10-30 19:10:38,680 INFO basis random_s505 done in 23.2s (elapsed 225s)
+2026-10-30 19:11:02,111 INFO basis wsvd done in 23.4s (elapsed 249s)
+2026-10-30 19:11:02,118 INFO [stage] aggregate ...
+2026-10-30 19:11:10,095 INFO [stage] aggregate done in 7.98s
+2026-10-30 19:11:10,262 INFO run dir: /Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/runs/20261030T160653Z_day2_run

@@ -1,0 +1,72 @@
+{
+  "protocol_version": "day3-v1",
+  "label": "day3_heldout",
+  "seed": 20261030,
+  "model": {
+    "name": "openai-community/gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "dtype": "float32",
+    "device": "mps",
+    "attn_implementation": "eager"
+  },
+  "layer": 9,
+  "ranks": [96, 192, 384],
+  "methods": ["zero", "bias", "gauss", "gauss_wo"],
+  "scopes": ["last_token", "full_layer"],
+  "quadrature_nodes": 128,
+  "quadrature_sigma_max_checked": 2.5,
+  "svd": {"device": "cpu", "dtype": "float64"},
+  "bases": {
+    "families": ["svd", "pca", "random", "wsvd"],
+    "random_seeds": [101, 202, 303, 404, 505],
+    "ridge_rel": 0.01,
+    "fit_pool": "final_token",
+    "roles": {"svd": "main", "pca": "main_data_driven_post_calibration", "wsvd": "secondary_sensitivity",
+              "random": "dimension_control_fixed_seeds"}
+  },
+  "matching": {
+    "regimes": ["native", "l2", "preact"],
+    "abs_floor": 1e-8,
+    "rel_floor": 1e-6,
+    "oos_range": [0.25, 4.0],
+    "assert_rel_tol_f64": 1e-9,
+    "assert_rel_tol_f32": 1e-5
+  },
+  "datasets": {
+    "dir": "manifests_day3",
+    "pairs_per_stratum": 32,
+    "diff_bins": [[10, 19], [20, 29], [30, 40]],
+    "seeds": {"validation": 20261041, "test": 20261042},
+    "source": {"validation": "manifests/sealed_prompts_validation.csv", "test": "manifests/sealed_prompts_test.csv"}
+  },
+  "calibration_artifact": {"dir": "calibration_day3", "file": "calib_artifact.pt", "index": "calib_index.json"},
+  "analysis": {
+    "anchor_rank": 192,
+    "bootstrap_B": 10000,
+    "bootstrap": "stratified: 12 frame x direction x diff_bin cells, fixed weights N_c/N; cluster = templates resampled within frame (primary); iid = pairs resampled within cell (supporting)",
+    "primary_scope": "last_token",
+    "primary": {"id": "P1", "basis": "svd", "k": 192, "scope": "last_token", "donor": "natural", "S": "RB",
+                "contrast": ["gauss", "bias"], "ci": 0.95, "ci_kind": "template_cluster"},
+    "secondary": [
+      {"id": "S1", "kind": "basis_difference", "lhs": ["pca", "bias"], "rhs": ["svd", "bias"], "k": 192,
+       "scope": "last_token", "S": "RB"},
+      {"id": "S2", "kind": "absolute_rms", "basis": "pca", "method": "bias", "k": 192, "scope": "last_token",
+       "S": "RB"}
+    ],
+    "multiplicity": {"secondary": "bonferroni", "family_alpha": 0.05},
+    "epsilon_rule": {"fraction": 0.05,
+                     "reference": "RMS of T over Day-1 pilot rows model=orig, donor=natural, S=RB, k=96 (calibration)",
+                     "reference_csv": "runs/20261030T153707Z_pilot/per_pair_rows.csv"},
+    "kl_matching": {"max_gap": 0.10, "gap": "2|KL_A - KL_B| / (KL_A + KL_B); 0 if both are 0",
+                    "tie_break": ["min_gap", "min_max_rank", "min_sum_rank", "lexicographic_lhs_k_rhs_k"],
+                    "scopes": ["last_token", "full_layer"],
+                    "families": [{"id": "Q1", "lhs": ["svd", "bias"], "rhs": ["pca", "bias"]},
+                                 {"id": "Q2", "lhs": ["svd", "gauss"], "rhs": ["svd", "bias"]},
+                                 {"id": "Q3", "lhs": ["pca", "gauss"], "rhs": ["pca", "bias"]}]}
+  },
+  "day2": {"config": "config/day2_v1.json", "run": "runs/20261030T160653Z_day2_run"},
+  "smoke_gates": {"replay_orig_max_abs_T": 1e-4, "replay_reduced_max_abs_T": 1e-4},
+  "budget": {"batch_size": 192, "walltime_budget_s": 900, "aggregate_reserve_s": 150},
+  "positive_control": {"min_mean_pd": 0.0, "ci_lower_T_gt": 0.0},
+  "bootstrap": {"B": 2000, "ci": 0.95}
+}

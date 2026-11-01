@@ -1,0 +1,14 @@
+{
+  "created_utc": "2026-10-31T11:04:04.149700+00:00",
+  "all_40_rates_have_2000_simulations": true,
+  "B": 10000,
+  "cp_recalculation_max_abs_error": 0.0,
+  "passing_candidates": [
+    192
+  ],
+  "first_passing": 192,
+  "reported_candidate_matches": true,
+  "reason_N192": "smallest passing operational null-FP upper bounds; power alone passes evenN48",
+  "not_monotonic": "N240 fails one null bound; preserved finite MonteCarlo behavior, no reseeding",
+  "scope": "conditional Gamma planning at hypotheticalL=.08; neither positive empirical evidence nor validated lexical-dependence inference"
+}

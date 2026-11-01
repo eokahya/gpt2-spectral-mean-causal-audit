@@ -1,0 +1,502 @@
+"""Discarded-state response-floor gate: synthetic/unit tests.
+
+No GPT-2 forward pass and no development outcome: model tests use a tiny random GPT-2 (CPU). The frozen artifact
+and safetensors weights are only read from disk."""
+import json
+import math
+import types
+
+import numpy as np
+import pytest
+import torch
+from transformers import GPT2Config, GPT2LMHeadModel
+
+from discarded_response_floor_gate import ROOT, data, pipeline
+from discarded_response_floor_gate.aggregate import aggregate
+from discarded_response_floor_gate.bootstrap import (confirm_decision, count_matrix, percentile_bounds, rng_for,
+                                                     template_bootstrap, theta_star)
+from discarded_response_floor_gate.common import MANIFESTS, PROTECTED, load_config, verify_protected, write_once
+from discarded_response_floor_gate.estimators import (centred_J, frame_moments, norm2_m, scale_s2, template_T,
+                                                      u_pairs, u_variance)
+from discarded_response_floor_gate.geometry import hybrids, load_projector, projector_checks, support
+from discarded_response_floor_gate.hook import branch_mlp, forward
+from discarded_response_floor_gate.power import (SCENARIOS, clopper_pearson, decide, gamma_params, guard, run_power,
+                                                  scenario_moments)
+from scp.data import make_batch
+from scp.model import wrapped_mlp
+
+F64 = torch.float64
+LAYER = 1
+needs_manifests = pytest.mark.skipif(not (MANIFESTS / "index.json").exists(), reason="run `prepare` first")
+
+
+@pytest.fixture(scope="module")
+def cfg():
+    return load_config()
+
+
+@pytest.fixture(scope="module")
+def P(cfg):
+    return load_projector(cfg)[0]
+
+
+@pytest.fixture(scope="module")
+def tiny():
+    c = GPT2Config(vocab_size=61, n_positions=32, n_embd=24, n_layer=3, n_head=4, attn_implementation="eager",
+                   bos_token_id=0, eos_token_id=0)
+    torch.manual_seed(0)
+    m = GPT2LMHeadModel(c).to(F64).eval()
+    for p in m.parameters():
+        p.requires_grad_(False)
+    return m
+
+
+def tiny_batch(n=3, length=7, seed=0):
+    g = torch.Generator().manual_seed(seed)
+    ids = [torch.randint(1, 61, (length - i,), generator=g).tolist() for i in range(n)]
+    return make_batch(ids, 0, torch.device("cpu"))
+
+
+# ------------------------------------------------------------------ 1. projector and orientation
+
+def test_frozen_projector_is_symmetric_idempotent_rank192(cfg, P):
+    chk = projector_checks(P, 192, cfg["numerics"])
+    assert chk["sym_max_abs"] == 0.0 and chk["idem_max_abs"] < 1e-12 and chk["trace"] == pytest.approx(192, abs=1e-9)
+    assert chk["n_eig_above_split"] == 192
+    x = torch.randn(5, 768, dtype=F64)
+    assert float(((P @ x.T).T - x @ P.T).abs().max()) < 1e-12  # column map == row map
+    bad = P.clone()
+    bad[0, 1] += 1e-6
+    with pytest.raises(ValueError):
+        projector_checks(bad, 192, cfg["numerics"])
+
+
+def test_weight_orientation_from_safetensors(cfg):
+    from huggingface_hub import hf_hub_download
+    from safetensors import safe_open
+    path = hf_hub_download(cfg["model"]["name"], "model.safetensors", revision=cfg["model"]["revision"])
+    with safe_open(path, "pt") as f:
+        Wc = f.get_tensor(f"h.{cfg['layer']}.mlp.c_fc.weight")
+    assert tuple(Wc.shape) == (768, 3072)  # Conv1D: x[768] @ Wc -> preactivation[3072]
+
+
+# ------------------------------------------------------------------ 2. hybrid algebra
+
+def test_hybrid_equals_centred_form_for_any_mean_and_controls(P):
+    g = torch.Generator().manual_seed(1)
+    ev, U = torch.linalg.eigh(P)
+    V = U[:, -192:]
+    x_rec, x_a = torch.randn(768, generator=g, dtype=F64), torch.randn(768, generator=g, dtype=F64)
+    x_don = torch.randn(8, 768, generator=g, dtype=F64)
+    xm, xp = hybrids(P, x_rec, x_don, x_a)
+    I = torch.eye(768, dtype=F64)
+    for mu in (torch.zeros(768, dtype=F64), 10 * torch.randn(768, generator=g, dtype=F64)):
+        z = V.T @ (x_rec - mu)
+        d = V.T @ (x_a - x_rec)
+        q = (x_don - mu) @ (I - P).T
+        assert float((mu + V @ z + q - xm).abs().max()) < 1e-10
+        assert float((mu + V @ (z + d) + q - xp).abs().max()) < 1e-10
+    own_m, own_p = hybrids(P, x_rec, x_rec[None], x_a)
+    assert float((own_m[0] - x_rec).abs().max()) < 1e-12  # own q and own z -> the original input
+    d0_m, d0_p = hybrids(P, x_rec, x_don, x_rec)
+    assert torch.equal(d0_m, d0_p)  # d = 0 -> identical branch inputs
+    # retained part is the recipient's, discarded part is the donor's
+    assert float((xm @ P.T - x_rec @ P.T).abs().max()) < 1e-10
+    assert float((xm @ (I - P).T - x_don @ (I - P).T).abs().max()) < 1e-10
+    sp = support(P, x_rec, x_don, x_a, xm, xp, torch.randn(768, 30, dtype=F64), torch.zeros(30, dtype=F64))
+    assert all(v.shape == (8,) for v in sp.values())
+
+
+# ------------------------------------------------------------------ 3. estimators and synthetic controls
+
+def test_u_two_ways_denominator_8_and_identical_q():
+    g = torch.Generator().manual_seed(2)
+    R = torch.randn(8, 100, generator=g, dtype=F64)
+    u1, u2 = u_variance(R), u_pairs(R)
+    assert u1 == pytest.approx(u2, rel=1e-13)
+    pop_var = float(R.var(0, unbiased=False).sum()) / 100
+    assert u1 == pytest.approx(pop_var, rel=1e-13)  # denominator 8 (population), not 7
+    assert u1 != pytest.approx(float(R.var(0, unbiased=True).sum()) / 100, rel=1e-6)
+    assert u_variance(R[:1].expand(8, -1)) < 1e-30 and u_pairs(R[:1].expand(8, -1)) == 0.0
+
+
+def test_centring_and_dimension_normalisation():
+    l = torch.randn(3, 500, dtype=F64)
+    J = list(range(100, 200))
+    c = centred_J(l, J)
+    assert float(c.mean(-1).abs().max()) < 1e-14
+    assert float((centred_J(l + 7.0, J) - c).abs().max()) < 1e-12
+    assert float(norm2_m(torch.ones(2, 100, dtype=F64))[0]) == 1.0
+    assert scale_s2(torch.full((4, 100), 2.0, dtype=F64), [0.25] * 4) == pytest.approx(4.0)
+
+
+def test_whole_map_affine_negative_control_gives_zero(P):
+    """F(z, q) = A z + B q + t on the whole map (here: an affine map of the full branch input) -> R = A d, L = 0."""
+    g = torch.Generator().manual_seed(3)
+    W = torch.randn(768, 100, generator=g, dtype=F64) / 30
+    t = torch.randn(100, generator=g, dtype=F64)
+    Fmap = lambda x: centred_J(x @ W + t, list(range(100)))  # noqa: E731
+    x_rec, x_a = torch.randn(768, generator=g, dtype=F64), torch.randn(768, generator=g, dtype=F64)
+    xm, xp = hybrids(P, x_rec, torch.randn(8, 768, generator=g, dtype=F64), x_a)
+    R = Fmap(xp) - Fmap(xm)
+    assert u_variance(R) < 1e-24 and u_pairs(R) < 1e-24
+
+
+def test_bilinear_positive_control_matches_analytic_L2():
+    """F(z, q) = A z + B q + beta z_1 q_1 v: R_k = A d + beta d_1 q_1k v, so with the uniform 8-point Q
+    L^2 = beta^2 d_1^2 Var_Q(q_1) ||v||_m^2 / s^2 (population variance over the 8 donors)."""
+    g = torch.Generator().manual_seed(4)
+    m, dz, dq = 100, 6, 5
+    A = torch.randn(m, dz, generator=g, dtype=F64)
+    Bq = torch.randn(m, dq, generator=g, dtype=F64)
+    v = torch.randn(m, generator=g, dtype=F64)
+    v = v - v.mean()
+    beta = 0.7
+    F = lambda z, q: z @ A.T + q @ Bq.T + beta * z[:, :1] * q[:, :1] * v  # noqa: E731
+    z = torch.randn(dz, generator=g, dtype=F64)
+    d = torch.randn(dz, generator=g, dtype=F64)
+    q = torch.randn(8, dq, generator=g, dtype=F64)
+    R = F((z + d).expand(8, -1), q) - F(z.expand(8, -1), q)
+    s2 = 1.9
+    analytic = beta ** 2 * float(d[0]) ** 2 * float(q[:, 0].var(unbiased=False)) * float(norm2_m(v)) / s2
+    assert u_variance(R) / s2 == pytest.approx(analytic, rel=1e-12)
+    assert u_pairs(R) / s2 == pytest.approx(analytic, rel=1e-12)
+
+
+# ------------------------------------------------------------------ 4. hook (tiny GPT-2)
+
+def test_branch_hook_last_token_only_and_bypass_untouched(tiny):
+    b = tiny_batch()
+    block = tiny.transformer.h[LAYER]
+    cap = {}
+    h1 = block.ln_2.register_forward_pre_hook(lambda mod, i: cap.setdefault("resid", []).append(i[0].clone()))
+    h2 = block.register_forward_hook(lambda mod, i, o: cap.setdefault("out", []).append((o[0] if isinstance(o, tuple) else o).clone()))
+    try:
+        with branch_mlp(tiny, LAYER) as w:
+            base = forward(tiny, w, b)
+            ident = forward(tiny, w, b, branch=base["x_in_last"])
+            br = torch.randn(3, 24, dtype=F64)
+            pat = forward(tiny, w, b, branch=br)
+    finally:
+        h1.remove()
+        h2.remove()
+    assert torch.equal(ident["logits"], base["logits"])  # replacing by the same value is the identity
+    assert torch.equal(cap["resid"][0], cap["resid"][2])  # residual bypass unchanged
+    ar, li = torch.arange(3), b.last_idx
+    out_p = cap["out"][2]
+    assert float((out_p[ar, li] - (cap["resid"][2][ar, li] + block.mlp(br.unsqueeze(1))[:, 0])).abs().max()) < 1e-12
+    other = torch.arange(out_p.shape[1])[None, :] != li[:, None]
+    assert torch.equal(cap["out"][0][other], out_p[other])
+    pos = torch.arange(out_p.shape[1])[None, :] < li[:, None]
+    assert torch.equal(base["hidden_all"][pos], pat["hidden_all"][pos])
+    assert not torch.equal(base["logits"], pat["logits"])
+
+
+def test_hook_guards(tiny):
+    with wrapped_mlp(tiny, LAYER):
+        with pytest.raises(RuntimeError, match="nesting"):
+            with branch_mlp(tiny, LAYER):
+                pass
+    b = tiny_batch()
+    tiny.train()
+    try:
+        with branch_mlp(tiny, LAYER) as w, pytest.raises(RuntimeError, match="eval"):
+            forward(tiny, w, b)
+    finally:
+        tiny.eval()
+
+
+def test_float64_vs_float32_tiny_model_responses(tiny, P):
+    """Precision comparison of the full R pipeline on a tiny model (the real MPS-f32 vs CPU-f64 check is in smoke)."""
+    t32 = GPT2LMHeadModel(tiny.config)
+    t32.load_state_dict({k: v.float() for k, v in tiny.state_dict().items()})
+    t32.eval()
+    b = tiny_batch(n=1)
+    g = torch.Generator().manual_seed(5)
+    P24 = torch.linalg.qr(torch.randn(24, 24, generator=g, dtype=F64))[0][:, :10]
+    P24 = P24 @ P24.T
+    res = {}
+    for name, mdl, dt in (("f64", tiny, F64), ("f32", t32, torch.float32)):
+        with branch_mlp(mdl, LAYER) as w:
+            x_rec = forward(mdl, w, b)["x_in_last"][0].to(F64)
+            x_don = torch.randn(8, 24, generator=torch.Generator().manual_seed(6), dtype=F64) + x_rec
+            x_a = x_rec + torch.randn(24, generator=torch.Generator().manual_seed(7), dtype=F64)
+            xm, xp = hybrids(P24, x_rec, x_don, x_a)
+            bb = make_batch([b.ids[0].tolist()] * 16, 0, torch.device("cpu"))
+            lg = forward(mdl, w, bb, branch=torch.cat([xm, xp]).to(dt))["logits"].to(F64)
+        Fc = centred_J(lg, list(range(61)))
+        res[name] = Fc[8:] - Fc[:8]
+    rel = float((res["f32"] - res["f64"]).norm() / res["f64"].norm())
+    assert rel < 1e-4
+    assert u_variance(res["f32"]) == pytest.approx(u_variance(res["f64"]), rel=1e-3)
+
+
+# ------------------------------------------------------------------ 5. bootstrap
+
+def _groups(frames=(("A", 3), ("B", 5)), seed=0):
+    rng = np.random.default_rng(seed)
+    gs, U = [], []
+    for f, nt in frames:
+        for t in range(nt):
+            for k in range(2):
+                gs.append({"frame": f, "template": f"{f}|t{t}", "group_id": f"{f}{t}{k}"})
+                U.append(float(rng.gamma(2.0, 0.01)))
+    return gs, np.array(U)
+
+
+def test_bootstrap_counts_match_bruteforce_template_resampling():
+    """Resampling templates carries both groups; frame weights stay 1/F even with unequal template counts."""
+    gs, U = _groups()
+    s2 = 1.3
+    T = template_T(gs, U, s2)
+    frames = sorted(T)
+    vals = [np.array([T[f][t] for t in sorted(T[f])])[None, :] for f in frames]
+    C = [count_matrix(v.shape[1], 20, rng_for(9, 7, i)) for i, v in enumerate(vals)]
+    ts = theta_star(vals, C)[0]
+    for b in range(20):
+        per_frame = []
+        for fi, f in enumerate(frames):
+            tmpl = sorted(T[f])
+            rows = []  # explicit group-level expansion
+            for ti, t in enumerate(tmpl):
+                for _ in range(int(C[fi][b, ti])):
+                    rows.append(np.mean([u for g, u in zip(gs, U) if g["template"] == t]) / s2)
+            per_frame.append(np.mean(rows))
+        assert ts[b] == pytest.approx(np.mean(per_frame), rel=1e-12)
+    for c in C:
+        assert (c.sum(1) == c.shape[1]).all()
+
+
+def test_template_bootstrap_bounds_and_decisions():
+    gs, U = _groups((("A", 6), ("B", 6), ("C", 6), ("D", 6)))
+    T = template_T(gs, U, 1.0)
+    r = template_bootstrap(T, 2000, 1, 0.95)
+    assert r["theta_lower"] <= r["theta"] <= r["theta_upper"]
+    assert r["L"] == pytest.approx(r["theta"] ** 0.5)
+    assert confirm_decision({"L_lower": 0.06, "L_upper": 0.2}, 0.05) == "SUPPORTED_FLOOR"
+    assert confirm_decision({"L_lower": 0.01, "L_upper": 0.05}, 0.05) == "TARGET_FLOOR_RULED_OUT"
+    assert confirm_decision({"L_lower": 0.01, "L_upper": 0.08}, 0.05) == "INCONCLUSIVE"
+    assert confirm_decision(r, 0.05, valid=False) == "EVALUATION_INVALID"
+    lo, hi = percentile_bounds(np.arange(101.0), 0.95)
+    assert lo == pytest.approx(5.0) and hi == pytest.approx(95.0)  # linear quantiles
+
+
+# ------------------------------------------------------------------ 6. power planning
+
+def test_frame_moments_and_template_T():
+    gs, U = _groups((("A", 6), ("B", 6)))
+    T = template_T(gs, U, 2.0)
+    m, v, mbar = frame_moments(T)
+    a = [np.mean(U[i:i + 2]) / 2.0 for i in range(0, 12, 2)]
+    assert m["A"] == pytest.approx(np.mean(a)) and v["A"] == pytest.approx(np.var(a, ddof=1))
+    assert mbar == pytest.approx((m["A"] + m["B"]) / 2)
+
+
+def test_gamma_matching_and_scenarios():
+    m, v = {"A": 0.004, "B": 0.006}, {"A": 1e-5, "B": 2e-5}
+    mbar = 0.005
+    mu, V, r = scenario_moments(m, v, mbar, 0.0064, 4, "kappa_r2_v")
+    assert r == pytest.approx(1.28) and mu["A"] == pytest.approx(1.28 * 0.004) and V["B"] == pytest.approx(4 * 1.28 ** 2 * 2e-5)
+    mu, V, _ = scenario_moments(m, v, mbar, 0.0025, 1, "kappa_v")
+    assert V["A"] == v["A"]
+    sh, sc = gamma_params(0.005, 1e-5)
+    x = np.random.default_rng(0).gamma(sh, sc, 400000)
+    assert x.mean() == pytest.approx(0.005, rel=0.01) and x.var() == pytest.approx(1e-5, rel=0.03) and (x > 0).all()
+    assert len(SCENARIOS) == 4
+
+
+def test_moment_guard_classes(cfg):
+    g = cfg["power"]["guards"]
+    assert guard({"A": 0.01, "B": 0.02}, {"A": 1e-5, "B": 1e-5}, 1e-9, g)["ok"]
+    r = guard({"A": float("nan"), "B": 0.02}, {"A": 1e-5, "B": 1e-5}, 0.0, g)
+    assert r["invalid"] and not r["ok"]
+    r = guard({"A": 1e-12, "B": 0.02}, {"A": 1e-5, "B": 1e-5}, 0.0, g)
+    assert r["per_frame"]["A"] == "near_zero_floor" and not r["invalid"]
+    r = guard({"A": 0.01, "B": 0.02}, {"A": 0.0, "B": 1e-5}, 0.0, g)
+    assert r["per_frame"]["A"] == "zero_variance"
+    r = guard({"A": 1e-6, "B": 0.02}, {"A": 1e-5, "B": 1e-5}, 1e-7, g)  # floor = 100 x numerical noise
+    assert r["per_frame"]["A"] == "near_zero_floor"
+
+
+def test_clopper_pearson_edges():
+    from scipy.stats import beta
+    assert clopper_pearson(0, 50, 0.05)[0] == 0.0 and clopper_pearson(50, 50, 0.05)[1] == 1.0
+    lo, hi = clopper_pearson(40, 50, 0.05)
+    assert lo == pytest.approx(beta.ppf(0.025, 40, 11)) and hi == pytest.approx(beta.ppf(0.975, 41, 10))
+
+
+def _row(N, scen, alt_lo, alt_hi, null_hi):
+    return {"N": N, "scenario": scen, "alt": {"cp_lo": alt_lo, "cp_hi": alt_hi}, "null": {"cp_hi": null_hi}}
+
+
+def test_power_decision_rules(cfg):
+    sc = ["a", "b"]
+    ok = [_row(48, s, 0.5, 0.7, 0.05) for s in sc] + [_row(96, s, 0.85, 0.95, 0.06) for s in sc]
+    d = decide(cfg, ok, True)
+    assert d["decision"] == "POWER_PLAN_CANDIDATE" and d["candidate_N"] == 96
+    fp = [_row(96, "a", 0.85, 0.95, 0.06), _row(96, "b", 0.85, 0.95, 0.09)]
+    assert decide(cfg, fp, True)["decision"] == "POWER_NOT_ESTABLISHED"  # null alarm in one scenario
+    low = [_row(48, "a", 0.5, 0.7, 0.05), _row(96, "a", 0.6, 0.79, 0.05)]
+    assert decide(cfg, low, True)["decision"] == "NO_GO_BUDGET"
+    assert decide(cfg, ok, False)["decision"] == "POWER_NOT_ESTABLISHED"
+
+
+def test_run_power_small_is_deterministic_and_never_prescribed(cfg):
+    m, v = {f: 0.006 for f in "ABCD"}, {f: 4e-6 for f in "ABCD"}
+    a = run_power(cfg, m, v, 0.006, 0.0, outer=30, B=200)
+    b = run_power(cfg, m, v, 0.006, 0.0, outer=30, B=200)
+    assert [r["alt"]["successes"] for r in a["rows"]] == [r["alt"]["successes"] for r in b["rows"]]
+    assert a["complete"] and not a["prescribed"] and a["decision"] == "POWER_NOT_ESTABLISHED"
+    assert len(a["rows"]) == 5 * 4 and a["n_comparisons"] == 40
+    assert a["cp_alpha_per_comparison"] == pytest.approx(0.05 / 40)
+
+
+def test_run_power_compute_cap_labels_partial_output(cfg):
+    m, v = {f: 0.006 for f in "ABCD"}, {f: 4e-6 for f in "ABCD"}
+    r = run_power(cfg, m, v, 0.006, 0.0, cap_s=0.0)
+    assert not r["complete"] and r["decision"] == "POWER_NOT_ESTABLISHED" and "cap" in r["reason"]
+
+
+def test_run_power_guard_failure(cfg):
+    r = run_power(cfg, {f: 0.0 for f in "ABCD"}, {f: 1e-6 for f in "ABCD"}, 0.0, 0.0, outer=5, B=10)
+    assert r["decision"] == "POWER_NOT_ESTABLISHED" and "guard" in r["reason"]
+
+
+def test_chunking_does_not_change_simulation(cfg):
+    from discarded_response_floor_gate.power import simulate_one
+    C = [count_matrix(6, 300, rng_for(1, 1, 0, i)) for i in range(4)]
+    mu, V = {f: 0.005 for f in "ABCD"}, {f: 1e-5 for f in "ABCD"}
+    x1 = simulate_one(list("ABCD"), mu, V, 6, C, 60, 10, 0.0025, 0.95, [rng_for(3, 2, i) for i in range(4)], None)
+    x2 = simulate_one(list("ABCD"), mu, V, 6, C, 60, 60, 0.0025, 0.95, [rng_for(3, 2, i) for i in range(4)], None)
+    assert x1 == x2
+
+
+# ------------------------------------------------------------------ 7. manifests (outcome-blind prepare)
+
+@needs_manifests
+def test_manifest_structure_freshness_and_leakage(cfg):
+    groups, index = data.load_groups()
+    asg = index["assignment"]
+    prompts = data.long_prompts(cfg, groups)
+    hist, files = data.historical_texts(cfg)
+    assert "followup/manifests/test_recipients.csv" in files
+    info = data.structural_checks(cfg, asg, groups, prompts, hist)
+    assert info == {"n_groups": 48, "n_templates": 24, "n_prompts": 480, "n_donor_contexts": 384,
+                    "n_historical_texts": len(hist)}
+    assert json.loads(json.dumps(data.assign(cfg))) == asg  # deterministic, outcome-blind
+    assert len({p["text_sha256"] for p in prompts}) == 480 and len({p["ids_sha256"] for p in prompts}) == 480
+    for g in groups:
+        assert all(g[f"don{k}_text"].count(f"17{g['r']:02d}") == 1 for k in range(8))  # same year as the recipient
+        assert len({g[f"don{k}_text"] for k in range(8)}) == 8  # 8 distinct enumerated donors
+
+
+@needs_manifests
+def test_leakage_and_duplicate_detection(cfg):
+    groups, index = data.load_groups()
+    prompts = data.long_prompts(cfg, groups)
+    hist, _ = data.historical_texts(cfg)
+    with pytest.raises(AssertionError, match="historical"):
+        data.structural_checks(cfg, index["assignment"], groups, prompts, hist | {prompts[5]["text"]})
+    dup = [dict(p) for p in prompts]
+    dup[1]["text"] = dup[0]["text"]
+    with pytest.raises(AssertionError):
+        data.structural_checks(cfg, index["assignment"], groups, dup, hist)
+
+
+@needs_manifests
+def test_prepare_refuses_existing_manifests(cfg):
+    with pytest.raises(FileExistsError):
+        data.prepare(None, cfg)
+
+
+@needs_manifests
+def test_separate_aggregation_matches_pipeline_on_synthetic_raw(cfg, tmp_path):
+    groups, _ = data.load_groups()
+    g = torch.Generator().manual_seed(8)
+    raw = torch.randn(48, 19, 100, generator=g, dtype=F64) * 3
+    raw[:, 18] = raw[:, 0]  # duplicate control row
+    torch.save({"row_kinds": pipeline.ROW_KINDS, "group_ids": [x["group_id"] for x in groups],
+                "J_ids": list(range(100)), "raw_J_logits": raw}, tmp_path / "raw_J_logits.pt")
+    stats = [pipeline.group_stats(raw[i]) for i in range(48)]
+    ctl = [{"identity_max_abs": 0.0, "duplicate_max_abs": 0.0, "finite": True} for _ in range(48)]
+    summ = pipeline.summarise(cfg, groups, stats, ctl)
+    data.write_csv(tmp_path / "groups_U.csv", [{"group_id": x["group_id"], "U": s["U"]} for x, s in zip(groups, stats)])
+    agg = aggregate(tmp_path)
+    assert summ["valid"]
+    assert agg["Lhat2"] == pytest.approx(summ["Lhat2"], rel=1e-12) and agg["s2"] == pytest.approx(summ["s2"], rel=1e-12)
+    assert agg["U_max_abs_diff_vs_groups_U_csv"] < 1e-12 and agg["U_two_way_max_rel"] < 1e-12
+    for f in agg["frame_mean_T"]:
+        assert agg["frame_mean_T"][f] == pytest.approx(summ["frame_mean_T"][f], rel=1e-12)
+        assert agg["frame_var_T"][f] == pytest.approx(summ["frame_var_T"][f], rel=1e-12)
+
+
+@needs_manifests
+def test_summarise_flags_invalid_measurements(cfg):
+    groups, _ = data.load_groups()
+    raw = torch.randn(48, 19, 100, dtype=F64)
+    raw[:, 18] = raw[:, 0]
+    stats = [pipeline.group_stats(raw[i]) for i in range(48)]
+    bad_ctl = [{"identity_max_abs": 1.0, "duplicate_max_abs": 0.0, "finite": True} for _ in range(48)]
+    assert not pipeline.summarise(cfg, groups, stats, bad_ctl)["valid"]
+    raw[:, 16] = raw[:, 17]  # natural response exactly zero -> scale invalid
+    stats = [pipeline.group_stats(raw[i]) for i in range(48)]
+    ok_ctl = [{"identity_max_abs": 0.0, "duplicate_max_abs": 0.0, "finite": True} for _ in range(48)]
+    out = pipeline.summarise(cfg, groups, stats, ok_ctl)
+    assert not out["valid"] and "scale" in out["invalid_reasons"][0]
+
+
+# ------------------------------------------------------------------ 8. stage guards and preserved files
+
+def test_stages_refuse_without_registration(cfg, monkeypatch, tmp_path):
+    monkeypatch.setattr(pipeline, "REGISTRATION", tmp_path / "none.json")
+    final = {**cfg, "protocol_version": "drfg-dev-v1"}
+    with pytest.raises(RuntimeError, match="registration"):
+        pipeline.develop(final)
+    with pytest.raises(RuntimeError, match="registration"):
+        pipeline.power(final, "x")
+
+
+def test_register_refuses_draft_and_existing(cfg, monkeypatch, tmp_path):
+    monkeypatch.setattr(pipeline, "REGISTRATION", tmp_path / "r.json")
+    with pytest.raises(RuntimeError, match="protocol_version"):
+        pipeline.register({**cfg, "protocol_version": "drfg-dev-v1-DRAFT"}, "x", "y")
+    (tmp_path / "r.json").write_text("{}")
+    with pytest.raises(FileExistsError):
+        pipeline.register({**cfg, "protocol_version": "drfg-dev-v1"}, "x", "y")
+    with pytest.raises(FileExistsError):
+        write_once(tmp_path / "r.json", {})
+
+
+def test_verify_registration_detects_changes(cfg, monkeypatch, tmp_path):
+    from discarded_response_floor_gate.common import bound_hashes
+    p = tmp_path / "reg.json"
+    good = {"bound": bound_hashes(cfg)}
+    p.write_text(json.dumps(good))
+    monkeypatch.setattr(pipeline, "REGISTRATION", p)
+    final = {**cfg, "protocol_version": "drfg-dev-v1"}
+    assert pipeline.verify_registration(final)
+    with pytest.raises(RuntimeError, match="DRAFT"):
+        pipeline.verify_registration({**cfg, "protocol_version": "drfg-dev-v1-DRAFT"})
+    bad = json.loads(json.dumps(good))
+    bad["bound"]["scp_dependency_tree_sha256"] = "0" * 64
+    p.write_text(json.dumps(bad))
+    with pytest.raises(RuntimeError, match="scp_dependency"):
+        pipeline.verify_registration(final)
+
+
+def test_cli_requires_arguments():
+    from discarded_response_floor_gate import cli
+    for argv in (["register"], ["register", "--smoke-run", "x"], ["power"], ["report"]):
+        with pytest.raises(SystemExit):
+            cli.main(argv)
+
+
+def test_old_work_untouched(cfg):
+    from scp.common import source_hashes
+    assert source_hashes()["tree_sha256"] == cfg["scp_dependency_tree_sha256"]
+    from followup.common import bound_hashes as fb, load_config as flc
+    reg = json.loads((ROOT / "followup" / "registration" / "FOLLOWUP_REGISTRATION.json").read_text())
+    assert fb(flc()) == reg["bound"]
+    if PROTECTED.exists():
+        r = verify_protected()
+        assert r["ok"], r

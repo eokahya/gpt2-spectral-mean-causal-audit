@@ -1,0 +1,84 @@
+{
+  "run_id": "20261030T160333Z_day2_quadcheck",
+  "stage": "day2_quadcheck",
+  "label": "exploratory_day2_controls",
+  "protocol_version": "day2-v1",
+  "start_utc": "2026-10-30T16:03:33.223733+00:00",
+  "argv": [
+    "run_day2.py",
+    "quadcheck"
+  ],
+  "seed": 20261030,
+  "config_path": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/config/day2_v1.json",
+  "config_sha256": "3dae9cd8d80accdbf57251d7a44a801911aeca56d931c00b55a0535683a4f31b",
+  "protocol_sha256": "88cb9abf3744a15aaa4eea092d2c64e3eaf8e22b8d3fcfa236aba91032f1e979",
+  "source": {
+    "tree_sha256": "90a9bc2cff96a24a14e34c5bc59bbdaeff35e91cf496b2ba2883d7ac813dbe92",
+    "files": {
+      "run.py": "69f6e9b31fcdf8ca63f0552be28c41c505809480e5129671f9264f405fc287da",
+      "run_day2.py": "2b89083a068c5390be39a2398cd1011208a458271cddb015e90a4526983402a8",
+      "scp/__init__.py": "8dfd15eb6df2cf72cd659c373d2615741137fad7032a31131903e2c870ce606d",
+      "scp/bases.py": "c44815de5d316f777fb339d61d80b53617f29e25a5c9e14062f6269825677ce6",
+      "scp/common.py": "23843a17354c3de135f4cb132c89ad18f80bb644f1cac126efdd58fcf9baa4da",
+      "scp/data.py": "06a8d9b43aa980f2f8d4a09887e0c93c7dbba53e4b160c9a7f02cc4543276cb6",
+      "scp/day2.py": "374310dd60b95bad82d2de62bd0fc77277a8e2c042caf0888b464dcf5ee223b6",
+      "scp/experiment.py": "2dcbd1e39ff9887b3c4ce1eae14376c84e72da6cb6c4a87e1e88c45a706cb049",
+      "scp/matching.py": "994dde6e9d429648efbb982f9c77c71861adee28f1c98c8dd2b65b312ee5ca97",
+      "scp/metrics.py": "736430a2792f7d970b7abf85ddf5df60e368732fd7235dac255ccbe1ad044f08",
+      "scp/model.py": "82d3db4fd7ae70ec6d00b29c82fbbb228b49fcbe93dcd55e2cb411959c58b8e4",
+      "scp/report.py": "7e024eaab248f39da0277bfb0d8e97645a2d2faee587a61fd2ddd1822af49e34",
+      "scp/spectral.py": "50eb34663c89a2540d165e300fa9355d4d86d3501a1518a84b0e8cdd27b1ddb4",
+      "tests/conftest.py": "bb4408f6678181cfb65f3adcfdd41d6d32a3e0e87d05511b022fef1b6cc2e4f3",
+      "tests/test_cli_guards.py": "92215361ce9a5433acc0523516aa9b5d147c26451c9d00005edcf8b63eb79f36",
+      "tests/test_data.py": "0f0ee4333982113e577b57b71f03ddb9e245d9a4ce1dcd789e0b228ed474c77e",
+      "tests/test_day2.py": "2edb1805d264a38d7d6291fc6c07da9bd3f1d8d2231b0e085670bf18490739a1",
+      "tests/test_model.py": "da0208cd6a41ccb08928d2912e80b920c9ca31aa5daba5ce455f4cb08032da1d",
+      "tests/test_spectral.py": "f9436e08e81e3dee258e658088a634e7ecf3d0625ad3e03a4a5021b99e964488"
+    }
+  },
+  "manifests": {
+    "manifests/moment_pool_calibration.csv": "7fec3dab3247ed37f3d9ef28f09398e7b30857937b91f7cc6617b79dcdf7e3e3",
+    "manifests/pilot_pairs_calibration.csv": "797500e0c8c9531c76cad93a5648b85474894112890b10ee19f51c73bc4cff5f",
+    "manifests/sealed_prompts_test.csv": "a311a76a4ce019ef17874a0c6f24e4812d67b21d7f4b502d9b798f0a8593dc6c",
+    "manifests/sealed_prompts_validation.csv": "617e4915c2101083255e7c423b14ca48e9b8e3baea69b941f9dbcb4ba223b3f1",
+    "manifests/split_manifest.json": "40a25f0234a4dd45e6e869afff48af80f35e8126b9e4203febb815b8a9ac0f98"
+  },
+  "env": {
+    "python": "3.13.0 (v3.13.0:60403a5409f, Oct  7 2024, 00:37:40) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "torch": "2.15.0",
+    "transformers": "5.22.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "mps_available": true,
+    "mps_built": true
+  },
+  "model": {
+    "name": "openai-community/gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "dtype": "float32",
+    "device": "mps",
+    "attn_implementation": "eager",
+    "safetensors_path": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/.cache/hf/hub/models--openai-community--gpt2/snapshots/607a30d783dfa663caf39e06633721c8d4cfcd7e/model.safetensors",
+    "safetensors_sha256": "248dfc3911869ec493c76e65bf2fcf7f615828b0254c12b473182f0f81d3a707"
+  },
+  "svd": {
+    "device": "cpu",
+    "dtype": "float64"
+  },
+  "day2_protocol_sha256": "c8a887efe2aa8304584b49126c2fc81e6bac849b1f3c5f25ea3b15d8471520ec",
+  "metadata": {
+    "metadata/continuation_mask.json": "a99fea11bc5e7228fca386e45c4cd2c458ce9a14d96a6ed9d8e2005f2e889645"
+  },
+  "snapshot_dir": "runs/20261030T160333Z_day2_quadcheck/snapshot",
+  "layer": 9,
+  "device_used": "mps",
+  "status": "ok",
+  "end_utc": "2026-10-30T16:05:17.214420+00:00",
+  "walltime_s": 103.990696,
+  "stage_walltimes_s": {
+    "load_model": 1.409848582930863,
+    "svd_cpu_float64": 0.1984820410143584
+  }
+}

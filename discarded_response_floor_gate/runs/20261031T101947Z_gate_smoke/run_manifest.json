@@ -1,0 +1,67 @@
+{
+  "run_id": "20261031T101947Z_gate_smoke",
+  "stage": "smoke",
+  "protocol_version": "drfg-dev-v1-DRAFT",
+  "start_utc": "2026-10-31T10:19:47.791574+00:00",
+  "argv": [
+    "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate/__main__.py",
+    "smoke"
+  ],
+  "bound": {
+    "protocol_sha256": "573e640e6c65fb0b960db420cd9eb6a449883e9bd700b3c8cd8d0014be30fe1e",
+    "config_sha256": "859153671dda322e8f56f6f6926abf7a00da1d7cd028f658d29be45c9a128974",
+    "source": {
+      "tree_sha256": "11f8594a1ec15046fc2951def9f8dacd5324d49f219da6914db23902c7b120c7",
+      "files": {
+        "discarded_response_floor_gate/__init__.py": "f0c23ec3736ed7658b62127b9f16a575e94a3323057b95c3de13b6c2f851187f",
+        "discarded_response_floor_gate/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+        "discarded_response_floor_gate/aggregate.py": "9a5555a1d3e6bb9d0034cff78ceab7519dade64571cdeef36b7a88b7f13c8fa8",
+        "discarded_response_floor_gate/bootstrap.py": "b7fc9a3ddac1aa20c9e7d561b89168c7feb309297ecbe334ffadab8914197802",
+        "discarded_response_floor_gate/cli.py": "f3e6cec52c70f3bea766951990463b5bf13bf736f0af0906188dadaaf0adac71",
+        "discarded_response_floor_gate/common.py": "6403d5ecfa258983e0b774ff6a8deb834625b240c18854d109192dd3bea9a7b9",
+        "discarded_response_floor_gate/data.py": "f0155643368494b6bd2c203bb76a48f9efe3c0b58e3d51cfc25816174957624f",
+        "discarded_response_floor_gate/estimators.py": "668305c39f98f378c2ad2a44f113f132018d7b7b1d513f7f54902c16cf3c8437",
+        "discarded_response_floor_gate/geometry.py": "41fad609fb33634d9c8a594a68afffec416067aa10e3b3cb5797a01ccb25fb1b",
+        "discarded_response_floor_gate/hook.py": "9a29cc63b25ef25baf96ffb0b7a2e73b0d20e00768a329fa38d725912db773d4",
+        "discarded_response_floor_gate/pipeline.py": "85fb5a606f9ce60022bbd7078d3a107ecc0d0b4a6b1053c1bfb7ee72d1a871d3",
+        "discarded_response_floor_gate/power.py": "6793de4e883946a37290c7617bd8f4adac7c5e5b4ca690916f5b30b672e249b1",
+        "discarded_response_floor_gate/tests/test_gate.py": "e5d862b3d66abf1abd906550a984cc5a4487404ffa4388d3c11dfdb8010b3c68"
+      }
+    },
+    "scp_dependency_tree_sha256": "f04e0ece5f30f5a56804232d530992bf2cd959335d34bd032357a4a2d2d6a449",
+    "manifests": {
+      "discarded_response_floor_gate/manifests/groups.csv": "e923301aabe88742846fd23100f05c7848db2f7c010ca8bf880fc6386936149a",
+      "discarded_response_floor_gate/manifests/index.json": "c3d22910446b7a17466f901b7650a9519705d852017aadecfed288872ff89067",
+      "discarded_response_floor_gate/manifests/prompts.csv": "1cc5c5428623bff93f9328443c88df6a6c41c91e837599f1c986e349d47f2c29"
+    },
+    "protected_manifest_sha256": "8dd1e77017d24f9aa4911af8ba5b8acb5147a1165b96c361b4d72cadcfda8fd9",
+    "artifact_file_sha256": "cd56bb2f9cb958cb3381b93e799567cb569788faec17c44d775057e2d92a3fcf",
+    "J_ids_sha256": "5c0ba5751c5b4a59af9f08a4d3116a68380c0ca7f17bcc4a9ec8ca54237b028f"
+  },
+  "env": {
+    "python": "3.13.0 (v3.13.0:60403a5409f, Oct  7 2024, 00:37:40) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "torch": "2.15.0",
+    "transformers": "5.22.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "mps_available": true,
+    "mps_built": true
+  },
+  "torch_threads": 6,
+  "model_files": {
+    "safetensors_path": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/.cache/hf/hub/models--openai-community--gpt2/snapshots/607a30d783dfa663caf39e06633721c8d4cfcd7e/model.safetensors",
+    "safetensors_sha256": "248dfc3911869ec493c76e65bf2fcf7f615828b0254c12b473182f0f81d3a707"
+  },
+  "status": "ok",
+  "end_utc": "2026-10-31T10:19:53.173590+00:00",
+  "walltime_s": 5.382028,
+  "stage_walltimes_s": {
+    "load_model_mps_float32": 1.7054992499761283,
+    "load_model_cpu_float64": 0.36820616596378386
+  },
+  "outputs": {
+    "smoke.json": "8e63f539516c516cdfd26f63d5a468daa4e18ff0acdc474feac880ae9a2f5604"
+  }
+}

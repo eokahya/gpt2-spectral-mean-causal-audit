@@ -1,0 +1,412 @@
+{
+  "run": "runs/20261030T164225Z_day3_validate",
+  "split": "validation",
+  "status": "ok",
+  "walltime_s": 239.549291,
+  "method": "Independent raw CSV grouping; independent template-multiplicity sufficient-statistic bootstrap (B10000) for P1/S1/S2 and both frames; main results and hashes checked. No model rerun. Grid CI endpoints and full-vector means not reconstructed.",
+  "row_counts": {
+    "gate": 192,
+    "controls": 84288,
+    "reduced": 110592,
+    "unperturbed": 36864
+  },
+  "group_counts": {
+    "controls": 439,
+    "reduced": 576,
+    "unperturbed": 192
+  },
+  "all_groups_192_unique_pairs": true,
+  "max_discrepancies": {
+    "raw_error_identity": 0.0,
+    "original_reference_alignment": 0.0,
+    "gate_raw_alignment": 0.0,
+    "matched_norm_relative": 1.1550784409744793e-08,
+    "control_mean": 0.0,
+    "reduced_mean": 0.0,
+    "reduced_rms": 0.0,
+    "KL_mean": 0.0,
+    "P1_cluster_CI": 2.1510571102112408e-16,
+    "S1_upper": 0.0,
+    "S2_upper": 0.0,
+    "F2_CI_max": 2.220446049250313e-16,
+    "F3_CI_max": 2.220446049250313e-16
+  },
+  "hash_bindings_unchanged": {
+    "protocol": true,
+    "config": true,
+    "calibration_artifact": true,
+    "calibration_index": true,
+    "source_tree": true,
+    "manifests_day3/datasets_index.json": true,
+    "manifests_day3/test_pairs.csv": true,
+    "manifests_day3/validation_pairs.csv": true,
+    "epsilon_reference": true
+  },
+  "independent_bootstrap": {
+    "P1": [
+      0.037589599359738025,
+      0.04570202971689326
+    ],
+    "S1_upper": -1.1232302050197407,
+    "S2_upper": 0.0790490644392873
+  },
+  "analysis": {
+    "design": {
+      "n_cells": 12,
+      "templates_per_frame": {
+        "F2": 9,
+        "F3": 9
+      }
+    },
+    "bootstrap_B": 10000,
+    "epsilon": 0.08973707820478917,
+    "secondary_upper_level": 0.975,
+    "orig_RB_rms_calibration": 1.7947415640957833,
+    "orig_RB_rms_this_split": 1.885835192282945,
+    "epsilon_over_orig_RB_rms_this_split": 0.04758479350263673,
+    "notes": [
+      "Bonferroni within the secondary family {S1,S2} only; no global FWER including P1.",
+      "Bootstrap intervals are nominal, approximate and conditional on fitted bases/moments and the 2 frames of this split.",
+      "The positive gate does not guarantee against weak-signal splits.",
+      "If the test-split orig RB scale approaches epsilon, passing S2 is not strong mechanism preservation."
+    ],
+    "P1": {
+      "diff_cluster_ci": [
+        0.041644136594324754,
+        0.03758959935973824,
+        0.04570202971689326
+      ],
+      "diff_iid_ci": [
+        0.041644136594324754,
+        0.03775816568896848,
+        0.04557754387286122
+      ],
+      "direction": "lhs_higher",
+      "rms_gauss": 1.3121668276302176,
+      "rms_bias": 1.2705226910358929,
+      "reading": "lhs=gauss; a positive or undistinguished difference does not support Gaussian superiority",
+      "spec": {
+        "id": "P1",
+        "basis": "svd",
+        "k": 192,
+        "scope": "last_token",
+        "donor": "natural",
+        "S": "RB",
+        "contrast": [
+          "gauss",
+          "bias"
+        ],
+        "ci": 0.95,
+        "ci_kind": "template_cluster"
+      }
+    },
+    "S1": {
+      "spec": {
+        "id": "S1",
+        "kind": "basis_difference",
+        "lhs": [
+          "pca",
+          "bias"
+        ],
+        "rhs": [
+          "svd",
+          "bias"
+        ],
+        "k": 192,
+        "scope": "last_token",
+        "S": "RB"
+      },
+      "diff_cluster_upper": [
+        -1.1965501424038427,
+        -1.1232302050197407
+      ],
+      "diff_iid_upper": [
+        -1.1965501424038427,
+        -1.144024606089051
+      ],
+      "supported_lhs_lower": true
+    },
+    "S2": {
+      "spec": {
+        "id": "S2",
+        "kind": "absolute_rms",
+        "basis": "pca",
+        "method": "bias",
+        "k": 192,
+        "scope": "last_token",
+        "S": "RB"
+      },
+      "rms_cluster_upper": [
+        0.07397254863205012,
+        0.0790490644392873
+      ],
+      "rms_iid_upper": [
+        0.07397254863205012,
+        0.08332558164507056
+      ],
+      "preserved_upper_lt_eps": true,
+      "nrmse_fixed_cal_denominator": 0.04121626762977351,
+      "nrmse_this_split_denominator": 0.03922535168224366
+    },
+    "per_frame_descriptive": {
+      "F2": {
+        "P1": {
+          "diff_cluster_ci": [
+            0.0368251514247121,
+            0.0322645064139464,
+            0.04163612665369465
+          ],
+          "diff_iid_ci": [
+            0.0368251514247121,
+            0.033168729560934126,
+            0.04046214918551382
+          ],
+          "direction": "lhs_higher",
+          "rms_gauss": 0.9983411144258666,
+          "rms_bias": 0.9615159630011545,
+          "reading": "lhs=gauss; a positive or undistinguished difference does not support Gaussian superiority"
+        },
+        "S1": {
+          "spec": {
+            "id": "S1",
+            "kind": "basis_difference",
+            "lhs": [
+              "pca",
+              "bias"
+            ],
+            "rhs": [
+              "svd",
+              "bias"
+            ],
+            "k": 192,
+            "scope": "last_token",
+            "S": "RB"
+          },
+          "diff_cluster_upper": [
+            -0.917392712701864,
+            -0.8591150276063637
+          ],
+          "diff_iid_upper": [
+            -0.917392712701864,
+            -0.8656829160773601
+          ],
+          "supported_lhs_lower": true
+        },
+        "S2": {
+          "spec": {
+            "id": "S2",
+            "kind": "absolute_rms",
+            "basis": "pca",
+            "method": "bias",
+            "k": 192,
+            "scope": "last_token",
+            "S": "RB"
+          },
+          "rms_cluster_upper": [
+            0.044123250299290546,
+            0.049518774168649846
+          ],
+          "rms_iid_upper": [
+            0.044123250299290546,
+            0.04930511900779851
+          ],
+          "preserved_upper_lt_eps": true,
+          "nrmse_fixed_cal_denominator": 0.024584737536582586,
+          "nrmse_this_split_denominator": 0.023397193179896088
+        }
+      },
+      "F3": {
+        "P1": {
+          "diff_cluster_ci": [
+            0.045921229850423684,
+            0.03995059015489373,
+            0.05201917950572588
+          ],
+          "diff_iid_ci": [
+            0.045921229850423684,
+            0.03996100801604329,
+            0.051924364508819286
+          ],
+          "direction": "lhs_higher",
+          "rms_gauss": 1.5411316698003856,
+          "rms_bias": 1.495210439949962,
+          "reading": "lhs=gauss; a positive or undistinguished difference does not support Gaussian superiority"
+        },
+        "S1": {
+          "spec": {
+            "id": "S1",
+            "kind": "basis_difference",
+            "lhs": [
+              "pca",
+              "bias"
+            ],
+            "rhs": [
+              "svd",
+              "bias"
+            ],
+            "k": 192,
+            "scope": "last_token",
+            "S": "RB"
+          },
+          "diff_cluster_upper": [
+            -1.4022158315748643,
+            -1.2908268127673532
+          ],
+          "diff_iid_upper": [
+            -1.4022158315748643,
+            -1.3237655806813227
+          ],
+          "supported_lhs_lower": true
+        },
+        "S2": {
+          "spec": {
+            "id": "S2",
+            "kind": "absolute_rms",
+            "basis": "pca",
+            "method": "bias",
+            "k": 192,
+            "scope": "last_token",
+            "S": "RB"
+          },
+          "rms_cluster_upper": [
+            0.09299460837509765,
+            0.10040391090449174
+          ],
+          "rms_iid_upper": [
+            0.09299460837509765,
+            0.1070425002966692
+          ],
+          "preserved_upper_lt_eps": false,
+          "nrmse_fixed_cal_denominator": 0.05181504136053687,
+          "nrmse_this_split_denominator": 0.04931216086943457
+        }
+      }
+    }
+  },
+  "positive_control": {
+    "valid": true,
+    "rule": "mean PD > 0 AND CI_lo(mean T_RB natural) > 0 AND CI_lo(mean[T_nat - T_same_year]) > 0",
+    "pd_mean_ci": [
+      0.9037370291896991,
+      0.8861685706757735,
+      0.9181715883511743,
+      192
+    ],
+    "pd_frac_positive": 1.0,
+    "T_RB_natural_mean_ci": [
+      1.7762729506978683,
+      1.6916927033806726,
+      1.865706076316259,
+      192
+    ],
+    "T_RB_same_year_mean_ci": [
+      0.04989678305966333,
+      -0.0013471125094819973,
+      0.09889173616125548,
+      192
+    ],
+    "T_RB_wrong_donor_mean_ci": [
+      0.8774386641018698,
+      0.7470469041876903,
+      1.014918933482227,
+      192
+    ],
+    "T_natural_minus_same_year_ci": [
+      1.726376167638205,
+      1.6422417280956023,
+      1.817249674744173,
+      192
+    ],
+    "T_RB_natural_cluster_ci": [
+      1.7762729506978683,
+      1.5632117992120305,
+      1.9911956992522177,
+      18
+    ],
+    "per_frame": {
+      "F2": {
+        "n": 91,
+        "pd_mean_ci": [
+          0.8576950756884129,
+          0.8246576900389052,
+          0.885724737129474,
+          91
+        ],
+        "T_RB_natural_mean_ci": [
+          1.3696567202865861,
+          1.3112135461675782,
+          1.4321416176811086,
+          91
+        ],
+        "T_nat_minus_same_year_ci": [
+          1.510516782091805,
+          1.4205653930473836,
+          1.5990271793496307,
+          91
+        ]
+      },
+      "F3": {
+        "n": 101,
+        "pd_mean_ci": [
+          0.9452203734334322,
+          0.9381939547732651,
+          0.9510197069383971,
+          101
+        ],
+        "T_RB_natural_mean_ci": [
+          2.142630148395163,
+          2.0139557222216453,
+          2.2652449452981616,
+          101
+        ],
+        "T_nat_minus_same_year_ci": [
+          1.9208633367938726,
+          1.7801706134718145,
+          2.0527926909297833,
+          101
+        ]
+      }
+    }
+  },
+  "validation_KL_selection_independent": {
+    "Q1|last_token": null,
+    "Q1|full_layer": null,
+    "Q2|last_token": [
+      0.008462367891260586,
+      384,
+      768,
+      384,
+      384,
+      0.06333110998087425,
+      0.0627974368982337
+    ],
+    "Q2|full_layer": [
+      0.016883317154118456,
+      192,
+      384,
+      192,
+      192,
+      0.14388087694924348,
+      0.14633074437152824
+    ],
+    "Q3|last_token": [
+      6.231338196538182e-06,
+      384,
+      768,
+      384,
+      384,
+      0.0013000530404318202,
+      0.001300044939386892
+    ],
+    "Q3|full_layer": [
+      0.0976261773199369,
+      192,
+      384,
+      192,
+      192,
+      0.0498075520672591,
+      0.04517133903505629
+    ]
+  },
+  "test_frozen_KL": null
+}

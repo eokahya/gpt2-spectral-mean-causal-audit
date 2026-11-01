@@ -1,0 +1,56 @@
+{
+  "protocol_version": "pilot-v1",
+  "label": "exploratory_pilot",
+  "seed": 20261030,
+  "model": {
+    "name": "openai-community/gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "dtype": "float32",
+    "device": "mps",
+    "attn_implementation": "eager"
+  },
+  "layer": 9,
+  "backup_layer": 10,
+  "ranks": [96, 192, 384],
+  "max_ranks_ever": 8,
+  "methods": ["zero", "bias", "gauss", "gauss_wo"],
+  "scopes": ["last_token", "full_layer"],
+  "quadrature_nodes": 64,
+  "quadrature_sigma_max_checked": 2.0,
+  "svd": {"device": "cpu", "dtype": "float64"},
+  "task": {
+    "century": "17",
+    "yy_min": 2,
+    "yy_max": 98,
+    "diff_min": 10,
+    "diff_max": 40,
+    "diff_bins": [[10, 19], [20, 29], [30, 40]],
+    "frames": {
+      "F0": "The {noun} lasted from the year 17{yy} to the year 17",
+      "F1": "The {noun} started in the year 17{yy} and ended in the year 17",
+      "F2": "The {noun} ran from the year 17{yy} until the year 17",
+      "F3": "The {noun} began in the year 17{yy} and was over by the year 17",
+      "F4": "The {noun} continued from the year 17{yy} through the year 17",
+      "F5": "The {noun} was active from the year 17{yy} to the year 17"
+    },
+    "nouns": ["war", "dynasty", "siege", "pilgrimage", "expedition", "reign", "rebellion", "voyage", "occupation",
+              "embargo", "crusade", "famine", "drought", "plague", "epidemic", "revolution", "empire", "alliance",
+              "treaty", "truce", "conflict", "campaign", "blockade", "migration", "exile", "regency", "mission",
+              "festival", "construction", "excavation", "survey", "journey", "partnership", "monopoly", "boycott",
+              "strike"]
+  },
+  "splits": {
+    "frames": {"calibration": ["F0", "F1"], "validation": ["F2", "F3"], "test": ["F4", "F5"]},
+    "noun_groups": ["moment_pool", "calibration", "validation", "test"]
+  },
+  "budget": {
+    "pilot_pairs_per_stratum": 32,
+    "pilot_pairs_total": 192,
+    "bench_pairs": [16, 32],
+    "walltime_budget_s": 900,
+    "aggregate_reserve_s": 120,
+    "batch_size": 192
+  },
+  "positive_control": {"min_mean_pd": 0.0, "ci_lower_T_gt": 0.0},
+  "bootstrap": {"B": 2000, "ci": 0.95}
+}

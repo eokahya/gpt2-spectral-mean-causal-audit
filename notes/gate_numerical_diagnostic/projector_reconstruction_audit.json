@@ -1,0 +1,5 @@
+{
+  "diagnostic_only": true,
+  "all480_own_q_reconstruction_cpu64_max_abs": 3.552713678800501e-15,
+  "all480_after_f32_cast_bit_equal": true
+}

@@ -1,0 +1,13 @@
+2026-10-30 19:47:24,784 INFO [stage] load_model ...
+W1030 19:47:25.816000 40173 .venv/lib/python3.13/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 12892.95it/s]
+2026-10-30 19:47:26,366 INFO [stage] load_model done in 1.58s
+2026-10-30 19:48:28,796 INFO basis svd done in 19.3s (elapsed 65s)
+2026-10-30 19:48:47,968 INFO basis pca done in 19.2s (elapsed 84s)
+2026-10-30 19:49:07,232 INFO basis random_s101 done in 19.3s (elapsed 104s)
+2026-10-30 19:49:26,408 INFO basis random_s202 done in 19.2s (elapsed 123s)
+2026-10-30 19:49:45,517 INFO basis random_s303 done in 19.1s (elapsed 142s)
+2026-10-30 19:50:04,659 INFO basis random_s404 done in 19.1s (elapsed 161s)
+2026-10-30 19:50:23,789 INFO basis random_s505 done in 19.1s (elapsed 180s)
+2026-10-30 19:50:42,880 INFO basis wsvd done in 19.1s (elapsed 199s)
+2026-10-30 19:50:50,612 INFO run dir: /Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/runs/20261030T164723Z_day3_test

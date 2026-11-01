@@ -1,0 +1,77 @@
+{
+  "data": "OLD Day-1 calibration only: manifests/pilot_pairs_calibration.csv (rec, don) and manifests/moment_pool_calibration.csv (same-year discarded donors)",
+  "groups": [
+    "cal-0013",
+    "cal-0172",
+    "cal-0189"
+  ],
+  "projector_checks": {
+    "sym_max_abs": 0.0,
+    "idem_max_abs": 7.216449660063518e-16,
+    "trace": 192.0,
+    "n_eig_above_split": 192,
+    "eig_retained_min": 0.9999999999999947,
+    "eig_discarded_max_abs": 1.5543122344803576e-15,
+    "complement_idem_max_abs": 2.1094237467877974e-15
+  },
+  "u_two_way_rel": 2.1301422335016123e-16,
+  "identity_max_abs": 0.0,
+  "s2_oldcal_technical": 1.5072549332377343,
+  "U_oldcal_technical": [
+    7.95282994658919e-06,
+    7.018723314467935e-06,
+    1.0248154574946966e-05
+  ],
+  "own_q_algebra_max_abs": 1.5543122344752192e-15,
+  "same_q_U": 0.0,
+  "d0_R_max_abs": 0.0,
+  "other_positions_max_abs": 0.0,
+  "resid_mid_max_abs": 0.0,
+  "patched_logits_differ": 14.214279174804688,
+  "zero_noise_L2_units": 0.0,
+  "zero_noise_over_theta0": 0.0,
+  "f64_activation_rel": [
+    1.7253462097430195e-06
+  ],
+  "f32_vs_f64_R_rel": 0.00011935632801972114,
+  "f32_vs_f64_U_rel": 0.001082113606644522,
+  "timing": {
+    "warmup": "untimed: one extraction forward + one 19-row group forward on an old calibration prompt",
+    "timed_groups": 3,
+    "extract_s": 0.06573262508027256,
+    "extract_per_prompt_s": 0.0021910875026757517,
+    "group_forward_s": [
+      0.014325124910101295,
+      0.01631545787677169,
+      0.03584612510167062
+    ],
+    "group_forward_max_s": 0.03584612510167062,
+    "projected_dev_model_stage_s": 3.4654200077056885,
+    "rows_per_group": 19,
+    "scientific_forwards_dev": 768,
+    "scale_forwards_dev": 96,
+    "control_forwards_dev": 48,
+    "extraction_forwards_dev": 480
+  },
+  "memory": {
+    "max_rss_bytes": 2197291008,
+    "mps_current_allocated_bytes": 504413696,
+    "mps_driver_allocated_bytes": 1135214592,
+    "peak_gib": 2.04638671875
+  },
+  "gates": {
+    "identity": true,
+    "own_q_algebra": true,
+    "same_q": true,
+    "d0": true,
+    "other_positions": true,
+    "resid_mid": true,
+    "f32_vs_f64_R": true,
+    "f32_vs_f64_U": true,
+    "u_two_way": true,
+    "zero_noise": true,
+    "patch_has_effect": true,
+    "budget_projection": true
+  },
+  "all_gates_pass": true
+}

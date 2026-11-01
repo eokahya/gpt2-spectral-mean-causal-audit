@@ -1,0 +1,60 @@
+{
+  "run_id": "20261030T191411Z_followup_prepare",
+  "stage": "prepare",
+  "protocol_version": "followup-v1-DRAFT",
+  "start_utc": "2026-10-30T19:14:11.374034+00:00",
+  "argv": [
+    "run_followup.py",
+    "prepare"
+  ],
+  "seed": 20261101,
+  "config_path": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/followup/config/followup_v1.json",
+  "bound": {
+    "protocol_sha256": null,
+    "design_sha256": "24558511e714ac25b10217631d5aa340d8981f57e0606d463c241a5e40d05238",
+    "config_sha256": "65103ec02e34c880b3463d8ed1a5c1131c9315f8be5352a86babe591d5543179",
+    "source": {
+      "tree_sha256": "b723e8d99e4e0b7a4b7a7b34e7f18bb9330f79b3a2ed71f1a193e6cc07b221ed",
+      "files": {
+        "followup/__init__.py": "a3a6f8dd452a435fb1d8a49c3eeec087ddbe31e5c8441b582299dcd33cd86dfd",
+        "followup/common.py": "e6930ce0f86e33198457741830fdb499f8f6b6a5896f405e0ec8bf6a3dbf1f94",
+        "followup/data.py": "bf1dab3e1872de68d485276f7743c89ce6cd1b6766cd2a5953306d97e6b0bf0d",
+        "followup/downstream.py": "581e54c7663e2e9db131641503f4327ff8c73fe685d3898f719c8789e0816668",
+        "followup/features.py": "b04206aa75b9e8aeb77a308171fd7030f20a5b41e8e20ae83962b30a00b2fd00",
+        "followup/local.py": "0e1ce0fc4012291007eed18076f760bdbcdb0edf6858107cccb1c70ac89bf7aa",
+        "followup/pipeline.py": "82e05c25409a0336b8ea999d54c41f792511e9992b489da193d8b0e05daae6ad",
+        "followup/ridge.py": "e4c8147304d4424c71e6ccbf2acaac377d26bf3112079e2d61bb51f4a01244ad",
+        "followup/stats.py": "aaadf4881b56e49b042a34e0e3f570afb583ca315e23a3af01a36ee70f6e63fe",
+        "run_followup.py": "8d20927fe23691daa73943cf0a1f41e8839e55380f1cecac0c914235bec8ffae"
+      }
+    },
+    "manifests": {},
+    "day3_config_sha256": "39147730d3ead4439aadcd12e9a572a5e667aa988c31a967da76cd711b10b0aa",
+    "artifact_file_sha256": "cd56bb2f9cb958cb3381b93e799567cb569788faec17c44d775057e2d92a3fcf"
+  },
+  "env": {
+    "python": "3.13.0 (v3.13.0:60403a5409f, Oct  7 2024, 00:37:40) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "torch": "2.15.0",
+    "transformers": "5.22.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "mps_available": true,
+    "mps_built": true
+  },
+  "model": {
+    "name": "openai-community/gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "dtype": "float32",
+    "device": "mps",
+    "attn_implementation": "eager"
+  },
+  "status": "ok",
+  "end_utc": "2026-10-30T19:14:12.796861+00:00",
+  "walltime_s": 1.422838,
+  "stage_walltimes_s": {},
+  "outputs": {
+    "prepare.json": "0351dbd48d43ae7d998f06e2d3e1f18a4b4710c7370c81d42e804eacb3c1bb2e"
+  }
+}

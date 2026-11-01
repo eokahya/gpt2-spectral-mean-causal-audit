@@ -1,0 +1,445 @@
+{
+  "created_utc": "2026-10-30T19:14:12.788205+00:00",
+  "seed": 20261101,
+  "assignment": {
+    "frames": {
+      "fit": [
+        "N0",
+        "N5",
+        "N6",
+        "N9"
+      ],
+      "validation": [
+        "N7",
+        "N8"
+      ],
+      "test": [
+        "N1",
+        "N2",
+        "N3",
+        "N4"
+      ]
+    },
+    "templates": {
+      "fit": [
+        [
+          "N0",
+          "administration"
+        ],
+        [
+          "N0",
+          "colony"
+        ],
+        [
+          "N0",
+          "crisis"
+        ],
+        [
+          "N0",
+          "evacuation"
+        ],
+        [
+          "N5",
+          "courtship"
+        ],
+        [
+          "N5",
+          "embassy"
+        ],
+        [
+          "N5",
+          "prosperity"
+        ],
+        [
+          "N5",
+          "publication"
+        ],
+        [
+          "N6",
+          "conquest"
+        ],
+        [
+          "N6",
+          "protectorate"
+        ],
+        [
+          "N6",
+          "reformation"
+        ],
+        [
+          "N6",
+          "republic"
+        ],
+        [
+          "N9",
+          "assembly"
+        ],
+        [
+          "N9",
+          "garrison"
+        ],
+        [
+          "N9",
+          "mandate"
+        ],
+        [
+          "N9",
+          "parliament"
+        ]
+      ],
+      "validation": [
+        [
+          "N7",
+          "pestilence"
+        ],
+        [
+          "N7",
+          "presidency"
+        ],
+        [
+          "N7",
+          "schism"
+        ],
+        [
+          "N7",
+          "stalemate"
+        ],
+        [
+          "N8",
+          "ceasefire"
+        ],
+        [
+          "N8",
+          "confederation"
+        ],
+        [
+          "N8",
+          "federation"
+        ],
+        [
+          "N8",
+          "papacy"
+        ]
+      ],
+      "test": [
+        [
+          "N1",
+          "apprenticeship"
+        ],
+        [
+          "N1",
+          "dispute"
+        ],
+        [
+          "N1",
+          "inquiry"
+        ],
+        [
+          "N1",
+          "recession"
+        ],
+        [
+          "N1",
+          "reconstruction"
+        ],
+        [
+          "N1",
+          "rivalry"
+        ],
+        [
+          "N1",
+          "settlement"
+        ],
+        [
+          "N1",
+          "trial"
+        ],
+        [
+          "N2",
+          "marriage"
+        ],
+        [
+          "N2",
+          "monarchy"
+        ],
+        [
+          "N2",
+          "mutiny"
+        ],
+        [
+          "N2",
+          "outbreak"
+        ],
+        [
+          "N2",
+          "scarcity"
+        ],
+        [
+          "N2",
+          "shortage"
+        ],
+        [
+          "N2",
+          "translation"
+        ],
+        [
+          "N2",
+          "uprising"
+        ],
+        [
+          "N3",
+          "feud"
+        ],
+        [
+          "N3",
+          "governorship"
+        ],
+        [
+          "N3",
+          "investigation"
+        ],
+        [
+          "N3",
+          "negotiation"
+        ],
+        [
+          "N3",
+          "residency"
+        ],
+        [
+          "N3",
+          "tenure"
+        ],
+        [
+          "N3",
+          "union"
+        ],
+        [
+          "N3",
+          "upheaval"
+        ],
+        [
+          "N4",
+          "armistice"
+        ],
+        [
+          "N4",
+          "commission"
+        ],
+        [
+          "N4",
+          "flood"
+        ],
+        [
+          "N4",
+          "friendship"
+        ],
+        [
+          "N4",
+          "insurrection"
+        ],
+        [
+          "N4",
+          "quarantine"
+        ],
+        [
+          "N4",
+          "standoff"
+        ],
+        [
+          "N4",
+          "winter"
+        ]
+      ]
+    },
+    "years": {
+      "fit": [
+        4,
+        5,
+        9,
+        11,
+        15,
+        19,
+        20,
+        23,
+        27,
+        30,
+        34,
+        36,
+        39,
+        42,
+        45,
+        47,
+        51,
+        54,
+        57,
+        59,
+        64,
+        65,
+        68,
+        73,
+        76,
+        79,
+        81,
+        83,
+        88,
+        91,
+        94,
+        96,
+        98
+      ],
+      "validation": [
+        2,
+        7,
+        8,
+        12,
+        16,
+        18,
+        22,
+        25,
+        28,
+        29,
+        33,
+        35,
+        38,
+        43,
+        44,
+        49,
+        52,
+        53,
+        58,
+        60,
+        62,
+        67,
+        69,
+        71,
+        75,
+        78,
+        82,
+        85,
+        86,
+        89,
+        93,
+        97
+      ],
+      "test": [
+        3,
+        6,
+        10,
+        13,
+        14,
+        17,
+        21,
+        24,
+        26,
+        31,
+        32,
+        37,
+        40,
+        41,
+        46,
+        48,
+        50,
+        55,
+        56,
+        61,
+        63,
+        66,
+        70,
+        72,
+        74,
+        77,
+        80,
+        84,
+        87,
+        90,
+        92,
+        95
+      ]
+    },
+    "unused_frames": [],
+    "unused_nouns": [
+      "council",
+      "depression",
+      "exhibition",
+      "expansion",
+      "invasion",
+      "ministry",
+      "renovation",
+      "restoration",
+      "retreat",
+      "tournament"
+    ]
+  },
+  "rule": "outcome-blind: config + seed + tokenizer only; exclusions only for tokenization",
+  "leakage": {
+    "historical_files": [
+      "manifests/moment_pool_calibration.csv",
+      "manifests/pilot_pairs_calibration.csv",
+      "manifests/sealed_prompts_test.csv",
+      "manifests/sealed_prompts_validation.csv",
+      "manifests_day3/test_pairs.csv",
+      "manifests_day3/validation_pairs.csv"
+    ],
+    "n_historical_texts": 2178,
+    "n_overlap": 0
+  },
+  "splits": {
+    "fit": {
+      "n_recipients": 96,
+      "n_templates": 16,
+      "frames": [
+        "N0",
+        "N5",
+        "N6",
+        "N9"
+      ],
+      "per_frame": {
+        "N0": 24,
+        "N5": 24,
+        "N6": 24,
+        "N9": 24
+      },
+      "file": "followup/manifests/fit_recipients.csv",
+      "sha256": "830482dadaa15319d5de709b4ba839b133d2d41b0d318057c0204d3f47e5a089",
+      "tokenization_exclusions": 0,
+      "build_seed": 20261111
+    },
+    "validation": {
+      "n_recipients": 48,
+      "n_templates": 8,
+      "frames": [
+        "N7",
+        "N8"
+      ],
+      "per_frame": {
+        "N7": 24,
+        "N8": 24
+      },
+      "file": "followup/manifests/validation_recipients.csv",
+      "sha256": "5a24b6a1c5c9e3ca1c373cf98ac1e234ad274ae1c36c5525cc5f46f72cefe25d",
+      "tokenization_exclusions": 0,
+      "build_seed": 20261112
+    },
+    "test": {
+      "n_recipients": 192,
+      "n_templates": 32,
+      "frames": [
+        "N1",
+        "N2",
+        "N3",
+        "N4"
+      ],
+      "per_frame": {
+        "N1": 48,
+        "N2": 48,
+        "N3": 48,
+        "N4": 48
+      },
+      "file": "followup/manifests/test_recipients.csv",
+      "sha256": "08c8221d248818593338b0492f220d0cbadd612812cc14debb60cc02ffc28e32",
+      "tokenization_exclusions": 0,
+      "build_seed": 20261113
+    }
+  }
+}

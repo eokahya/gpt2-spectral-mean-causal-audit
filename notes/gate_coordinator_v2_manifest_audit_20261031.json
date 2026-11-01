@@ -1,0 +1,14 @@
+{
+  "groups": 48,
+  "recipient_fields_unchanged": true,
+  "overlap_histogram": {
+    "1": 864,
+    "2": 240,
+    "0": 24
+  },
+  "distinct_contexts": 384,
+  "noun_use_counts": [
+    8
+  ],
+  "unique_noun_sets": 48
+}

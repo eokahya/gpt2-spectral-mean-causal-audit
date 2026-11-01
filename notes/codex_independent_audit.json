@@ -1,0 +1,140 @@
+{
+  "auditor": "Codex independent read-only numerical review",
+  "recorded_utc": "2026-10-30T15:45:57.704901+00:00",
+  "run": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/runs/20261030T153707Z_pilot",
+  "row_count": 46656,
+  "run_status": "ok",
+  "device": "mps",
+  "artifacts_sha256": {
+    "results.json": "450216ceaed1b9cc1ffc76c724617ff872262256362a34297cfb3eb69f07ad55",
+    "per_pair_rows.csv": "68bdda4956e5247fa5c4988c9bfe9686c944b5e756909372cf9491b51601d555",
+    "run_manifest.json": "d8df3b6c2fd6e7ad210695bbb08f8e9b0b25808b0df8e7c63628f830a0cfa9dc"
+  },
+  "rms_recalculations": [
+    {
+      "scope": "last_token",
+      "rank": 96,
+      "gauss": {
+        "n": 192,
+        "rms": 1.5855629145720016,
+        "difference_from_report": 0.0
+      },
+      "bias": {
+        "n": 192,
+        "rms": 1.5664810680878878,
+        "difference_from_report": 0.0
+      }
+    },
+    {
+      "scope": "last_token",
+      "rank": 192,
+      "gauss": {
+        "n": 192,
+        "rms": 1.3015541458422835,
+        "difference_from_report": 0.0
+      },
+      "bias": {
+        "n": 192,
+        "rms": 1.2666788239210132,
+        "difference_from_report": 0.0
+      }
+    },
+    {
+      "scope": "last_token",
+      "rank": 384,
+      "gauss": {
+        "n": 192,
+        "rms": 0.8329349925947249,
+        "difference_from_report": 0.0
+      },
+      "bias": {
+        "n": 192,
+        "rms": 0.7999051307479748,
+        "difference_from_report": 0.0
+      }
+    },
+    {
+      "scope": "full_layer",
+      "rank": 96,
+      "gauss": {
+        "n": 192,
+        "rms": 1.6216992234960672,
+        "difference_from_report": 0.0
+      },
+      "bias": {
+        "n": 192,
+        "rms": 1.6030164574431183,
+        "difference_from_report": 0.0
+      }
+    },
+    {
+      "scope": "full_layer",
+      "rank": 192,
+      "gauss": {
+        "n": 192,
+        "rms": 1.2857676079422038,
+        "difference_from_report": -2.220446049250313e-16
+      },
+      "bias": {
+        "n": 192,
+        "rms": 1.2796383579603336,
+        "difference_from_report": 0.0
+      }
+    },
+    {
+      "scope": "full_layer",
+      "rank": 384,
+      "gauss": {
+        "n": 192,
+        "rms": 0.8362464241598293,
+        "difference_from_report": 0.0
+      },
+      "bias": {
+        "n": 192,
+        "rms": 0.8387873206974022,
+        "difference_from_report": 0.0
+      }
+    }
+  ],
+  "signed_error_decomposition": [
+    {
+      "rank": 96,
+      "scope": "last_token",
+      "mean_eR_gauss": 0.02749670639935679,
+      "mean_eR_bias": 0.046733638427970216,
+      "MSE_R_gauss_minus_bias": -0.0018197380594659688,
+      "cross_term_minus_2_E_C_eR_difference": 0.061967710543102156,
+      "MSE_RB_gauss_minus_bias": 0.060146819388290675,
+      "max_identity_residual": 1.848008897575859e-05
+    },
+    {
+      "rank": 192,
+      "scope": "last_token",
+      "mean_eR_gauss": 0.05747639090861676,
+      "mean_eR_bias": 0.09181092763876365,
+      "MSE_R_gauss_minus_bias": -0.005551171405563522,
+      "cross_term_minus_2_E_C_eR_difference": 0.09512001891025794,
+      "MSE_RB_gauss_minus_bias": 0.08956795158931512,
+      "max_identity_residual": 1.3747402900277095e-05
+    },
+    {
+      "rank": 384,
+      "scope": "last_token",
+      "mean_eR_gauss": 0.07921502371743927,
+      "mean_eR_bias": 0.11106055246843886,
+      "MSE_R_gauss_minus_bias": -0.006362018849817969,
+      "cross_term_minus_2_E_C_eR_difference": 0.0602951641733697,
+      "MSE_RB_gauss_minus_bias": 0.05393248369183976,
+      "max_identity_residual": 1.624071317984921e-05
+    }
+  ],
+  "interpretation": "Descriptive arithmetic: C = T_orig_RB - T_orig_R = T_orig_B + I_orig; e_RB approximately e_R - C. Error cancellation in this metric is observed; the biological or network mechanism producing R over-response was not established.",
+  "max_abs_reduced_T_B": 1.8649631076388884e-05,
+  "test_margin_not_frozen": true,
+  "scope_limits": [
+    "Calibration only",
+    "18 frame-noun clusters but only 2 frames",
+    "No matched-quality or specificity claim",
+    "No new model forwards in this audit"
+  ]
+}

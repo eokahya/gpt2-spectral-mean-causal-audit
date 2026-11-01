@@ -1,0 +1,76 @@
+{
+  "run_id": "20261031T105754Z_gate_v3_smoke",
+  "stage": "smoke",
+  "protocol_version": "drfg-dev-v3-techremeasure",
+  "config_path": "discarded_response_floor_gate_v3/config/gate_dev_v3.json",
+  "manifest_dir": "discarded_response_floor_gate_v3/manifests",
+  "start_utc": "2026-10-31T10:57:54.259176+00:00",
+  "argv": [
+    "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/discarded_response_floor_gate_v3/__main__.py",
+    "smoke"
+  ],
+  "bound": {
+    "protocol_path": "discarded_response_floor_gate_v3/DEV_PROTOCOL_v3.md",
+    "protocol_sha256": "ec644e4ed18d92751ed068c321ee536a53240bf93768adc3519456674f93462e",
+    "config_path": "discarded_response_floor_gate_v3/config/gate_dev_v3.json",
+    "config_sha256": "4b51cd0bd6df09423cc324d7659abd08ea5a8c60be7016dbb4a0cf7d5fd1cfdb",
+    "source": {
+      "tree_sha256": "a3e9965438e7c807ef4c46abe6d9cbad0529ac8db3a289ed5ab67e10a52716c4",
+      "files": {
+        "discarded_response_floor_gate_v3/__init__.py": "992594a5723d3b335143c6b43028424185a9cf1c76eb9bebf06e2b107f84bc8a",
+        "discarded_response_floor_gate_v3/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+        "discarded_response_floor_gate_v3/aggregate.py": "77807b7afa44c33f4b3f5cde24562a0b577c26da27ccac6c18d7a906437fced7",
+        "discarded_response_floor_gate_v3/bootstrap.py": "b7fc9a3ddac1aa20c9e7d561b89168c7feb309297ecbe334ffadab8914197802",
+        "discarded_response_floor_gate_v3/cli.py": "21d12221e1dbf76199224f52b2a9e5d3e132a981d207dfae29d314b843c3a9f0",
+        "discarded_response_floor_gate_v3/common.py": "4621ae796baf531f1281a9a86e159885d5f152dda25573b6c8e9c41ca9e717b6",
+        "discarded_response_floor_gate_v3/data.py": "0f47e517a0dea640ace7b068ae9c8aa75c2ac8eb7b7e9d07eada77523cca3951",
+        "discarded_response_floor_gate_v3/estimators.py": "668305c39f98f378c2ad2a44f113f132018d7b7b1d513f7f54902c16cf3c8437",
+        "discarded_response_floor_gate_v3/geometry.py": "41fad609fb33634d9c8a594a68afffec416067aa10e3b3cb5797a01ccb25fb1b",
+        "discarded_response_floor_gate_v3/hook.py": "9a29cc63b25ef25baf96ffb0b7a2e73b0d20e00768a329fa38d725912db773d4",
+        "discarded_response_floor_gate_v3/pipeline.py": "1fe5c118091b1cefe6de4a2580c8e6da8d1dff8e0b02cb59a64fbddcee46fa90",
+        "discarded_response_floor_gate_v3/power.py": "6793de4e883946a37290c7617bd8f4adac7c5e5b4ca690916f5b30b672e249b1",
+        "discarded_response_floor_gate_v3/tests/test_gate_v3.py": "e110371d005d4222d8b89950b7fca1c6fdca228083ca89bf5da6847dcff4ee9e"
+      }
+    },
+    "scp_dependency_tree_sha256": "f04e0ece5f30f5a56804232d530992bf2cd959335d34bd032357a4a2d2d6a449",
+    "manifest_dir": "discarded_response_floor_gate_v3/manifests",
+    "manifests": {
+      "discarded_response_floor_gate_v3/manifests/group_noun_overlap.csv": "3d4f2b2ef6580d62708809491c4c7072ac3faec6a26b9c396c9acdd3059992aa",
+      "discarded_response_floor_gate_v3/manifests/groups.csv": "70059a91c8fd2f5f93b93566ed2758b1403c55a51ee5bc4be2beeda6c94f3414",
+      "discarded_response_floor_gate_v3/manifests/index.json": "acf6e6efce152a2148a2dfed875f59b6defa3db1c9765dae4fc468d5748c1d53",
+      "discarded_response_floor_gate_v3/manifests/manifest_copy_v3.json": "b762f09f6cb590832923d5088a9d0b9fabcb9e8ba52dface9ef7cbc6282dfb03",
+      "discarded_response_floor_gate_v3/manifests/prompts.csv": "abd575a61c333f4e68a00eae616686b118e694b762a00842752c93a30dc0198a",
+      "discarded_response_floor_gate_v3/manifests/template_noun_overlap.csv": "6846833a64b2ec9f727b4da6755388df969ba87d92998c4aca5d43d2d0dfe84e"
+    },
+    "protected_manifest_sha256": "102281e9d8ab21b22a996e2df2effc391aebdd4f3c3af2ac9f01b50ed13c48a4",
+    "artifact_file_sha256": "cd56bb2f9cb958cb3381b93e799567cb569788faec17c44d775057e2d92a3fcf",
+    "J_ids_sha256": "5c0ba5751c5b4a59af9f08a4d3116a68380c0ca7f17bcc4a9ec8ca54237b028f",
+    "v2_registration_sha256": "4eff66fce15dbd66c0b83170ca3ce0de2f5d3d325df3cdaec3552209346bbe1c"
+  },
+  "env": {
+    "python": "3.13.0 (v3.13.0:60403a5409f, Oct  7 2024, 00:37:40) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "torch": "2.15.0",
+    "transformers": "5.22.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "mps_available": true,
+    "mps_built": true
+  },
+  "torch_threads": 6,
+  "model_files": {
+    "safetensors_path": "/Users/emre/Documents/Codex/ML_Projects/spectral_causal_pilot/.cache/hf/hub/models--openai-community--gpt2/snapshots/607a30d783dfa663caf39e06633721c8d4cfcd7e/model.safetensors",
+    "safetensors_sha256": "248dfc3911869ec493c76e65bf2fcf7f615828b0254c12b473182f0f81d3a707"
+  },
+  "status": "ok",
+  "end_utc": "2026-10-31T10:58:01.331735+00:00",
+  "walltime_s": 7.072573,
+  "stage_walltimes_s": {
+    "load_model_mps_float32": 1.491565957898274,
+    "load_model_cpu_float64": 0.36470704106613994
+  },
+  "outputs": {
+    "smoke.json": "21ec6f448843c363bea9e3d04129b5da9208cced966ad94ddd893e18230eb335"
+  }
+}

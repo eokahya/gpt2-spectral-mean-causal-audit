@@ -1,0 +1,87 @@
+{
+  "positive_control": {
+    "valid": true,
+    "rule": "mean PD > 0 AND CI_lo(mean T_RB natural) > 0 AND CI_lo(mean[T_nat - T_same_year]) > 0",
+    "pd_mean_ci": [
+      0.9149652258876312,
+      0.9036396634571316,
+      0.9236290877932433,
+      192
+    ],
+    "pd_frac_positive": 1.0,
+    "T_RB_natural_mean_ci": [
+      1.7246967196515464,
+      1.6551712636529425,
+      1.7908200227394706,
+      192
+    ],
+    "T_RB_same_year_mean_ci": [
+      0.004030234178450719,
+      -0.018036071364992558,
+      0.026261009955459564,
+      192
+    ],
+    "T_RB_wrong_donor_mean_ci": [
+      0.7851150292588378,
+      0.6518647055717282,
+      0.9159920454341866,
+      192
+    ],
+    "T_natural_minus_same_year_ci": [
+      1.720666485473096,
+      1.6469073624450399,
+      1.7907126848280193,
+      192
+    ],
+    "T_RB_natural_cluster_ci": [
+      1.7246967196515464,
+      1.6487595796240246,
+      1.798766861641864,
+      18
+    ]
+  },
+  "top1_examples": [
+    {
+      "prompt": "The crusade lasted from the year 1764 to the year 17",
+      "top1": "75"
+    },
+    {
+      "prompt": "The exile lasted from the year 1753 to the year 17",
+      "top1": "60"
+    },
+    {
+      "prompt": "The dynasty started in the year 1704 and ended in the year 17",
+      "top1": "05"
+    },
+    {
+      "prompt": "The excavation started in the year 1749 and ended in the year 17",
+      "top1": "50"
+    },
+    {
+      "prompt": "The reign started in the year 1746 and ended in the year 17",
+      "top1": "47"
+    },
+    {
+      "prompt": "The exile started in the year 1771 and ended in the year 17",
+      "top1": "72"
+    },
+    {
+      "prompt": "The campaign started in the year 1712 and ended in the year 17",
+      "top1": "15"
+    },
+    {
+      "prompt": "The crusade started in the year 1751 and ended in the year 17",
+      "top1": "52"
+    }
+  ],
+  "frac_top1_in_J": 1.0,
+  "frac_top1_year_gt_r": 1.0,
+  "identity_same_example_max_abs_logit_diff": 0.0,
+  "RB_patch_vs_donor_mlp_out_max_abs_diff": 8.58306884765625e-06,
+  "RB_patch_vs_donor_mlp_out_rel": 3.610269629916729e-07,
+  "mps_cpu_parity": {
+    "orig_max_abs_logit_diff": 0.0005950927734375,
+    "reduced_gauss_full_layer_k192_max_abs_logit_diff": 0.00054931640625,
+    "n_prompts": 8
+  }
+}

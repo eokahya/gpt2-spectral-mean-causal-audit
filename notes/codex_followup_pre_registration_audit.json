@@ -1,0 +1,46 @@
+{
+  "created_utc": "2026-10-30T19:20:43.466696+00:00",
+  "reviewer": "Codex coordinator; experiment source/tests authored by Claude Code Opus 5.5 High",
+  "stage": "pre-registration; no new fit/validation/test outcomes",
+  "reviewed_modules": [
+    "followup/common.py",
+    "followup/data.py",
+    "followup/local.py",
+    "followup/downstream.py",
+    "followup/features.py",
+    "followup/ridge.py",
+    "followup/stats.py",
+    "followup/pipeline.py",
+    "run_followup.py",
+    "tests_followup/test_followup.py"
+  ],
+  "independent_checks": {
+    "new_csv_cells_balanced": true,
+    "new_prompt_splits_disjoint": true,
+    "historical_exact_overlap": 0,
+    "old33_frozen_files_unchanged": true,
+    "day3_verify_frozen": true,
+    "smoke_bound_matches_current": true
+  },
+  "requested_and_verified_fixes": [
+    "preactivation norm product in baseline",
+    "frozen scp source dependency hash in registration",
+    "same batch shape determinism; separate cross-shape rounding check",
+    "primary local delta_b numerical equivalence gate"
+  ],
+  "tests": {
+    "followup_passed": 27,
+    "old_passed": 64,
+    "old_skipped": 2,
+    "skip_reason": "Existing registration/freeze would allow guard tests to launch real validation/test runs"
+  },
+  "smoke_run": "20261030T192134Z_followup_smoke",
+  "smoke_gates_passed": 10,
+  "probe_caveat": "Four old-CAL exact-JVP checks have fixed-8-probe norm ratios approx .986 to 1.485; no estimator change. Bootstrap conditions on fixed probes.",
+  "decision": "Ready to finalize config version and register, then execute the fixed staged protocol.",
+  "final_recheck_utc": "2026-10-30T19:22:03.579425+00:00",
+  "final_followup_test_log": "followup/logs/pytest_followup_20261030T192123Z.log",
+  "source_tree_sha256": "c39af8e403bdfdbe49cb4db391e234362b691a3fb508bfd69bc1bd7731afb908",
+  "config_final": "followup-v1",
+  "final_correction": "Two guard tests now use an explicit DRAFT copy instead of depending on the current config label. Final 27 tests and old-CAL smoke repeated; bound hashes match."
+}

@@ -1,0 +1,27 @@
+{
+  "kind": "day3_registration",
+  "registered_utc": "2026-10-30T16:42:18.003280+00:00",
+  "protocol_version": "day3-v1",
+  "bindings": {
+    "protocol_day3": "35d049301e3a6bcf3f3e86ae8d8406580e07aea7e1c1edd29707ac7bf656c396",
+    "config_day3": "39147730d3ead4439aadcd12e9a572a5e667aa988c31a967da76cd711b10b0aa",
+    "source_tree": "f04e0ece5f30f5a56804232d530992bf2cd959335d34bd032357a4a2d2d6a449",
+    "calibration_artifact": "cd56bb2f9cb958cb3381b93e799567cb569788faec17c44d775057e2d92a3fcf",
+    "calibration_index": "1ad6ec1fb8aa3cb819817eb0c47741e9fed2de6470e5abe9ccc1f88f7fcc9dfb",
+    "datasets": {
+      "manifests_day3/datasets_index.json": "d1702fae9b96170d1b99e4f616e3b6b44bf31e098c335ddc9ca628562bbf524c",
+      "manifests_day3/test_pairs.csv": "50a1e4bdf44dd67de0fe8002d0000bb88ca81a6d07afd3ecc2990dc98eaba367",
+      "manifests_day3/validation_pairs.csv": "f9331172c00c23f8bca125ff75ff9e6815a383fc83a52898433b2e59b103532d"
+    }
+  },
+  "epsilon": {
+    "epsilon": 0.08973707820478917,
+    "reference_rms": 1.7947415640957833,
+    "fraction": 0.05,
+    "n": 192,
+    "reference_csv": "runs/20261030T153707Z_pilot/per_pair_rows.csv",
+    "reference_csv_sha256": "68bdda4956e5247fa5c4988c9bfe9686c944b5e756909372cf9491b51601d555"
+  },
+  "note": "validation/test unseen; epsilon fixed here (calibration-informed); KL selection frozen after validation",
+  "checksum": "d658797d3a7af3fe1db8baf97825118e5f0f11615782021fc12c7cf69963195a"
+}

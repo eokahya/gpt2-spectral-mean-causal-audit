@@ -1,0 +1,32 @@
+{
+  "registered_utc": "2026-10-30T15:36:37.233005+00:00",
+  "protocol_version": "pilot-v1",
+  "protocol": "88cb9abf3744a15aaa4eea092d2c64e3eaf8e22b8d3fcfa236aba91032f1e979",
+  "config": "e8f7165df53ce4b112444d1d4e4ecc9c86e231d5421974739df63f1475f8ff33",
+  "manifests": {
+    "manifests/moment_pool_calibration.csv": "7fec3dab3247ed37f3d9ef28f09398e7b30857937b91f7cc6617b79dcdf7e3e3",
+    "manifests/pilot_pairs_calibration.csv": "797500e0c8c9531c76cad93a5648b85474894112890b10ee19f51c73bc4cff5f",
+    "manifests/sealed_prompts_test.csv": "a311a76a4ce019ef17874a0c6f24e4812d67b21d7f4b502d9b798f0a8593dc6c",
+    "manifests/sealed_prompts_validation.csv": "617e4915c2101083255e7c423b14ca48e9b8e3baea69b941f9dbcb4ba223b3f1",
+    "manifests/split_manifest.json": "40a25f0234a4dd45e6e869afff48af80f35e8126b9e4203febb815b8a9ac0f98"
+  },
+  "source": {
+    "tree_sha256": "9ea69ff9fd5162c591f8eea4f66008b349673cee96deb214da8ea0c34ae65ec3",
+    "files": {
+      "run.py": "69f6e9b31fcdf8ca63f0552be28c41c505809480e5129671f9264f405fc287da",
+      "scp/__init__.py": "8dfd15eb6df2cf72cd659c373d2615741137fad7032a31131903e2c870ce606d",
+      "scp/common.py": "b3c34473a5bb30d0993783cc155e54c781b68081e9227c950010c9f10a7378d4",
+      "scp/data.py": "7571ddaf03577f458c6adca961d9ed3c11d90dc0241d46efb7047eaea4b95ddf",
+      "scp/experiment.py": "0a7610b94d3a94c12746efeb6316d92301802333055f098351690fe952070275",
+      "scp/metrics.py": "8e68703458d5c157ae64b3a62a823d0f73a12a65ba9c41f93d0490f614c6fd46",
+      "scp/model.py": "090d6b01c20a77437274f8553dd8bfac4e1af8814c276114027dc9d75d534794",
+      "scp/spectral.py": "50eb34663c89a2540d165e300fa9355d4d86d3501a1518a84b0e8cdd27b1ddb4",
+      "tests/conftest.py": "bb4408f6678181cfb65f3adcfdd41d6d32a3e0e87d05511b022fef1b6cc2e4f3",
+      "tests/test_cli_guards.py": "92215361ce9a5433acc0523516aa9b5d147c26451c9d00005edcf8b63eb79f36",
+      "tests/test_data.py": "4e4e96b78f526d58e58fa3248c0bc605b163d0f8247e494a5f71290a4399545d",
+      "tests/test_model.py": "da0208cd6a41ccb08928d2912e80b920c9ca31aa5daba5ce455f4cb08032da1d",
+      "tests/test_spectral.py": "f9436e08e81e3dee258e658088a634e7ecf3d0625ad3e03a4a5021b99e964488"
+    }
+  },
+  "note": "written before the first pilot measurement; epsilon NOT frozen; test split sealed"
+}

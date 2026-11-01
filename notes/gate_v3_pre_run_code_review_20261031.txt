@@ -1,0 +1,6 @@
+Coordinator pre-run review of v3 draft (no model calls yet):
+1. BLOCKER if still present: legacy_contrast holds branch_mlp(ctx.model,...) open while calling ctx.group_rows; group_rows opens another branch_mlp and hook.py explicitly rejects nested wrappers. Close outer wrapper after extracting each mixed batch before canonical group_rows; add tiny-model regression exercising legacy_contrast end-to-end.
+2. Compute accounting: Ctx.counts accumulates old-cal warmup extraction, but development compute_counts names 480 logical prompts alongside 481 forwards/9139 rows. Reset or subtract counts after warmup; document warmup separately so counted development is exactly480 forwards9120 rows plus48 group forwards912 rows.
+3. Protocol has inherited old CLI/paths sections; explicitly mark v2 text historical where superseded or update active instructions so users cannot accidentally run v2 develop. Keep all scientific thresholds and fixed power settings unchanged.
+4. Scope of proof: canonical tests and CPU64 smoke support measured numerical validity only. Never claim general bug absence or fresh/unexposed scientific confirmation.
+Please fix these in v3 only before handoff; preserve all v2 bytes. Coordinator will run MPS smoke/register/develop.

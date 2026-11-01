@@ -1,0 +1,250 @@
+...........F.FFF.....F...                                                [100%]
+=================================== FAILURES ===================================
+_________________ test_residual_bypass_invariant_and_locality __________________
+
+cpu_model = (GPT2LMHeadModel(
+  (transformer): GPT2Model(
+    (wte): Embedding(50257, 768)
+    (wpe): Embedding(1024, 768)
+    (dr...
+	50256: AddedToken("<|endoftext|>", rstrip=False, lstrip=False, single_word=False, normalized=True, special=True),
+}))
+small = {'rec': Batch(ids=tensor([[  464, 39856, 15436,   422,   262,   614,  1596,  2414,   284,   262,
+           614,  1596..., 'diff_bin': '20-29', 'r': 41, ...}, {'pair_id': 'cal-0191', 'direction': 'down', 'diff_bin': '30-40', 'r': 93, ...}]}
+
+    def test_residual_bypass_invariant_and_locality(cpu_model, small):
+        """Patch touches only the MLP-branch input at the final position; residual bypass and other positions fixed."""
+        model, _ = cpu_model
+        b = small["rec"]
+        cap = {}
+        blk = model.transformer.h[9]
+        h1 = blk.ln_2.register_forward_pre_hook(lambda m, a: cap.setdefault("resid_mid", []).append(a[0].clone()))
+        h2 = blk.register_forward_hook(lambda m, a, o: cap.setdefault("block_out", []).append(
+            (o[0] if isinstance(o, tuple) else o).clone()))
+        try:
+            with wrapped_mlp(model, 9) as w:
+                base = forward_last(model, w, b)
+                delta = torch.randn(6, 768) * 2.0
+                pat = forward_last(model, w, b, delta=delta)
+        finally:
+            h1.remove(), h2.remove()
+        assert torch.equal(cap["resid_mid"][0], cap["resid_mid"][1])  # residual bypass unchanged
+        d_block = cap["block_out"][1] - cap["block_out"][0]
+        d_mlp = pat["out_all"] - base["out_all"]
+        assert torch.allclose(d_block, d_mlp, atol=1e-4)  # block-output change == MLP-output change
+        ar = torch.arange(6)
+        mask = torch.zeros(d_mlp.shape[:2], dtype=torch.bool)
+        mask[ar, b.last_idx] = True
+        assert d_mlp[~mask].abs().max() == 0  # other positions untouched
+        assert d_mlp[mask].abs().max() > 1e-2
+        # final hidden states at earlier positions unchanged (causal); final position changed
+        dh = (pat["hidden_all"] - base["hidden_all"]).abs()
+>       assert dh[~mask].max() == 0 and dh[mask].max() > 1e-3
+E       assert (tensor(1.6302) == 0)
+E        +  where tensor(1.6302) = <built-in method max of Tensor object at 0x11f1bc4b0>()
+E        +    where <built-in method max of Tensor object at 0x11f1bc4b0> = tensor([[0.0000, 0.0000, 0.0000,  ..., 0.0000, 0.0000, 0.0000],\n        [0.0000, 0.0000, 0.0000,  ..., 0.0000, 0.0000,...0.0081, 0.0283, 0.0073,  ..., 0.0065, 0.0081, 0.0080],\n        [0.0074, 0.0272, 0.0074,  ..., 0.0067, 0.0079, 0.0073]]).max
+
+tests/test_model.py:106: AssertionError
+_____________________ test_full_rank_reduction_is_original _____________________
+
+cpu_model = (GPT2LMHeadModel(
+  (transformer): GPT2Model(
+    (wte): Embedding(50257, 768)
+    (wpe): Embedding(1024, 768)
+    (dr...
+	50256: AddedToken("<|endoftext|>", rstrip=False, lstrip=False, single_word=False, normalized=True, special=True),
+}))
+cfg = {'protocol_version': 'pilot-v1', 'label': 'exploratory_pilot', 'seed': 20261030, 'model': {'name': 'openai-community/gpt2', 'revision': '607a30d783dfa663caf39e06633721c8d4cfcd7e', 'dtype': 'float32', 'device': 'mps', ...}, ...}
+spectrum = Spectrum(W_in=tensor([[-0.1263, -0.0915,  0.1290,  ...,  0.1656, -0.0513,  0.0052],
+        [ 0.1003,  0.0872,  0.0250... -0.0091, -0.0099],
+        [-0.0222,  0.0636,  0.0231,  ..., -0.0112, -0.0143, -0.0108]],
+       dtype=torch.float64))
+small = {'rec': Batch(ids=tensor([[  464, 39856, 15436,   422,   262,   614,  1596,  2414,   284,   262,
+           614,  1596..., 'diff_bin': '20-29', 'r': 41, ...}, {'pair_id': 'cal-0191', 'direction': 'down', 'diff_bin': '30-40', 'r': 93, ...}]}
+
+    def test_full_rank_reduction_is_original(cpu_model, cfg, spectrum, small):
+        model, _ = cpu_model
+        with wrapped_mlp(model, 9) as w:
+            rec, don = _orig(model, w, small)
+            x = torch.cat([rec["x_pre_last"], don["x_pre_last"]])
+>           P_R, P_B, mlp, cal, wo = _moments(cpu_model, cfg, spectrum, 768, x)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_model.py:144: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_model.py:18: in _moments
+    Wc = mlp.c_fc.weight.detach()
+         ^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = SpectralMLP(
+  (orig): GPT2MLP(
+    (c_fc): Conv1D(nf=3072, nx=768)
+    (c_proj): Conv1D(nf=768, nx=3072)
+    (act): NewGELUActivation()
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+)
+name = 'c_fc'
+
+    def __getattr__(self, name: str) -> Union[Tensor, "Module"]:
+        if "_parameters" in self.__dict__:
+            _parameters = self.__dict__["_parameters"]
+            if name in _parameters:
+                return _parameters[name]
+        if "_buffers" in self.__dict__:
+            _buffers = self.__dict__["_buffers"]
+            if name in _buffers:
+                return _buffers[name]
+        if "_modules" in self.__dict__:
+            modules = self.__dict__["_modules"]
+            if name in modules:
+                return modules[name]
+>       raise AttributeError(
+            f"'{type(self).__name__}' object has no attribute '{name}'"
+        )
+E       AttributeError: 'SpectralMLP' object has no attribute 'c_fc'
+
+.venv/lib/python3.13/site-packages/torch/nn/modules/module.py:1976: AttributeError
+__________________________ test_reduced_B_invariance ___________________________
+
+cpu_model = (GPT2LMHeadModel(
+  (transformer): GPT2Model(
+    (wte): Embedding(50257, 768)
+    (wpe): Embedding(1024, 768)
+    (dr...
+	50256: AddedToken("<|endoftext|>", rstrip=False, lstrip=False, single_word=False, normalized=True, special=True),
+}))
+cfg = {'protocol_version': 'pilot-v1', 'label': 'exploratory_pilot', 'seed': 20261030, 'model': {'name': 'openai-community/gpt2', 'revision': '607a30d783dfa663caf39e06633721c8d4cfcd7e', 'dtype': 'float32', 'device': 'mps', ...}, ...}
+spectrum = Spectrum(W_in=tensor([[-0.1263, -0.0915,  0.1290,  ...,  0.1656, -0.0513,  0.0052],
+        [ 0.1003,  0.0872,  0.0250... -0.0091, -0.0099],
+        [-0.0222,  0.0636,  0.0231,  ..., -0.0112, -0.0143, -0.0108]],
+       dtype=torch.float64))
+small = {'rec': Batch(ids=tensor([[  464, 39856, 15436,   422,   262,   614,  1596,  2414,   284,   262,
+           614,  1596..., 'diff_bin': '20-29', 'r': 41, ...}, {'pair_id': 'cal-0191', 'direction': 'down', 'diff_bin': '30-40', 'r': 93, ...}]}
+
+    def test_reduced_B_invariance(cpu_model, cfg, spectrum, small):
+        """In every reduced model a patch confined to the discarded subspace B has no effect (Delta_B = 0)."""
+        model, _ = cpu_model
+        with wrapped_mlp(model, 9) as w:
+            rec, don = _orig(model, w, small)
+            d = don["x_pre_last"] - rec["x_pre_last"]
+            for k in cfg["ranks"]:
+>               P_R, P_B, mlp, cal, wo = _moments(cpu_model, cfg, spectrum, k, torch.cat([rec["x_pre_last"],
+                                                                                        don["x_pre_last"]]))
+
+tests/test_model.py:160: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_model.py:18: in _moments
+    Wc = mlp.c_fc.weight.detach()
+         ^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = SpectralMLP(
+  (orig): GPT2MLP(
+    (c_fc): Conv1D(nf=3072, nx=768)
+    (c_proj): Conv1D(nf=768, nx=3072)
+    (act): NewGELUActivation()
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+)
+name = 'c_fc'
+
+    def __getattr__(self, name: str) -> Union[Tensor, "Module"]:
+        if "_parameters" in self.__dict__:
+            _parameters = self.__dict__["_parameters"]
+            if name in _parameters:
+                return _parameters[name]
+        if "_buffers" in self.__dict__:
+            _buffers = self.__dict__["_buffers"]
+            if name in _buffers:
+                return _buffers[name]
+        if "_modules" in self.__dict__:
+            modules = self.__dict__["_modules"]
+            if name in modules:
+                return modules[name]
+>       raise AttributeError(
+            f"'{type(self).__name__}' object has no attribute '{name}'"
+        )
+E       AttributeError: 'SpectralMLP' object has no attribute 'c_fc'
+
+.venv/lib/python3.13/site-packages/torch/nn/modules/module.py:1976: AttributeError
+_____________________________ test_scope_locality ______________________________
+
+cpu_model = (GPT2LMHeadModel(
+  (transformer): GPT2Model(
+    (wte): Embedding(50257, 768)
+    (wpe): Embedding(1024, 768)
+    (dr...
+	50256: AddedToken("<|endoftext|>", rstrip=False, lstrip=False, single_word=False, normalized=True, special=True),
+}))
+cfg = {'protocol_version': 'pilot-v1', 'label': 'exploratory_pilot', 'seed': 20261030, 'model': {'name': 'openai-community/gpt2', 'revision': '607a30d783dfa663caf39e06633721c8d4cfcd7e', 'dtype': 'float32', 'device': 'mps', ...}, ...}
+spectrum = Spectrum(W_in=tensor([[-0.1263, -0.0915,  0.1290,  ...,  0.1656, -0.0513,  0.0052],
+        [ 0.1003,  0.0872,  0.0250... -0.0091, -0.0099],
+        [-0.0222,  0.0636,  0.0231,  ..., -0.0112, -0.0143, -0.0108]],
+       dtype=torch.float64))
+small = {'rec': Batch(ids=tensor([[  464, 39856, 15436,   422,   262,   614,  1596,  2414,   284,   262,
+           614,  1596..., 'diff_bin': '20-29', 'r': 41, ...}, {'pair_id': 'cal-0191', 'direction': 'down', 'diff_bin': '30-40', 'r': 93, ...}]}
+
+    def test_scope_locality(cpu_model, cfg, spectrum, small):
+        model, _ = cpu_model
+        with wrapped_mlp(model, 9) as w:
+            rec, don = _orig(model, w, small)
+>           P_R, P_B, mlp, cal, wo = _moments(cpu_model, cfg, spectrum, 96, torch.cat([rec["x_pre_last"],
+                                                                                     don["x_pre_last"]]))
+
+tests/test_model.py:178: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_model.py:18: in _moments
+    Wc = mlp.c_fc.weight.detach()
+         ^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = SpectralMLP(
+  (orig): GPT2MLP(
+    (c_fc): Conv1D(nf=3072, nx=768)
+    (c_proj): Conv1D(nf=768, nx=3072)
+    (act): NewGELUActivation()
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+)
+name = 'c_fc'
+
+    def __getattr__(self, name: str) -> Union[Tensor, "Module"]:
+        if "_parameters" in self.__dict__:
+            _parameters = self.__dict__["_parameters"]
+            if name in _parameters:
+                return _parameters[name]
+        if "_buffers" in self.__dict__:
+            _buffers = self.__dict__["_buffers"]
+            if name in _buffers:
+                return _buffers[name]
+        if "_modules" in self.__dict__:
+            modules = self.__dict__["_modules"]
+            if name in modules:
+                return modules[name]
+>       raise AttributeError(
+            f"'{type(self).__name__}' object has no attribute '{name}'"
+        )
+E       AttributeError: 'SpectralMLP' object has no attribute 'c_fc'
+
+.venv/lib/python3.13/site-packages/torch/nn/modules/module.py:1976: AttributeError
+_______________________ test_quadrature_node_convergence _______________________
+
+    def test_quadrature_node_convergence():
+        m = torch.linspace(-8, 8, 161, dtype=torch.float64).reshape(-1, 1)
+        s = torch.tensor([0.01, 0.1, 0.5, 1.0, 2.0, 4.0], dtype=torch.float64).reshape(1, -1)
+        ref = gauss_expect_gelu(m, s, 128)
+        errs = {n: float((gauss_expect_gelu(m, s, n) - ref).abs().max()) for n in (8, 16, 32, 64)}
+>       assert errs[32] < 1e-7 and errs[64] < 1e-10, errs
+E       AssertionError: {8: 0.10868345811785485, 16: 0.035413681655995344, 32: 0.004765202236827193, 64: 0.0001348409633166181}
+E       assert (0.004765202236827193 < 1e-07)
+
+tests/test_spectral.py:66: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_model.py::test_residual_bypass_invariant_and_locality - ass...
+FAILED tests/test_model.py::test_full_rank_reduction_is_original - AttributeE...
+FAILED tests/test_model.py::test_reduced_B_invariance - AttributeError: 'Spec...
+FAILED tests/test_model.py::test_scope_locality - AttributeError: 'SpectralML...
+FAILED tests/test_spectral.py::test_quadrature_node_convergence - AssertionEr...
+5 failed, 20 passed in 9.42s

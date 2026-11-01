@@ -1,0 +1,89 @@
+{
+  "created_utc": "2026-10-31T10:58:08.465632+00:00",
+  "protocol_version": "drfg-dev-v3-techremeasure",
+  "bound": {
+    "protocol_path": "discarded_response_floor_gate_v3/DEV_PROTOCOL_v3.md",
+    "protocol_sha256": "ec644e4ed18d92751ed068c321ee536a53240bf93768adc3519456674f93462e",
+    "config_path": "discarded_response_floor_gate_v3/config/gate_dev_v3.json",
+    "config_sha256": "4b51cd0bd6df09423cc324d7659abd08ea5a8c60be7016dbb4a0cf7d5fd1cfdb",
+    "source": {
+      "tree_sha256": "a3e9965438e7c807ef4c46abe6d9cbad0529ac8db3a289ed5ab67e10a52716c4",
+      "files": {
+        "discarded_response_floor_gate_v3/__init__.py": "992594a5723d3b335143c6b43028424185a9cf1c76eb9bebf06e2b107f84bc8a",
+        "discarded_response_floor_gate_v3/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+        "discarded_response_floor_gate_v3/aggregate.py": "77807b7afa44c33f4b3f5cde24562a0b577c26da27ccac6c18d7a906437fced7",
+        "discarded_response_floor_gate_v3/bootstrap.py": "b7fc9a3ddac1aa20c9e7d561b89168c7feb309297ecbe334ffadab8914197802",
+        "discarded_response_floor_gate_v3/cli.py": "21d12221e1dbf76199224f52b2a9e5d3e132a981d207dfae29d314b843c3a9f0",
+        "discarded_response_floor_gate_v3/common.py": "4621ae796baf531f1281a9a86e159885d5f152dda25573b6c8e9c41ca9e717b6",
+        "discarded_response_floor_gate_v3/data.py": "0f47e517a0dea640ace7b068ae9c8aa75c2ac8eb7b7e9d07eada77523cca3951",
+        "discarded_response_floor_gate_v3/estimators.py": "668305c39f98f378c2ad2a44f113f132018d7b7b1d513f7f54902c16cf3c8437",
+        "discarded_response_floor_gate_v3/geometry.py": "41fad609fb33634d9c8a594a68afffec416067aa10e3b3cb5797a01ccb25fb1b",
+        "discarded_response_floor_gate_v3/hook.py": "9a29cc63b25ef25baf96ffb0b7a2e73b0d20e00768a329fa38d725912db773d4",
+        "discarded_response_floor_gate_v3/pipeline.py": "1fe5c118091b1cefe6de4a2580c8e6da8d1dff8e0b02cb59a64fbddcee46fa90",
+        "discarded_response_floor_gate_v3/power.py": "6793de4e883946a37290c7617bd8f4adac7c5e5b4ca690916f5b30b672e249b1",
+        "discarded_response_floor_gate_v3/tests/test_gate_v3.py": "e110371d005d4222d8b89950b7fca1c6fdca228083ca89bf5da6847dcff4ee9e"
+      }
+    },
+    "scp_dependency_tree_sha256": "f04e0ece5f30f5a56804232d530992bf2cd959335d34bd032357a4a2d2d6a449",
+    "manifest_dir": "discarded_response_floor_gate_v3/manifests",
+    "manifests": {
+      "discarded_response_floor_gate_v3/manifests/group_noun_overlap.csv": "3d4f2b2ef6580d62708809491c4c7072ac3faec6a26b9c396c9acdd3059992aa",
+      "discarded_response_floor_gate_v3/manifests/groups.csv": "70059a91c8fd2f5f93b93566ed2758b1403c55a51ee5bc4be2beeda6c94f3414",
+      "discarded_response_floor_gate_v3/manifests/index.json": "acf6e6efce152a2148a2dfed875f59b6defa3db1c9765dae4fc468d5748c1d53",
+      "discarded_response_floor_gate_v3/manifests/manifest_copy_v3.json": "b762f09f6cb590832923d5088a9d0b9fabcb9e8ba52dface9ef7cbc6282dfb03",
+      "discarded_response_floor_gate_v3/manifests/prompts.csv": "abd575a61c333f4e68a00eae616686b118e694b762a00842752c93a30dc0198a",
+      "discarded_response_floor_gate_v3/manifests/template_noun_overlap.csv": "6846833a64b2ec9f727b4da6755388df969ba87d92998c4aca5d43d2d0dfe84e"
+    },
+    "protected_manifest_sha256": "102281e9d8ab21b22a996e2df2effc391aebdd4f3c3af2ac9f01b50ed13c48a4",
+    "artifact_file_sha256": "cd56bb2f9cb958cb3381b93e799567cb569788faec17c44d775057e2d92a3fcf",
+    "J_ids_sha256": "5c0ba5751c5b4a59af9f08a4d3116a68380c0ca7f17bcc4a9ec8ca54237b028f",
+    "v2_registration_sha256": "4eff66fce15dbd66c0b83170ca3ce0de2f5d3d325df3cdaec3552209346bbe1c"
+  },
+  "smoke_run": "20261031T105754Z_gate_v3_smoke",
+  "smoke_json_sha256": "21ec6f448843c363bea9e3d04129b5da9208cced966ad94ddd893e18230eb335",
+  "tests_log": "notes/gate_coordinator_v3_tests_20261031.log",
+  "tests_log_sha256": "337b9dbd4e286cbc95d12d1c9e353d9fa817136b50327432428de28f5bf9b553",
+  "v2_preservation": {
+    "v2_status": "EVALUATION_INVALID",
+    "v2_failed_develop_run": "20261031T103329Z_gate_develop",
+    "v2_source_tree_sha256": "74690c53065affc19467b7e301a126855d6ad308e7dd8571c50a9ac304a4a07c",
+    "v2_manifest_dir": "discarded_response_floor_gate/manifests_v2",
+    "manifest_copy": [
+      "groups.csv",
+      "prompts.csv",
+      "group_noun_overlap.csv",
+      "template_noun_overlap.csv",
+      "index.json"
+    ],
+    "files": {
+      "discarded_response_floor_gate/registration/DEV_REGISTRATION_v2.json": "4eff66fce15dbd66c0b83170ca3ce0de2f5d3d325df3cdaec3552209346bbe1c",
+      "discarded_response_floor_gate/config/gate_dev_v2.json": "d5ae24674e472e1ef2f991c74f9a7490523975a9897081ee1bcb27800fc8b76a",
+      "discarded_response_floor_gate/config/gate_dev_v1.json": "859153671dda322e8f56f6f6926abf7a00da1d7cd028f658d29be45c9a128974",
+      "discarded_response_floor_gate/DEV_PROTOCOL_v2.md": "00be71d6d450f4c1043221a91a3493edaa9ccd8092b535be819f14fdce79913a",
+      "discarded_response_floor_gate/DEV_PROTOCOL.md": "573e640e6c65fb0b960db420cd9eb6a449883e9bd700b3c8cd8d0014be30fe1e",
+      "discarded_response_floor_gate/protected_manifest.json": "8dd1e77017d24f9aa4911af8ba5b8acb5147a1165b96c361b4d72cadcfda8fd9",
+      "discarded_response_floor_gate/logs/pytest_gate_v2_20261031T103122Z.log": "f4a7be0deba754f6a9e66818c437b573bb19781a9a96f05c10de9ebe7f398aa9",
+      "discarded_response_floor_gate/manifests_v2/group_noun_overlap.csv": "3d4f2b2ef6580d62708809491c4c7072ac3faec6a26b9c396c9acdd3059992aa",
+      "discarded_response_floor_gate/manifests_v2/groups.csv": "70059a91c8fd2f5f93b93566ed2758b1403c55a51ee5bc4be2beeda6c94f3414",
+      "discarded_response_floor_gate/manifests_v2/index.json": "acf6e6efce152a2148a2dfed875f59b6defa3db1c9765dae4fc468d5748c1d53",
+      "discarded_response_floor_gate/manifests_v2/prompts.csv": "abd575a61c333f4e68a00eae616686b118e694b762a00842752c93a30dc0198a",
+      "discarded_response_floor_gate/manifests_v2/template_noun_overlap.csv": "6846833a64b2ec9f727b4da6755388df969ba87d92998c4aca5d43d2d0dfe84e",
+      "discarded_response_floor_gate/runs/20261031T103110Z_gate_prepare/run_manifest.json": "deae48a56e68006e7bb49e31e5b19e25f4329e83c31929bb5b09792191c354f2",
+      "discarded_response_floor_gate/runs/20261031T103110Z_gate_prepare/log.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "discarded_response_floor_gate/runs/20261031T103110Z_gate_prepare/prepare.json": "a40b6063db51104f16666ba65118096c0687f951685b9d51f0cac78cbd05414e",
+      "discarded_response_floor_gate/runs/20261031T103259Z_gate_smoke/run_manifest.json": "abf21b829fff33a647f17cc72e57c4834bec29824121be3c756a50ac3f5c00a7",
+      "discarded_response_floor_gate/runs/20261031T103259Z_gate_smoke/log.txt": "9e32d49dff36646501821968ab5956b963c8d65a2f152b8a57a99295016a59e6",
+      "discarded_response_floor_gate/runs/20261031T103259Z_gate_smoke/smoke.json": "6e22fd397bedccec41bc110d42b277c80847d5418932de3f997cf08427fe30aa",
+      "discarded_response_floor_gate/runs/20261031T103329Z_gate_develop/run_manifest.json": "28afdef781ad4313f3ac5310e777182510ea4616aeebd0f6ab270ea5c9872eeb",
+      "discarded_response_floor_gate/runs/20261031T103329Z_gate_develop/log.txt": "8fc24b574ab6064091e23e7288ebd9bacaad6b4d2bc98ab3c556f43d4413fafb",
+      "discarded_response_floor_gate/runs/20261031T103329Z_gate_develop/activations.pt": "752427bca168822ad8a64e1befc4b519ac30e0fc59e20fcc2f235bbf6138e962",
+      "discarded_response_floor_gate/runs/20261031T103329Z_gate_develop/controls.csv": "78c3dc6c804541920f382efb83e71fc8d205a618d89acc7288c67a7145c0ed76",
+      "discarded_response_floor_gate/runs/20261031T103329Z_gate_develop/development.json": "500a10e2cef839558f23513402cb67fe0cdb039bd5a03b15c12f5a00fe4c3809",
+      "discarded_response_floor_gate/runs/20261031T103329Z_gate_develop/groups_U.csv": "5e956e6725414282fe0e6239f2b27f32af674aeb70984783638775c60606bafe",
+      "discarded_response_floor_gate/runs/20261031T103329Z_gate_develop/raw_J_logits.pt": "38c5325a949c1315ca6be3363a927e39533f378d67f766134e003d22ba563f9b",
+      "discarded_response_floor_gate/runs/20261031T103329Z_gate_develop/support.csv": "3c28851f1633f2263981e7cc6adf8c2009ca163cad2edcae63f164d10b84cf14"
+    }
+  },
+  "v2_status": "EVALUATION_INVALID (preserved, not reclassified)",
+  "rule": "technical remeasurement of the registered v2 design: no v3 development outcome exists before this file; v2 raw outputs exist (the remeasurement is not blind)"
+}
